@@ -5,4 +5,4 @@ extends Control
 # var b = "textvar"
 
 func _ready():
-	$Background/TextureRect.rect_size = OS.get_screen_size()
+	$Background/Panel.rect_size = OS.get_screen_size()
