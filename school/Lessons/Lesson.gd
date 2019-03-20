@@ -42,7 +42,14 @@ func add_content(initial_height, content):
 			var texture = load(str("res://school/Lessons/", c))
 			var tr = TextureRect.new()
 			var tex_size = texture.get_size()
+			
 			tr.texture = texture
+			if tex_size.x > OS.get_window_size().x:
+				var scale = OS.get_window_size().x/tex_size.x
+				tex_size *= scale
+				tr.expand = true
+				tr.rect_size = tex_size
+			
 			tr.rect_position = Vector2((OS.get_window_size().x - tex_size.x)/2, hpos)
 			add_child(tr)
 			

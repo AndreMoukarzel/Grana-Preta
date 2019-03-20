@@ -10,7 +10,8 @@ var lessons = [
 		NAME : "Basic Stuff",
 		TYPE : "info",
 		CONTENT : ["Blablabla",
-					"Image.png",
+					"acoes_codigos_001.png",
+					"acoes_codigos_002.png",
 					"Kokoko\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsdçfaljksdflçaskj"]
 	},
 ]
