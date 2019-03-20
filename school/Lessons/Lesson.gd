@@ -4,11 +4,18 @@ extends Control
 const OFFSET = Vector2(10, 5)
 const TEXT_OFFSET = 10
 
+var text_font
 
 func _ready():
 	rect_size = OS.get_window_size() - OFFSET
 	rect_position = OFFSET/2
 	$Title.rect_size.x = OS.get_window_size().x - OFFSET.x
+	text_font = DynamicFont.new()
+	text_font.size = 20
+	text_font.font_data = load("res://school/Lessons/LessonFont.otf")
+	text_font.use_filter = true
+	text_font.use_mipmaps
+	
 
 
 # Must be setup after being added to tree, or label height will be gotten incorrectly
@@ -59,6 +66,7 @@ func add_content(initial_height, content):
 			l.add_color_override("font_color", Color(0, 0, 0))
 			l.rect_position = Vector2(TEXT_OFFSET, hpos)
 			l.text = c
+			l.set("custom_fonts/font", text_font)
 			add_child(l)
 			
 			hpos += l.rect_size.y + 5
