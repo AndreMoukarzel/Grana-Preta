@@ -11,7 +11,7 @@ var lessons = [
 		TYPE : "info",
 		CONTENT : ["Blablabla",
 					"Image.png",
-					"Kokoko"]
+					"Kokoko\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsdçfaljksdflçaskj"]
 	},
 ]
 

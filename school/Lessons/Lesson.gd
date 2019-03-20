@@ -11,10 +11,21 @@ func _ready():
 	$Title.rect_size.x = OS.get_window_size().x - OFFSET.x
 
 
+# Must be setup after being added to tree, or label height will be gotten incorrectly
 func setup(name, content):
 	var title_height = add_title(name)
 	var total_height = add_content(title_height + 30, content)
+	var LocalCamera = $SwipeHandler/SwipingCamera
+	
 	rect_size.y = total_height + 25
+	LocalCamera.limit_right = OS.get_window_size().x
+	LocalCamera.limit_bottom = total_height + 10
+	set_height(total_height)
+
+
+func set_height(height):
+	var h = max(OS.get_window_size().y, height)
+	rect_size.y = h
 
 
 func add_title(title):
