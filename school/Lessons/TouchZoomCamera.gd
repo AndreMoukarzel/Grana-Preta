@@ -43,16 +43,16 @@ func map_pos(pos):
 	return p 
 
 func _unhandled_input(event):
-	if event.type == InputEvent.SCREEN_TOUCH and event.is_pressed():
+	if event == InputEventScreenTouch and event.is_pressed():
 		events[event.index]=event
 		
 		if is_zooming():
 			current_zoom = get_zoom()
 			first_distance = dist()
 			center = center()
-	elif event.type == InputEvent.SCREEN_TOUCH and not event.is_pressed():
+	elif event == InputEventScreenTouch and not event.is_pressed():
 		events.erase(event.index)
-	elif event.type == InputEvent.SCREEN_DRAG :
+	elif event == InputEventScreenDrag:
 		events[event.index] = event
 		
 		if events.size() > 1:
