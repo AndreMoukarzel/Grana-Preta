@@ -8,10 +8,23 @@ const TEXT_OFFSET = 10
 func _ready():
 	rect_size = OS.get_window_size() - OFFSET
 	rect_position = OFFSET/2
-	add_content(["blabla", "Image.png", "Mingau"])
+	$Title.rect_size.x = OS.get_window_size().x - OFFSET.x
 
-func add_content(content):
-	var hpos = 10
+
+func setup(name, content):
+	var title_height = add_title(name)
+	var total_height = add_content(title_height + 30, content)
+	rect_size.y = total_height + 25
+
+
+func add_title(title):
+	$Title.text = title
+	
+	return $Title.rect_size.y
+
+
+func add_content(initial_height, content):
+	var hpos = initial_height
 	
 	for c in content:
 		if c.find(".png") != -1: # is an image
@@ -31,3 +44,5 @@ func add_content(content):
 			add_child(l)
 			
 			hpos += l.rect_size.y + 5
+	
+	return hpos
