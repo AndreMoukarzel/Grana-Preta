@@ -33,7 +33,7 @@ func _calculate_swipe(swipe_speed):
 func swipe(direction, speed):
 	if speed < 80:
 		return
-	var dist = direction * log(speed) * 1.5
+	var dist = direction * speed/15
 	move_camera(dist)
 
 
