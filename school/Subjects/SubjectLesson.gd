@@ -4,11 +4,13 @@ const LESSON_DB = preload("res://school/Lessons/LessonDB.gd")
 
 var title : String
 var id : int
+var type
+var completed = false
 
 
 func setup(name, size):
+	var School = get_tree().get_root().get_node("School")
 	var db = LESSON_DB.new()
-	var type
 	
 	self.id = db.get_lesson_id(name)
 	self.title = name
@@ -23,11 +25,29 @@ func setup(name, size):
 	elif type == "question":
 		pass
 	
+	if School.completed_lessons.has(id): # lesson previously completed
+		set_completed()
+	
 	$Title.text = name
+
+
+func complete():
+	var School = get_tree().get_root().get_node("School")
+	
+	School.complete_lesson(id)
+	set_completed()
+	# add other possible effects of completion
+
+
+func set_completed():
+	modulate = Color(0, 1, 0)
+	completed = true
 
 
 func _on_SubjectLesson_pressed():
 	var db = LESSON_DB.new()
 	var School = get_tree().get_root().get_node("School")
 	
+	if type == "info" and not completed:
+		complete()
 	School.add_lesson(title, db.get_lesson_content(id))

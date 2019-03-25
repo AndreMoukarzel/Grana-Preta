@@ -11,7 +11,7 @@ var themes = [
 	{
 		NAME : "The School",
 		ICON : null,
-		INFO : ["Test", "Test1", "Test2", "Test3"],
+		INFO : ["Test"],
 		DEPEN : [],
 		HEIGHT : 0
 	},
@@ -42,14 +42,14 @@ var themes = [
 		INFO : [],
 		DEPEN : ["Stuff1", "Stuff2"],
 		HEIGHT : 2
-	},
+	}
 ]
 
 var subjects = [
 	{
 		NAME : "Test",
 		ICON : null,
-		INFO : ["Basic Stuff", "Test1", "Test2", "Test3"],
+		INFO : ["Basic Stuff", "Advanced Stuff"],
 	},
 ]
 
@@ -84,8 +84,22 @@ func get_theme_info(id):
 func get_subject_info(id):
 	return subjects[id][INFO]
 
+func get_lesson_subject(lesson_name): # returns id of subject containing lesson_name
+	for id in range(subjects.size()):
+		for lesson in subjects[id][INFO]:
+			if lesson == lesson_name:
+				return id
+	return -1
+
 func get_theme_dependencies(id):
 	return themes[id][DEPEN]
 
 func get_theme_height(id):
 	return themes[id][HEIGHT]
+
+func get_subject_theme(subject_name): # returns id of theme containing subject_name
+	for id in range(themes.size()):
+		for subject in themes[id][INFO]:
+			if subject == subject_name:
+				return id
+	return -1

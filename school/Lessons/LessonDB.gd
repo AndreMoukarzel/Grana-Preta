@@ -6,7 +6,7 @@ const CONTENT = 2
 
 
 var lessons = [
-	{ # ID = 0
+	{
 		NAME : "Basic Stuff",
 		TYPE : "info",
 		CONTENT : ["Blablabla",
@@ -14,6 +14,11 @@ var lessons = [
 					"acoes_codigos_002.png",
 					"Kokoko\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsdçfaljksdflçaskj"]
 	},
+	{
+		NAME : "Advanced Stuff",
+		TYPE : "info",
+		CONTENT : ["Hihi"]
+	}
 ]
 
 

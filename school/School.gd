@@ -3,6 +3,10 @@ extends Control
 const SUBJ_TREE_SCN = preload("res://school/Subjects/SubjectTree.tscn")
 const LESSON_SCN = preload("res://school/Lessons/Lesson.tscn")
 
+var completed_lessons = []
+var completed_subjects = []
+var completed_themes = []
+
 
 func _on_TextureButton_pressed():
 	instance_test_theme()
@@ -19,12 +23,53 @@ func add_subject_tree(theme_name):
 	SubjTree.setup(theme_name)
 	$ThemeTree.queue_free()
 
+
 func add_lesson(lesson_name, lesson_content):
 	var Lesson = LESSON_SCN.instance()
 	
 	add_child(Lesson)
 	Lesson.setup(lesson_name, lesson_content)
 	$SubjectTree.queue_free()
+
+
+func complete_lesson(id):
+	var school_db = load("res://school/SchoolDB.gd").new()
+	var lesson_db = load("res://school/Lessons/LessonDB.gd").new()
+	var lesson_name = lesson_db.get_lesson_name(id)
+	var subject_id = school_db.get_lesson_subject(lesson_name)
+	var all_lessons = school_db.get_subject_info(subject_id)
+	
+	print("lesson ", id, " completed")
+	completed_lessons.append(id)
+	for lesson in all_lessons:
+		var lesson_id = lesson_db.get_lesson_id(lesson)
+		
+		if not completed_lessons.has(lesson_id): # a lesson from subject was not completed
+			return
+			
+	complete_subject(subject_id)
+
+
+func complete_subject(subject_id):
+	var school_db = load("res://school/SchoolDB.gd").new()
+	var subject_name = school_db.get_subject_name(subject_id)
+	var theme_id = school_db.get_subject_theme(subject_name)
+	var all_subjects = school_db.get_theme_info(theme_id)
+	
+	print("subject ", subject_id, " completed")
+	completed_subjects.append(subject_id)
+	for subject in all_subjects:
+		var sub_id = school_db.get_subject_id(subject)
+		
+		if not completed_subjects.has(sub_id): # a subject from theme was not completed
+			return
+	
+	complete_theme(theme_id)
+
+
+func complete_theme(theme_id):
+	print("theme ", theme_id, " completed")
+	completed_themes.append(theme_id)
 
 
 func instance_test_lesson():

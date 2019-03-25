@@ -64,6 +64,7 @@ func add_icon(icon_location):
 
 func add_lessons(lessons):
 	var total_height = 0
+	
 	for lesson in lessons:
 		var instance = SUBJECT_LESSON_SCN.instance()
 		
