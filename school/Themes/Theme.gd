@@ -16,6 +16,7 @@ func setup(name, icon, locked=false):
 	if locked:
 		$Lock.set_position(texture_normal.get_size()/2)
 		$Lock.show()
+		disabled = true
 		# Probably should make icon being separated from Theme node, so I can darken it's modulate withouth affecting the lock
 	
 	$Label.text = name
