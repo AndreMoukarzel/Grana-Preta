@@ -4,19 +4,49 @@ const NAME = 0
 const ICON = 1
 const INFO = 2 # subjects in themes and lessons in subjects
 const DEPEN = 3 # dependencies for themes
+const HEIGHT = 4 # height of theme on tree
 
 
 var themes = [
-	{ # ID = 0
+	{
 		NAME : "The School",
 		ICON : null,
 		INFO : ["Test", "Test1", "Test2", "Test3"],
-		DEPEN : []
+		DEPEN : [],
+		HEIGHT : 0
+	},
+	{
+		NAME : "Stuff1",
+		ICON : null,
+		INFO : [],
+		DEPEN : ["The School"],
+		HEIGHT : 1
+	},
+	{
+		NAME : "Stuff2",
+		ICON : null,
+		INFO : [],
+		DEPEN : ["The School"],
+		HEIGHT : 1
+	},
+	{
+		NAME : "Stuff3",
+		ICON : null,
+		INFO : [],
+		DEPEN : [],
+		HEIGHT : 2
+	},
+	{
+		NAME : "Stuff4",
+		ICON : null,
+		INFO : [],
+		DEPEN : ["Stuff1", "Stuff2"],
+		HEIGHT : 2
 	},
 ]
 
 var subjects = [
-	{ # ID = 0
+	{
 		NAME : "Test",
 		ICON : null,
 		INFO : ["Basic Stuff", "Test1", "Test2", "Test3"],
@@ -56,3 +86,6 @@ func get_subject_info(id):
 
 func get_theme_dependencies(id):
 	return themes[id][DEPEN]
+
+func get_theme_height(id):
+	return themes[id][HEIGHT]

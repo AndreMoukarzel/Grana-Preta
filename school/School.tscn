@@ -24,6 +24,7 @@ margin_top = -1.0
 margin_bottom = -1.0
 
 [node name="TextureButton" type="TextureButton" parent="ThemeTree"]
+visible = false
 margin_left = 481.935
 margin_top = 148.996
 margin_right = 545.935
