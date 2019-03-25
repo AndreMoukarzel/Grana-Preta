@@ -13,11 +13,11 @@ script = ExtResource( 1 )
 margin_top = -1.0
 margin_bottom = -1.0
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="TextureButton" type="TextureButton" parent="ThemeTree"]
 margin_left = 481.935
-margin_top = 147.996
-margin_right = 521.935
-margin_bottom = 187.996
+margin_top = 148.996
+margin_right = 545.935
+margin_bottom = 212.996
 texture_normal = ExtResource( 3 )
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="ThemeTree/TextureButton" to="." method="_on_TextureButton_pressed"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://school/Subjects/SubjectLesson.gd" type="Script" id=1]
+[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="SubjectLesson" type="Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -844.0
+margin_bottom = -560.0
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 180.0
+margin_bottom = 40.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+
+[node name="Title" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 5.0
+margin_right = 173.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 2 )
+text = "Lesson Name"
+valign = 1
+
+[connection signal="pressed" from="." to="." method="_on_SubjectLesson_pressed"]

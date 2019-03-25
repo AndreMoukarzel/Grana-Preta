@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://school/Subject.gd" type="Script" id=1]
+[ext_resource path="res://school/Subjects/Subject.gd" type="Script" id=1]
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -47,14 +47,18 @@ valign = 1
 clip_text = true
 
 [node name="Icon" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 138.7
+margin_top = 8.55001
+margin_right = 178.7
+margin_bottom = 48.55
 expand = true
 
-[node name="Lessons" type="Control" parent="."]
-margin_left = 149.15
-margin_top = 8.54998
-margin_right = 189.15
-margin_bottom = 48.55
+[node name="Lessons" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 5.0
+margin_top = 60.0
+margin_right = 45.0
+margin_bottom = 171.0
+size_flags_vertical = 3
 
 [connection signal="pressed" from="." to="." method="_on_Subject_pressed"]
