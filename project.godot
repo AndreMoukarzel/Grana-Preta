@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="Grana Preta"
 run/main_scene="res://OpeningMenu.tscn"
-config/icon="res://icon.png"
+config/icon="res://school/lock.png"
 
 [display]
 

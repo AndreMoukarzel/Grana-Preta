@@ -4,7 +4,7 @@ const LESSON_SCN = preload("res://school/Lessons/Lesson.tscn")
 
 
 func _on_TextureButton_pressed():
-	instance_test_subject()
+	instance_test_theme()
 
 
 func add_lesson(lesson_name, lesson_content):
@@ -28,4 +28,13 @@ func instance_test_subject():
 	
 	add_child(Subject)
 	Subject.setup(300, db.get_subject_name(0), db.get_subject_icon(0), db.get_subject_info(0))
+
+
+func instance_test_theme():
+	var db = load("res://school/SchoolDB.gd").new()
+	var Theme = load("res://school/Themes/Theme.tscn").instance()
+	
+	Theme.rect_position = Vector2(100, 100)
+	add_child(Theme)
+	Theme.setup(db.get_theme_name(0), db.get_theme_icon(0))
 

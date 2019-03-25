@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://school/ThemeTree.gd" type="Script" id=1]
+[ext_resource path="res://school/Themes/ThemeTree.gd" type="Script" id=1]
 [ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
