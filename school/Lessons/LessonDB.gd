@@ -17,14 +17,11 @@ var lessons = [
 ]
 
 
-var name_map = { }
-
-func _ready():
-	for id in range (lessons.size()):
-		name_map[lessons[id][NAME]] = id
-
 func get_lesson_id(name):
-	return name_map[name]
+	for id in range(lessons.size()):
+		if lessons[id][NAME] == name:
+			return id
+	return -1
 
 func get_lesson_name(id):
 	return lessons[id][NAME]

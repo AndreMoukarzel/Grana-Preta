@@ -19,25 +19,22 @@ var subjects = [
 	{ # ID = 0
 		NAME : "Test",
 		ICON : null,
-		INFO : ["Basic Stuff", "Jamaica"],
+		INFO : ["Basic Stuff"],
 	},
 ]
 
 
-var theme_name_map = { }
-var subject_name_map = {}
-
-func _ready():
-	for id in range (themes.size()):
-		theme_name_map[themes[id][NAME]] = id
-	for id in range (subjects.size()):
-		subject_name_map[subjects[id][NAME]] = id
-
 func get_theme_id(name):
-	return theme_name_map[name]
+	for id in range(themes.size()):
+		if themes[id][NAME] == name:
+			return id
+	return -1
 
 func get_subject_id(name):
-	return subject_name_map[name]
+	for id in range(subjects.size()):
+		if subjects[id][NAME] == name:
+			return id
+	return -1
 
 func get_theme_name(id):
 	return themes[id][NAME]
