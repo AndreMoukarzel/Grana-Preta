@@ -10,7 +10,7 @@ var themes = [
 	{ # ID = 0
 		NAME : "The School",
 		ICON : null,
-		INFO : ["Test"],
+		INFO : ["Test", "Test1", "Test2", "Test3"],
 		DEPEN : []
 	},
 ]
@@ -19,7 +19,7 @@ var subjects = [
 	{ # ID = 0
 		NAME : "Test",
 		ICON : null,
-		INFO : ["Basic Stuff"],
+		INFO : ["Basic Stuff", "Test1", "Test2", "Test3"],
 	},
 ]
 

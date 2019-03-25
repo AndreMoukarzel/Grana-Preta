@@ -1,7 +1,5 @@
 extends TextureButton
 
-const SCHOOL_DB = preload("res://school/SchoolDB.gd")
-
 var title
 
 
@@ -25,24 +23,7 @@ func setup(name, icon, locked=false):
 	$Label.rect_position = Vector2((texture_normal.get_size().x - $Label.rect_size.x)/2, texture_normal.get_size().y)
 
 
-func get_all_subjects():
-	var db = SCHOOL_DB.new()
-	var subjects = db.get_theme_info(db.get_theme_id(title))
-	var all_subjects = []
-	
-	for sub in subjects:
-		var id = db.get_subject_id(sub)
-		var icon = db.get_subject_icon(id)
-		var info = db.get_subject_info(id)
-		
-		all_subjects.append([sub, icon, info])
-	return all_subjects
-
-
 func _on_Theme_pressed():
-	var Subject = load("res://school/Subjects/Subject.tscn").instance()
-	var subjects = get_all_subjects()
+	var School = get_tree().get_root().get_node("School")
 	
-	for subject in subjects:
-		add_child(Subject)
-		Subject.setup(300, subject[0], subject[1], subject[2])
+	School.add_subject_tree(title)

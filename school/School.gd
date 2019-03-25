@@ -1,5 +1,6 @@
 extends Control
 
+const SUBJ_TREE_SCN = preload("res://school/Subjects/SubjectTree.tscn")
 const LESSON_SCN = preload("res://school/Lessons/Lesson.tscn")
 
 
@@ -7,12 +8,23 @@ func _on_TextureButton_pressed():
 	instance_test_theme()
 
 
+func _ready():
+	$Background/Panel.rect_size = OS.get_screen_size()
+
+
+func add_subject_tree(theme_name):
+	var SubjTree = SUBJ_TREE_SCN.instance()
+	
+	add_child(SubjTree)
+	SubjTree.setup(theme_name)
+	$ThemeTree.queue_free()
+
 func add_lesson(lesson_name, lesson_content):
 	var Lesson = LESSON_SCN.instance()
 	
 	add_child(Lesson)
 	Lesson.setup(lesson_name, lesson_content)
-	$ThemeTree.queue_free()
+	$SubjectTree.queue_free()
 
 
 func instance_test_lesson():
@@ -35,6 +47,6 @@ func instance_test_theme():
 	var Theme = load("res://school/Themes/Theme.tscn").instance()
 	
 	Theme.rect_position = Vector2(100, 100)
-	add_child(Theme)
+	$ThemeTree.add_child(Theme)
 	Theme.setup(db.get_theme_name(0), db.get_theme_icon(0))
 

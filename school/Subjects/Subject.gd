@@ -1,5 +1,8 @@
 extends Button
 
+signal opened(parent)
+signal closed(parent)
+
 const FONT_WIDTH = 15
 const BASE_HEIGHT = 80
 const TWN_TIME = .2
@@ -56,6 +59,7 @@ func add_icon(icon_location):
 		scale = $Icon.rect_size.y / tex_size.y
 	$Icon.texture = texture
 	$Icon.rect_size = tex_size * scale
+	$Icon.rect_position.y = (rect_size.y - $Icon.rect_size.y)/2
 
 
 func add_lessons(lessons):
@@ -65,20 +69,30 @@ func add_lessons(lessons):
 		
 		$Lessons.add_child(instance)
 		instance.setup(lesson, Vector2(width - 20, 40))
-		total_height += instance.rect_size.y
+		total_height += instance.rect_size.y + 2
 	lessons_height = total_height
 
 
 func _on_Subject_pressed():
 	if is_open:
-		$Tween.interpolate_property($Lessons, "rect_scale:y", null, 0, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-		$Tween.interpolate_property($Background, "rect_size:y", null, BASE_HEIGHT, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-		$Tween.start()
-		
-		is_open = false
+		close()
 	else:
-		$Tween.interpolate_property($Lessons, "rect_scale:y", null, 1, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-		$Tween.interpolate_property($Background, "rect_size:y", null, BASE_HEIGHT + lessons_height + 10, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-		$Tween.start()
-		
-		is_open = true
+		open()
+
+
+func close():
+	$Tween.interpolate_property($Lessons, "rect_scale:y", null, 0, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Background, "rect_size:y", null, BASE_HEIGHT, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.start()
+	
+	is_open = false
+	emit_signal("closed", get_parent())
+
+
+func open():
+	$Tween.interpolate_property($Lessons, "rect_scale:y", null, 1, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Background, "rect_size:y", null, BASE_HEIGHT + lessons_height + 10, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.start()
+	
+	is_open = true
+	emit_signal("opened", get_parent())
