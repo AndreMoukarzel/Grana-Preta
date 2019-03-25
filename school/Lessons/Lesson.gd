@@ -14,8 +14,6 @@ func _ready():
 	text_font.size = 20
 	text_font.font_data = load("res://school/Lessons/LessonFont.otf")
 	text_font.use_filter = true
-	text_font.use_mipmaps
-	
 
 
 # Must be setup after being added to tree, or label height will be gotten incorrectly

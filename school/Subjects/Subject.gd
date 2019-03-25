@@ -2,6 +2,7 @@ extends Button
 
 const FONT_WIDTH = 15
 const BASE_HEIGHT = 80
+const TWN_TIME = .2
 const SUBJECT_LESSON_SCN = preload("res://school/Subjects/SubjectLesson.tscn")
 
 var width : int
@@ -15,6 +16,7 @@ func setup(width : int, name, icon, lessons):
 	self.width = width
 	
 	rect_size = Vector2(width, BASE_HEIGHT)
+	$Lessons.rect_scale = Vector2(1, 0)
 	$Lessons.rect_position.y = BASE_HEIGHT
 	$Background.rect_size = Vector2(width, BASE_HEIGHT)
 	$Title.rect_size = Vector2(0.66 * width, BASE_HEIGHT)
@@ -69,8 +71,14 @@ func add_lessons(lessons):
 
 func _on_Subject_pressed():
 	if is_open:
-		$Lessons.hide()
-		$Background.rect_size = Vector2(width, BASE_HEIGHT)
+		$Tween.interpolate_property($Lessons, "rect_scale:y", null, 0, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		$Tween.interpolate_property($Background, "rect_size:y", null, BASE_HEIGHT, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		$Tween.start()
+		
+		is_open = false
 	else:
-		$Lessons.show()
-		$Background.rect_size = Vector2(width, BASE_HEIGHT + lessons_height + 10)
+		$Tween.interpolate_property($Lessons, "rect_scale:y", null, 1, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		$Tween.interpolate_property($Background, "rect_size:y", null, BASE_HEIGHT + lessons_height + 10, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		$Tween.start()
+		
+		is_open = true
