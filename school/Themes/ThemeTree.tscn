@@ -9,11 +9,6 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="SwipeHandler" parent="." instance=ExtResource( 2 )]
-editor/display_folded = true
-
-[node name="Themes" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 
 
 [editable path="SwipeHandler"]

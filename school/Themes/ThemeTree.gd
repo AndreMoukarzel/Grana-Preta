@@ -16,6 +16,7 @@ var tree_height = [[]]
 func _ready():
 	add_themes()
 	position_themes()
+	set_camera_limits()
 	update()
 
 func _draw():
@@ -29,7 +30,6 @@ func add_themes():
 		var Theme = THEME_SCN.instance()
 		var theme_name = db.get_theme_name(id)
 		var icon = db.get_theme_icon(id)
-#		var dependencies = db.get_theme_dependencies(id)
 		var height = db.get_theme_height(id)
 		
 		Theme.set_name(theme_name)
@@ -44,11 +44,26 @@ func add_themes():
 
 func position_themes():
 	for height in tree_height:
-		var size = total_size/(height.size() + 1)
+		var size = max(DIST_X, total_size/(height.size() + 1))
 		var i = 1
 		for theme in height:
 			get_node(theme).rect_position.x = size * i
 			i += 1
+
+
+func set_camera_limits():
+	var Cam = $SwipeHandler/SwipingCamera
+	var max_y = tree_height.size() * DIST_Y + 2 * INITIAL_Y
+	var max_x = 0
+	
+	for height in tree_height:
+		max_x = max(max_x, height.size())
+	max_x = max_x * DIST_X
+	
+	max_x = max(max_x, OS.get_window_size().x)
+	max_y = max(max_y, OS.get_window_size().y)
+	Cam.limit_bottom = max_y
+	Cam.limit_right = max_x
 
 
 func draw_lines():
