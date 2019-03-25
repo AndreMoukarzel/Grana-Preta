@@ -1,12 +1,13 @@
 extends Button
 
 const FONT_WIDTH = 15
-const BASE_HEIGHT = 60
+const BASE_HEIGHT = 80
 const SUBJECT_LESSON_SCN = preload("res://school/Subjects/SubjectLesson.tscn")
 
 var width : int
 var title : String
 var is_open = false
+var lessons_height = 0
 
 
 func setup(width : int, name, icon, lessons):
@@ -18,8 +19,8 @@ func setup(width : int, name, icon, lessons):
 	$Background.rect_size = Vector2(width, BASE_HEIGHT)
 	$Title.rect_size = Vector2(0.66 * width, BASE_HEIGHT)
 	$Title.text = title
-	$Icon.rect_position = Vector2(rect_size.x - BASE_HEIGHT, 15)
-	$Icon.rect_size = Vector2(0.34 * width, BASE_HEIGHT - 15)
+	$Icon.rect_position = Vector2(rect_size.x - BASE_HEIGHT, 5)
+	$Icon.rect_size = Vector2(0.34 * width, BASE_HEIGHT - 10)
 	
 	clip_title()
 	add_icon(icon)
@@ -56,15 +57,20 @@ func add_icon(icon_location):
 
 
 func add_lessons(lessons):
+	var total_height = 0
 	for lesson in lessons:
 		var instance = SUBJECT_LESSON_SCN.instance()
 		
 		$Lessons.add_child(instance)
-		instance.setup(lesson)
+		instance.setup(lesson, Vector2(width - 20, 40))
+		total_height += instance.rect_size.y
+	lessons_height = total_height
 
 
 func _on_Subject_pressed():
 	if is_open:
 		$Lessons.hide()
+		$Background.rect_size = Vector2(width, BASE_HEIGHT)
 	else:
 		$Lessons.show()
+		$Background.rect_size = Vector2(width, BASE_HEIGHT + lessons_height + 10)

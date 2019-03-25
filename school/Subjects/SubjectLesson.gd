@@ -6,14 +6,18 @@ var title : String
 var id : int
 
 
-func setup(name):
+func setup(name, size):
 	var db = LESSON_DB.new()
 	var type
 	
 	self.id = db.get_lesson_id(name)
 	self.title = name
-	type = db.get_lesson_type(self.id)
 	
+	rect_min_size = size
+	$Background.rect_size = size
+	$Title.rect_size = Vector2(size.x - 15, size.y - 10)
+	
+	type = db.get_lesson_type(self.id)
 	if type == "info":
 		pass
 	elif type == "question":
