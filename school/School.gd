@@ -4,36 +4,47 @@ const THEME_TREE_SCN = preload("res://school/Themes/ThemeTree.tscn")
 const SUBJ_TREE_SCN = preload("res://school/Subjects/SubjectTree.tscn")
 const LESSON_SCN = preload("res://school/Lessons/Lesson.tscn")
 
-var last_theme
+var current_scene
+var theme_entered
 
 
 func _ready():
 	$Background/Panel.rect_size = OS.get_screen_size()
+	add_theme_tree()
 
 
 func add_theme_tree():
 	var ThemeTree = THEME_TREE_SCN.instance()
 	
-	for child in get_children():
-		if child.get_name() != "Background" and child.get_name() != "HUD":
-			child.queue_free()
+	clear_school()
 	add_child(ThemeTree)
+	current_scene = "ThemeTree"
+	theme_entered = null
 
 
 func add_subject_tree(theme_name):
 	var SubjTree = SUBJ_TREE_SCN.instance()
 	
+	clear_school()
 	add_child(SubjTree)
 	SubjTree.setup(theme_name)
-	$ThemeTree.queue_free()
+	current_scene = "SubjectTree"
+	theme_entered = theme_name
 
 
 func add_lesson(lesson_name, lesson_content):
 	var Lesson = LESSON_SCN.instance()
 	
+	clear_school()
 	add_child(Lesson)
 	Lesson.setup(lesson_name, lesson_content)
-	$SubjectTree.queue_free()
+	current_scene = "Lesson"
+
+
+func clear_school():
+	for child in get_children():
+		if child.get_name() != "Background" and child.get_name() != "HUD":
+			child.queue_free()
 
 
 func complete_lesson(id):
@@ -102,4 +113,7 @@ func instance_test_theme():
 
 
 func _on_Back_pressed():
-	add_theme_tree()
+	if current_scene == "SubjectTree":
+		add_theme_tree()
+	elif current_scene == "Lesson":
+		add_subject_tree(theme_entered)
