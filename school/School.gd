@@ -1,19 +1,23 @@
 extends Control
 
+const THEME_TREE_SCN = preload("res://school/Themes/ThemeTree.tscn")
 const SUBJ_TREE_SCN = preload("res://school/Subjects/SubjectTree.tscn")
 const LESSON_SCN = preload("res://school/Lessons/Lesson.tscn")
 
-var completed_lessons = []
-var completed_subjects = []
-var completed_themes = []
-
-
-func _on_TextureButton_pressed():
-	instance_test_theme()
+var last_theme
 
 
 func _ready():
 	$Background/Panel.rect_size = OS.get_screen_size()
+
+
+func add_theme_tree():
+	var ThemeTree = THEME_TREE_SCN.instance()
+	
+	for child in get_children():
+		if child.get_name() != "Background" and child.get_name() != "HUD":
+			child.queue_free()
+	add_child(ThemeTree)
 
 
 func add_subject_tree(theme_name):
@@ -40,11 +44,11 @@ func complete_lesson(id):
 	var all_lessons = school_db.get_subject_info(subject_id)
 	
 	print("lesson ", id, " completed")
-	completed_lessons.append(id)
+	Save.completed_lessons.append(id)
 	for lesson in all_lessons:
 		var lesson_id = lesson_db.get_lesson_id(lesson)
 		
-		if not completed_lessons.has(lesson_id): # a lesson from subject was not completed
+		if not Save.completed_lessons.has(lesson_id): # a lesson from subject was not completed
 			return
 			
 	complete_subject(subject_id)
@@ -57,11 +61,11 @@ func complete_subject(subject_id):
 	var all_subjects = school_db.get_theme_info(theme_id)
 	
 	print("subject ", subject_id, " completed")
-	completed_subjects.append(subject_id)
+	Save.completed_subjects.append(subject_id)
 	for subject in all_subjects:
 		var sub_id = school_db.get_subject_id(subject)
 		
-		if not completed_subjects.has(sub_id): # a subject from theme was not completed
+		if not Save.completed_subjects.has(sub_id): # a subject from theme was not completed
 			return
 	
 	complete_theme(theme_id)
@@ -69,7 +73,7 @@ func complete_subject(subject_id):
 
 func complete_theme(theme_id):
 	print("theme ", theme_id, " completed")
-	completed_themes.append(theme_id)
+	Save.completed_themes.append(theme_id)
 
 
 func instance_test_lesson():
@@ -95,3 +99,7 @@ func instance_test_theme():
 	$ThemeTree.add_child(Theme)
 	Theme.setup(db.get_theme_name(0), db.get_theme_icon(0))
 
+
+
+func _on_Back_pressed():
+	add_theme_tree()

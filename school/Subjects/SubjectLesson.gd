@@ -9,7 +9,6 @@ var completed = false
 
 
 func setup(name, size):
-	var School = get_tree().get_root().get_node("School")
 	var db = LESSON_DB.new()
 	
 	self.id = db.get_lesson_id(name)
@@ -25,7 +24,7 @@ func setup(name, size):
 	elif type == "question":
 		pass
 	
-	if School.completed_lessons.has(id): # lesson previously completed
+	if Save.completed_lessons.has(id): # lesson previously completed
 		set_completed()
 	
 	$Title.text = name

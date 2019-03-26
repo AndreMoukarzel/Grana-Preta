@@ -19,6 +19,10 @@ config/name="Grana Preta"
 run/main_scene="res://OpeningMenu.tscn"
 config/icon="res://school/lock.png"
 
+[autoload]
+
+Save="*res://Save.gd"
+
 [display]
 
 window/handheld/emulate_touchscreen=true
