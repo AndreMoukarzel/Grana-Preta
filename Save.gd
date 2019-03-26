@@ -26,8 +26,6 @@ func save_game():
 	savegame.open("user://savegame.save", File.WRITE)
 	savegame.store_line(to_json(savedata))
 	savegame.close()
-	print("save game")
-	print(to_json(savedata))
 
 
 func load_game():
@@ -52,5 +50,3 @@ func load_game():
 	for element in savedata.failed_questions_time:
 		failed_questions_time.append(int(element))
 	money = int(savedata.money)
-	print("load game")
-	print(savedata)

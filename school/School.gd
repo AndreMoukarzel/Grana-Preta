@@ -117,3 +117,8 @@ func _on_Back_pressed():
 		add_theme_tree()
 	elif current_scene == "Lesson":
 		add_subject_tree(theme_entered)
+	elif current_scene == "ThemeTree":
+		Save.save_game()
+		var e = get_tree().change_scene("res://City.tscn")
+		if e != 0:
+			print("City scene couldn't be loaded")

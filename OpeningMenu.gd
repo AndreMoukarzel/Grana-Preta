@@ -7,6 +7,7 @@ func _ready():
 	var label_size = $Label.rect_size
 	$Label.set_position(OS.window_size/2 - label_size/2)
 	play_start_animation()
+	Save.load_game()
 
 
 func _input(event):
