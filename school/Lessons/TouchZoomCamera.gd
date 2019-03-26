@@ -26,7 +26,7 @@ func dist():
 		first_event = events[event]
 	return result
 
-func center():
+func get_center():
 	var first_event = null
 	var result 
 	for event in events:
@@ -49,7 +49,7 @@ func _unhandled_input(event):
 		if is_zooming():
 			current_zoom = get_zoom()
 			first_distance = dist()
-			center = center()
+			center = get_center()
 	elif event == InputEventScreenTouch and not event.is_pressed():
 		events.erase(event.index)
 	elif event == InputEventScreenDrag:
