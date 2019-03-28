@@ -28,6 +28,15 @@ func lock():
 	disabled = true
 
 
+func unlock():
+	$Lock.hide()
+	disabled = false
+
+
+func is_locked():
+	return disabled
+
+
 func _on_Theme_pressed():
 	var School = get_tree().get_root().get_node("School")
 	

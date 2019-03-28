@@ -16,8 +16,10 @@ var tree_height = [[]]
 func _ready():
 	add_themes()
 	position_themes()
+	lock_themes()
 	set_camera_limits()
 	update()
+
 
 func _draw():
 	draw_lines()
@@ -49,6 +51,24 @@ func position_themes():
 		for theme in height:
 			get_node(theme).rect_position.x = size * i
 			i += 1
+
+
+func lock_themes():
+	var db = SCHOOL_DB.new()
+	
+	for height in tree_height:
+		for theme in height:
+			var id = db.get_theme_id(theme)
+			var dependencies = db.get_theme_dependencies(id)
+			
+			if dependencies.empty():
+				get_node(theme).unlock()
+				continue
+			for depen in dependencies:
+				var depen_id = db.get_theme_id(depen)
+				if not Save.completed_themes.has(depen_id): # Dependency not completed
+					get_node(theme).lock()
+					break
 
 
 func set_camera_limits():

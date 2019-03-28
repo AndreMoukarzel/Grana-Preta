@@ -50,3 +50,8 @@ func load_game():
 	for element in savedata.failed_questions_time:
 		failed_questions_time.append(int(element))
 	money = int(savedata.money)
+
+
+func clear_save():
+	var dir = Directory.new()
+	dir.remove("user://savegame.save")
