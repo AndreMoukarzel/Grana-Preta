@@ -39,34 +39,42 @@ func add_title(title):
 	return $Title.rect_size.y
 
 
+func add_text(content, pos_y):
+	var l = Label.new()
+	
+	l.add_color_override("font_color", Color(0, 0, 0))
+	l.rect_position = Vector2(TEXT_OFFSET, pos_y)
+	l.text = content
+	l.set("custom_fonts/font", text_font)
+	add_child(l)
+	
+	return l.rect_size.y
+
+
+func add_image(texture_name, pos_y):
+	var texture = load(str("res://school/Lessons/", texture_name))
+	var tr = TextureRect.new()
+	var tex_size = texture.get_size()
+	
+	tr.texture = texture
+	if tex_size.x > OS.get_window_size().x:
+		var scale = OS.get_window_size().x/tex_size.x
+		tex_size *= scale
+		tr.expand = true
+		tr.rect_size = tex_size
+	tr.rect_position = Vector2((OS.get_window_size().x - tex_size.x)/2, pos_y)
+	add_child(tr)
+	
+	return tex_size.y
+
+
 func add_content(initial_height, content):
 	var hpos = initial_height
 	
 	for c in content:
 		if c.find(".png") != -1: # is an image
-			var texture = load(str("res://school/Lessons/", c))
-			var tr = TextureRect.new()
-			var tex_size = texture.get_size()
-			
-			tr.texture = texture
-			if tex_size.x > OS.get_window_size().x:
-				var scale = OS.get_window_size().x/tex_size.x
-				tex_size *= scale
-				tr.expand = true
-				tr.rect_size = tex_size
-			
-			tr.rect_position = Vector2((OS.get_window_size().x - tex_size.x)/2, hpos)
-			add_child(tr)
-			
-			hpos += tex_size.y + 5
+			hpos += add_image(c, hpos) + 5
 		else:
-			var l = Label.new()
-			l.add_color_override("font_color", Color(0, 0, 0))
-			l.rect_position = Vector2(TEXT_OFFSET, hpos)
-			l.text = c
-			l.set("custom_fonts/font", text_font)
-			add_child(l)
-			
-			hpos += l.rect_size.y + 5
+			hpos += add_text(c, hpos) + 5
 	
 	return hpos
