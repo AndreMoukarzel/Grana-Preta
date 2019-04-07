@@ -32,11 +32,7 @@ func setup(name, content, id):
 		var question_height = add_question(i, title_height + 60)
 		add_answers(i, question_height + 80)
 	var answers_height = show_question_and_answer(0)
-	var total_height = position_back_and_next(answers_height + 60)
-
-	rect_size.y = total_height + 25
-	set_camera_limits(total_height)
-	set_height(total_height)
+	set_questionnaire_size(answers_height)
 
 
 func add_title(title):
@@ -77,18 +73,6 @@ func add_image(parent, pos_y, texture_name):
 	return tex_size.y
 
 
-func parse_content(parent, content, centralize=false):
-	var vpos = 0
-	
-	for c in content:
-		if c.find(".png") != -1: # is an image
-			vpos += add_image(parent, vpos, c) + 5
-		else:
-			vpos += add_text(parent, c, vpos, centralize) + 5
-	
-	return vpos
-
-
 func add_question(index, pos_y):
 	var Cont = Control.new()
 	
@@ -126,12 +110,24 @@ func add_answers(index, pos_y):
 		Alt.connect("pressed", self, "Alternative_selected", [Alt])
 		
 		answer_pos += Alt.rect_size.y + 5
-	Cont.rect_size.y = current_answers.size() * (ALTER_HEIGHT + 10)
+	Cont.rect_size.y = (current_answers.size() - 1) * (ALTER_HEIGHT + 10)
+
+
+func parse_content(parent, content, centralize=false):
+	var vpos = 0
+	
+	for c in content:
+		if c.find(".png") != -1: # is an image
+			vpos += add_image(parent, vpos, c) + 5
+		else:
+			vpos += add_text(parent, c, vpos, centralize) + 5
+	
+	return vpos
 
 
 func position_back_and_next(pos_y):
-	$Back.rect_position = Vector2(OS.get_window_size().x/3, pos_y)
-	$Next.rect_position = Vector2(2 * OS.get_window_size().x/3, pos_y)
+	$Back.rect_position = Vector2(OS.get_window_size().x/3 - $Back.rect_size.x/2, pos_y + 50)
+	$Next.rect_position = Vector2(2 * OS.get_window_size().x/3 - $Next.rect_size.x/2, pos_y + 50)
 	
 	return pos_y + 20
 
@@ -159,15 +155,25 @@ func display_results():
 	
 	if wrong_answers == 0:
 		print("You got everything right!")
+		if not Save.completed_lessons.has(id): # if not completed, complete
+			complete()
 	else:
 		print(wrong_answers, " incorrect answers")
+		if not Save.completed_lessons.has(id): # if not completed, lock
+			lock()
 
 
 func complete():
 	var School = get_tree().get_root().get_node("School")
 	
 	School.complete_lesson(id)
-#	set_completed()
+	School._on_Back_pressed()
+
+
+func lock():
+	var School = get_tree().get_root().get_node("School")
+	
+	School._on_Back_pressed()
 
 
 func get_all_questions_and_answers(content):
@@ -194,22 +200,34 @@ func set_height(height):
 	rect_size.y = h
 
 
+func set_questionnaire_size(answers_height):
+	var total_height = position_back_and_next(answers_height + 60)
+
+	rect_size.y = total_height + 25
+	set_camera_limits(total_height)
+	set_height(total_height)
+
+
 func _on_Next_pressed():
 	if current_question == questions.size() - 1:
 		display_results()
 	else:
 		$Back.set_modulate(Color(1, 1, 1))
 		current_question += 1
-		show_question_and_answer(current_question)
+		var answers_height = show_question_and_answer(current_question)
+		set_questionnaire_size(answers_height)
 		
 		if current_question == questions.size() - 1:
 			$Next/Label.text = "Finish"
+			$Next/Panel.set_modulate(Color(.3, 1, .3))
 
 
 func _on_Back_pressed():
 	$Next/Label.text = "NEXT"
+	$Next/Panel.set_modulate(Color(1, 1, 1))
 	current_question = max(current_question - 1, 0)
-	show_question_and_answer(current_question)
+	var answers_height = show_question_and_answer(current_question)
+	set_questionnaire_size(answers_height)
 	
 	if current_question == 0:
 		$Back.set_modulate(Color(.6, .6, .6))
