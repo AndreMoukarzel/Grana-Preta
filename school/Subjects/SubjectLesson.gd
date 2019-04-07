@@ -47,6 +47,10 @@ func _on_SubjectLesson_pressed():
 	var db = LESSON_DB.new()
 	var School = get_tree().get_root().get_node("School")
 	
-	if type == "info" and not completed:
-		complete()
-	School.add_lesson(title, db.get_lesson_content(id))
+	if type == "info":
+		School.add_lesson(title, db.get_lesson_content(id))
+		if not completed:
+			complete()
+	elif type == "question":
+		School.add_question(title, db.get_lesson_content(id), id)
+

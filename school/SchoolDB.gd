@@ -49,7 +49,7 @@ var subjects = [
 	{
 		NAME : "Test",
 		ICON : null,
-		INFO : ["Basic Stuff", "Advanced Stuff"],
+		INFO : ["Basic Stuff", "Advanced Stuff", "Important Questions"],
 	},
 ]
 

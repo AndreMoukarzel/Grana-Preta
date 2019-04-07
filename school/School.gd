@@ -3,6 +3,7 @@ extends Control
 const THEME_TREE_SCN = preload("res://school/Themes/ThemeTree.tscn")
 const SUBJ_TREE_SCN = preload("res://school/Subjects/SubjectTree.tscn")
 const LESSON_SCN = preload("res://school/Lessons/Lesson.tscn")
+const QUESTION_SCN = preload("res://school/Lessons/Question.tscn")
 
 var current_scene
 var theme_entered
@@ -38,6 +39,15 @@ func add_lesson(lesson_name, lesson_content):
 	clear_school()
 	add_child(Lesson)
 	Lesson.setup(lesson_name, lesson_content)
+	current_scene = "Lesson"
+
+
+func add_question(question_name, question_content, question_id):
+	var Question = QUESTION_SCN.instance()
+	
+	clear_school()
+	add_child(Question)
+	Question.setup(question_name, question_content, question_id)
 	current_scene = "Lesson"
 
 

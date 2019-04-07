@@ -20,17 +20,10 @@ func _ready():
 func setup(name, content):
 	var title_height = add_title(name)
 	var total_height = add_content(title_height + 30, content)
-	var LocalCamera = $SwipeHandler/SwipingCamera
 	
 	rect_size.y = total_height + 25
-	LocalCamera.limit_right = OS.get_window_size().x
-	LocalCamera.limit_bottom = total_height + 10
+	set_camera_limits(total_height)
 	set_height(total_height)
-
-
-func set_height(height):
-	var h = max(OS.get_window_size().y, height)
-	rect_size.y = h
 
 
 func add_title(title):
@@ -69,12 +62,23 @@ func add_image(texture_name, pos_y):
 
 
 func add_content(initial_height, content):
-	var hpos = initial_height
+	var vpos = initial_height
 	
 	for c in content:
 		if c.find(".png") != -1: # is an image
-			hpos += add_image(c, hpos) + 5
+			vpos += add_image(c, vpos) + 5
 		else:
-			hpos += add_text(c, hpos) + 5
+			vpos += add_text(c, vpos) + 5
 	
-	return hpos
+	return vpos
+
+
+func set_camera_limits(height):
+	var LocalCamera = $SwipeHandler/SwipingCamera
+	LocalCamera.limit_right = OS.get_window_size().x
+	LocalCamera.limit_bottom = height + 10
+
+
+func set_height(height):
+	var h = max(OS.get_window_size().y, height)
+	rect_size.y = h
