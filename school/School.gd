@@ -97,6 +97,26 @@ func complete_theme(theme_id):
 	Save.completed_themes.append(theme_id)
 
 
+func lock_questionnaire(id):
+	var school_db = load("res://school/SchoolDB.gd").new()
+	var lesson_db = load("res://school/Lessons/LessonDB.gd").new()
+	var locktime = lesson_db.get_questionnaire_locktime(id)
+	
+	print("Questionnaire ", id, " locked")
+	Save.failed_questions.append(id)
+	Save.failed_questions_time.append(OS.get_datetime())
+
+
+func unlock_questionnaire(id):
+	var school_db = load("res://school/SchoolDB.gd").new()
+	var lesson_db = load("res://school/Lessons/LessonDB.gd").new()
+	var index = Save.failed_questions.find(id)
+	
+	print("Questionnaire ", id, " unlocked")
+	Save.failed_questions.remove(index)
+	Save.failed_questions_time.remove(index)
+
+
 func instance_test_lesson():
 	var db = load("res://school/Lessons/LessonDB.gd").new()
 	var id = db.get_lesson_id("Basic Stuff")

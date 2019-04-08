@@ -48,7 +48,7 @@ func load_game():
 	for element in savedata.failed_questions:
 		failed_questions.append(int(element))
 	for element in savedata.failed_questions_time:
-		failed_questions_time.append(int(element))
+		failed_questions_time.append(element)
 	money = int(savedata.money)
 
 

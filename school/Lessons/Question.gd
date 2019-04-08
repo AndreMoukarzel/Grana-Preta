@@ -15,6 +15,7 @@ var id
 
 
 func _ready():
+	randomize()
 	rect_size = OS.get_window_size() - OFFSET
 	rect_position = OFFSET/2
 	$Title.rect_size.x = OS.get_window_size().x - OFFSET.x
@@ -173,6 +174,7 @@ func complete():
 func lock():
 	var School = get_tree().get_root().get_node("School")
 	
+	School.lock_questionnaire(id)
 	School._on_Back_pressed()
 
 

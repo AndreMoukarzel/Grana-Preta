@@ -47,4 +47,7 @@ custom_fonts/font = SubResource( 2 )
 text = "Lesson Name"
 valign = 1
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="pressed" from="." to="." method="_on_SubjectLesson_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

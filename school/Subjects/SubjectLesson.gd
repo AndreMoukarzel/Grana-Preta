@@ -6,6 +6,8 @@ var title : String
 var id : int
 var type
 var completed = false
+var locked_time
+var lock_duration
 
 
 func setup(name, size):
@@ -17,6 +19,7 @@ func setup(name, size):
 	rect_min_size = size
 	$Background.rect_size = size
 	$Title.rect_size = Vector2(size.x - 15, size.y - 10)
+	$Title.text = name
 	
 	type = db.get_lesson_type(self.id)
 	if type == "info":
@@ -26,8 +29,33 @@ func setup(name, size):
 	
 	if Save.completed_lessons.has(id): # lesson previously completed
 		set_completed()
+	elif Save.failed_questions.has(id): # questionnaire locked
+		var index = Save.failed_questions.find(id)
+		
+		self.lock_duration = db.get_questionnaire_locktime(id)
+		self.locked_time = Save.failed_questions_time[index]
+		if can_be_unlocked(locked_time, lock_duration):
+			unlock()
+		else:
+			var remaining_time = get_remaining_locktime(locked_time, lock_duration)
+			self.disabled = true
+			modulate = Color(1, 0, 0)
+			$Title.text = str("Time remaning: ", remaining_time)
+			$Timer.start()
+
+
+func can_be_unlocked(locked_time, lock_duration):
+	var current_time = OS.get_datetime()
+	var remaining_time = get_remaining_locktime(locked_time, lock_duration)
 	
-	$Title.text = name
+	if locked_time.year - current_time.year < 0:
+		return true
+	elif locked_time.month - current_time.month < 0:
+		return true
+	
+	if remaining_time[0] > 0 or remaining_time[1] > 0 or remaining_time[2] > 0 or remaining_time[3] > 0:
+		return false
+	return true
 
 
 func complete():
@@ -38,9 +66,37 @@ func complete():
 	# add other possible effects of completion
 
 
+func unlock():
+	var School = get_tree().get_root().get_node("School")
+	
+	School.unlock_questionnaire(id)
+	self.disabled = false
+	modulate = Color(1, 1, 1)
+	$Title.text = self.title
+
+
 func set_completed():
 	modulate = Color(0, 1, 0)
 	completed = true
+
+
+func get_remaining_locktime(locked_time, lock_duration):
+	var current_time = OS.get_datetime()
+	var lock
+	var cur
+	var r
+	var remain = [0, 0, 0, 0] # [days, hours, minutes, seconds]
+	
+	lock = (lock_duration[0] + locked_time.day) * 86400 + (lock_duration[1] + locked_time.hour) * 3600 + \
+	       (lock_duration[2] + locked_time.minute) * 60 + locked_time.second
+	cur = current_time.day * 86400 + current_time.hour * 3600 + current_time.minute * 60 + current_time.second
+	r = lock - cur
+	remain[0] = int(r / 86400)
+	remain[1] = int(r / 3600) % 24
+	remain[2] = int(r / 60 ) % 60
+	remain[3] = int(r) % 60
+	
+	return remain
 
 
 func _on_SubjectLesson_pressed():
@@ -54,3 +110,18 @@ func _on_SubjectLesson_pressed():
 	elif type == "question":
 		School.add_question(title, db.get_lesson_content(id), id)
 
+
+func _on_Timer_timeout():
+	if can_be_unlocked(locked_time, lock_duration):
+		$Timer.stop()
+		unlock()
+		return
+	
+	var remaining_time = get_remaining_locktime(locked_time, lock_duration)
+	var remain_string = ""
+	
+	for r in remaining_time:
+		remain_string += str(":", r)
+	remain_string.erase(0, 1) # removes first ":"
+	$Title.text = str("Time remaning: ", remain_string)
+	modulate = Color(1, 0, 0)

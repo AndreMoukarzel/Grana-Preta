@@ -4,6 +4,7 @@ const NAME = 0
 const TYPE = 1 # info or question
 const CONTENT = 2 # In questions, CONTENT is organizes as [[Question 1], [[Answer1],[Answer2],...], Question 2, [Answers]....] and the first
                   # answer is always the correct one
+const LOCKTIME = 3 # [Days, Hours, Minutes]
 
 
 var lessons = [
@@ -27,7 +28,8 @@ var lessons = [
 				["Do you like cheese?"], [["Chesse is spoiled milk.", "And I hate it."], ["Yes"], ["No"]], 
 				["Is Jesus your lord and savior?"], [["I'm a JEW"], ["What?"], ["I'm alergic to mexicans"], ["Yea he actually is."]],
 				["Did this questionnaire work?"], [["FUCK YEA!"], ["ye"]]
-				]
+				],
+		LOCKTIME : [0, 0, 1]
 	}
 ]
 
@@ -46,3 +48,6 @@ func get_lesson_type(id):
 
 func get_lesson_content(id):
 	return lessons[id][CONTENT]
+
+func get_questionnaire_locktime(id):
+	return lessons[id][LOCKTIME]
