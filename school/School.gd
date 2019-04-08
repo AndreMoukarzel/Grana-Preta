@@ -98,9 +98,7 @@ func complete_theme(theme_id):
 
 
 func lock_questionnaire(id):
-	var school_db = load("res://school/SchoolDB.gd").new()
 	var lesson_db = load("res://school/Lessons/LessonDB.gd").new()
-	var locktime = lesson_db.get_questionnaire_locktime(id)
 	
 	print("Questionnaire ", id, " locked")
 	Save.failed_questions.append(id)
@@ -108,8 +106,6 @@ func lock_questionnaire(id):
 
 
 func unlock_questionnaire(id):
-	var school_db = load("res://school/SchoolDB.gd").new()
-	var lesson_db = load("res://school/Lessons/LessonDB.gd").new()
 	var index = Save.failed_questions.find(id)
 	
 	print("Questionnaire ", id, " unlocked")

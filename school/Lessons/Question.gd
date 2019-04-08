@@ -22,6 +22,7 @@ func _ready():
 	text_font = DynamicFont.new()
 	text_font.font_data = load("res://school/Lessons/LessonFont.otf")
 	text_font.use_filter = true
+	$Result.rect_position = Vector2(OS.get_window_size().x/4, -OS.get_window_size().y/2)
 
 
 # Must be setup after being added to tree, or label height will be gotten incorrectly
@@ -146,7 +147,9 @@ func show_question_and_answer(index):
 
 
 func display_results():
+	var School = get_tree().get_root().get_node("School")
 	var wrong_answers = 0
+	var Twn = $Result/Tween
 	
 	for i in range(selected_answers.size()):
 		if selected_answers[i] == -1:
@@ -155,13 +158,32 @@ func display_results():
 			wrong_answers += 1
 	
 	if wrong_answers == 0:
-		print("You got everything right!")
+		$Result.text = "PASSED"
+		$Result.set("custom_colors/font_color",Color(.03, .26, .03))
+		move_child($Result, get_child_count() - 1)
+		Twn.interpolate_property($Result, "rect_position:y", null,  OS.get_window_size().y/2, 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+		Twn.interpolate_property($Result, "rect_scale", Vector2(0.1, 0.1), Vector2(1.5, 1.5), 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+		Twn.start()
+		yield(Twn, "tween_completed")
+		
 		if not Save.completed_lessons.has(id): # if not completed, complete
 			complete()
+		else:
+			School._on_Back_pressed()
 	else:
+		$Result.text = "FAILED"
+		$Result.set("custom_colors/font_color",Color(.5, .08, .08))
+		move_child($Result, get_child_count() - 1)
+		Twn.interpolate_property($Result, "rect_position:y", null,  OS.get_window_size().y/2, 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+		Twn.interpolate_property($Result, "rect_scale", Vector2(0.1, 0.1), Vector2(1.5, 1.5), 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+		Twn.start()
+		yield(Twn, "tween_completed")
+		
 		print(wrong_answers, " incorrect answers")
 		if not Save.completed_lessons.has(id): # if not completed, lock
 			lock()
+		else:
+			School._on_Back_pressed()
 
 
 func complete():
