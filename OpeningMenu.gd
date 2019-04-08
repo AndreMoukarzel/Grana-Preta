@@ -12,9 +12,12 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("click"):
-		play_enter_animation()
-		yield($AnimationTween, "tween_completed")
-		get_tree().change_scene("res://City.tscn")
+		if $AnimationTween.is_active():
+			pass
+		else:
+			play_enter_animation()
+			yield($AnimationTween, "tween_completed")
+			get_tree().change_scene("res://City.tscn")
 
 
 func play_start_animation():
