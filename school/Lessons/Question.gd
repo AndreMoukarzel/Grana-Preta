@@ -51,7 +51,7 @@ func add_text(parent, content, pos_y, centralize=false):
 	l.text = content
 	l.set("custom_fonts/font", text_font)
 	if centralize:
-		l.rect_size.x = OS.get_window_size().x - 2 * TEXT_OFFSET
+		l.rect_size.x = parent.rect_size.x - 2 * TEXT_OFFSET
 		l.align = Label.ALIGN_CENTER
 	parent.add_child(l)
 	
@@ -64,12 +64,12 @@ func add_image(parent, pos_y, texture_name):
 	var tex_size = texture.get_size()
 	
 	tr.texture = texture
-	if tex_size.x > OS.get_window_size().x:
-		var scale = OS.get_window_size().x/tex_size.x
+	if tex_size.x > parent.rect_size.x - 2 * TEXT_OFFSET:
+		var scale = (parent.rect_size.x - 2 * TEXT_OFFSET)/tex_size.x
 		tex_size *= scale
 		tr.expand = true
 		tr.rect_size = tex_size
-	tr.rect_position = Vector2((OS.get_window_size().x - tex_size.x)/2, pos_y)
+	tr.rect_position = Vector2((parent.rect_size.x - tex_size.x)/2, pos_y)
 	parent.add_child(tr)
 	
 	return tex_size.y
@@ -82,6 +82,7 @@ func add_question(index, pos_y):
 	Cont.rect_position = Vector2(0, pos_y)
 	add_child(Cont)
 	text_font.size = 30
+	Cont.rect_size.x = OS.get_window_size().x - OFFSET.x
 	Cont.rect_size.y = parse_content(Cont, questions[index], true)
 	
 	return 20 + Cont.rect_size.y + Cont.rect_position.y
@@ -106,13 +107,13 @@ func add_answers(index, pos_y):
 		Alt.rect_position = Vector2(TEXT_OFFSET, answer_pos)
 		Alt.set_name(str("Alternative", i))
 		Cont.add_child(Alt)
+		Alt.rect_size.x = OS.get_window_size().x - 3 * TEXT_OFFSET
 		Alt.rect_size.y = max(parse_content(Alt, current_answers[i]), 50)
-		Alt.rect_size.x = OS.get_window_size().x - 2* TEXT_OFFSET
 		Alt.get_node("Panel").rect_size = Alt.rect_size
 		Alt.connect("pressed", self, "Alternative_selected", [Alt])
 		
 		answer_pos += Alt.rect_size.y + 5
-	Cont.rect_size.y = (current_answers.size() - 1) * (ALTER_HEIGHT + 10)
+	Cont.rect_size.y = answer_pos
 
 
 func parse_content(parent, content, centralize=false):
@@ -131,7 +132,7 @@ func position_back_and_next(pos_y):
 	$Back.rect_position = Vector2(OS.get_window_size().x/3 - $Back.rect_size.x/2, pos_y + 50)
 	$Next.rect_position = Vector2(2 * OS.get_window_size().x/3 - $Next.rect_size.x/2, pos_y + 50)
 	
-	return pos_y + 20
+	return $Next.rect_size.y + $Next.rect_position.y + 20
 
 
 # Returns bottom of current answers
@@ -227,9 +228,8 @@ func set_height(height):
 func set_questionnaire_size(answers_height):
 	var total_height = position_back_and_next(answers_height + 60)
 
-	rect_size.y = total_height + 25
 	set_camera_limits(total_height)
-	set_height(total_height)
+	set_height(total_height + 25)
 
 
 func _on_Next_pressed():
