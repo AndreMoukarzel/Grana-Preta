@@ -3,7 +3,7 @@
 [ext_resource path="res://school/Subjects/Subject.gd" type="Script" id=1]
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.901961, 0.901961, 0.901961, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -16,7 +16,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 use_mipmaps = true
 use_filter = true
@@ -34,13 +34,13 @@ script = ExtResource( 1 )
 margin_right = 200.0
 margin_bottom = 60.0
 mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 2 )
 
 [node name="Title" type="Label" parent="."]
 margin_left = 10.0
 margin_right = 140.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Title"
 valign = 1

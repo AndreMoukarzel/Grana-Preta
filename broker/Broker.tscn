@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://broker/Broker.gd" type="Script" id=1]
+[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 0.623529, 0.623529, 1 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.827451, 0.827451, 0.827451, 1 )
@@ -19,36 +23,77 @@ corner_radius_bottom_left = 5
 size = 40
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=3]
 
 [node name="Broker" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Investments" type="Button" parent="."]
-margin_left = 227.124
-margin_top = 139.234
-margin_right = 344.124
-margin_bottom = 192.234
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Investir"
+[node name="Background" type="ParallaxBackground" parent="."]
 
-[node name="Portfolio" type="Button" parent="."]
-margin_left = 167.665
-margin_top = 254.894
-margin_right = 381.665
-margin_bottom = 307.894
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Sua Carteira"
+[node name="Panel" type="Panel" parent="Background"]
+margin_right = 576.0
+margin_bottom = 1024.0
+custom_styles/panel = SubResource( 4 )
 
 [node name="Turtle" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 
+[node name="Menu" type="VBoxContainer" parent="."]
+margin_right = 400.0
+margin_bottom = 600.0
+size_flags_vertical = 7
+custom_constants/separation = 20
+
+[node name="Investments" type="Button" parent="Menu"]
+margin_top = 118.0
+margin_right = 400.0
+margin_bottom = 171.0
+size_flags_vertical = 6
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Investir"
+
+[node name="Portfolio" type="Button" parent="Menu"]
+margin_top = 428.0
+margin_right = 400.0
+margin_bottom = 481.0
+size_flags_vertical = 6
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Sua Carteira"
+
+[node name="InvestmentMenu" type="Control" parent="."]
+margin_left = 576.0
+margin_right = 976.0
+margin_bottom = 600.0
+size_flags_vertical = 7
+
+[node name="Panel" type="Panel" parent="InvestmentMenu"]
+margin_right = 400.0
+margin_bottom = 600.0
+
+[node name="PortfolioMenu" type="Control" parent="."]
+margin_left = -576.0
+margin_right = -176.0
+margin_bottom = 600.0
+size_flags_vertical = 7
+
+[node name="Panel2" type="Panel" parent="PortfolioMenu"]
+margin_right = 400.0
+margin_bottom = 600.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="Menu/Investments" to="." method="_on_Investments_pressed"]
+[connection signal="pressed" from="Menu/Portfolio" to="." method="_on_Portfolio_pressed"]
