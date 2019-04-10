@@ -17,7 +17,9 @@ func _input(event):
 		else:
 			play_enter_animation()
 			yield($AnimationTween, "tween_completed")
-			get_tree().change_scene("res://City.tscn")
+			var e = get_tree().change_scene("res://City.tscn")
+			if e != 0:
+				print("City scene couldn't be loaded")
 
 
 func play_start_animation():

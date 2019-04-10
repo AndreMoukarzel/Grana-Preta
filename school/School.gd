@@ -98,8 +98,6 @@ func complete_theme(theme_id):
 
 
 func lock_questionnaire(id):
-	var lesson_db = load("res://school/Lessons/LessonDB.gd").new()
-	
 	print("Questionnaire ", id, " locked")
 	Save.failed_questions.append(id)
 	Save.failed_questions_time.append(OS.get_datetime())
