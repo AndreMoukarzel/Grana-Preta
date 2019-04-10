@@ -4,13 +4,8 @@ var title
 
 
 func setup(name, icon, locked=false):
-#	var icon_path = str("res://school/Themes/", name, ".png")
-#	var icon2check = File.new()
-#	var has_icon = icon2check.file_exists(icon_path)
-	
 	self.title = name
-#	if has_icon:
-#		texture_normal = load(icon_path)
+	
 	if icon:
 		texture_normal = load(icon)
 	if locked:
