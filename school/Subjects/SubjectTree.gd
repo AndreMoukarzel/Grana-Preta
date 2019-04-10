@@ -28,22 +28,18 @@ func get_all_subjects(theme_name):
 
 func position_subjects(theme_name):
 	var subjects = get_all_subjects(theme_name)
-	var size = OS.get_window_size().x/3
-	var column = 0
+	var size = OS.get_window_size().x/2
 	var height = 80
 	
 	for subject in subjects:
 		var Subject = load("res://school/Subjects/Subject.tscn").instance()
-		var N = Node2D.new()
+		var N = Node2D.new() # Node is used to alter Subjects' z-index
 		
-		N.set_position(Vector2(size/4 + column * size * 1.5, height))
+		N.set_position(Vector2(size/2, height))
 		add_child(N)
 		N.add_child(Subject)
 		Subject.setup(size, subject[0], subject[1], subject[2])
-		column += 1
-		if column >= 2:
-			height += HEIGHT_ADD
-			column = 0
+		height += HEIGHT_ADD
 
 
 func connect_signals():
@@ -61,11 +57,8 @@ func subject_opened(node):
 			if Subject.is_open:
 				Subject.close()
 			child.z_index = 0
-			child.scale = Vector2(1, 1)
 	node.z_index = 1
-	node.scale = Vector2(1.2, 1.2)
 
 
 func subject_closed(node):
 	node.z_index = 0
-	node.scale = Vector2(1, 1)

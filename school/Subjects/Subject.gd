@@ -69,7 +69,7 @@ func add_lessons(lessons):
 		var instance = SUBJECT_LESSON_SCN.instance()
 		
 		$Lessons.add_child(instance)
-		instance.setup(lesson, Vector2(width - 20, 40))
+		instance.setup(lesson, Vector2(width - 10, 40))
 		total_height += instance.rect_size.y + 10
 	lessons_height = total_height
 
@@ -84,6 +84,8 @@ func _on_Subject_pressed():
 func close():
 	$Tween.interpolate_property($Lessons, "rect_scale:y", null, 0, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Background, "rect_size:y", null, BASE_HEIGHT, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, "rect_scale", null, Vector2(1, 1),  TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, "rect_position:x", null, 0,  TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.start()
 	
 	is_open = false
@@ -93,6 +95,8 @@ func close():
 func open():
 	$Tween.interpolate_property($Lessons, "rect_scale:y", null, 1, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Background, "rect_size:y", null, BASE_HEIGHT + lessons_height + 10, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, "rect_scale", null, Vector2(1.4, 1.4),  TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, "rect_position:x", null, -width * 0.2,  TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.start()
 	
 	is_open = true
