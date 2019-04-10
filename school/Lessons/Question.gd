@@ -263,5 +263,5 @@ func Alternative_selected(Alternative):
 	
 	for Alt in Answers.get_children():
 		Alt.get_node("Panel").set_modulate(Color(1, 1, 1))
-	Alternative.get_node("Panel").set_modulate(Color(.3, 1, .3))
+	Alternative.get_node("Panel").set_modulate(Color(.95, .95, .6))
 	selected_answers[current_question] = alt_num
