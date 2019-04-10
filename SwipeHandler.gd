@@ -15,9 +15,9 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("click"):
+	if event.is_pressed() and (event is InputEventScreenTouch or event is InputEventMouseButton):
 		swiping = true
-	elif event.is_action_released("click"):
+	elif not event.is_pressed() and (event is InputEventScreenTouch or event is InputEventMouseButton):
 		swiping = false
 	elif swiping:
 		_calculate_swipe(Input.get_last_mouse_speed())

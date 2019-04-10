@@ -70,7 +70,7 @@ func add_lessons(lessons):
 		
 		$Lessons.add_child(instance)
 		instance.setup(lesson, Vector2(width - 20, 40))
-		total_height += instance.rect_size.y + 2
+		total_height += instance.rect_size.y + 10
 	lessons_height = total_height
 
 

@@ -59,6 +59,7 @@ margin_top = 60.0
 margin_right = 205.0
 margin_bottom = 100.0
 size_flags_vertical = 2
+custom_constants/separation = 10
 
 [node name="Tween" type="Tween" parent="."]
 

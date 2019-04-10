@@ -22,8 +22,8 @@ custom_styles/panel = SubResource( 1 )
 [node name="Back" type="Button" parent="HUD"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 52.0
-margin_bottom = 30.0
+margin_right = 90.0
+margin_bottom = 50.0
 text = "Back"
 
 [connection signal="pressed" from="HUD/Back" to="." method="_on_Back_pressed"]

@@ -25,6 +25,9 @@ Save="*res://Save.gd"
 
 [display]
 
+window/size/width=600
+window/size/height=800
+window/handheld/orientation="portrait"
 window/handheld/emulate_touchscreen=true
 
 [input]

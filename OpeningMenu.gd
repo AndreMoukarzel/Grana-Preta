@@ -11,7 +11,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("click"):
+	if event.is_pressed() and (event is InputEventScreenTouch or event is InputEventMouseButton):
 		if $AnimationTween.is_active():
 			pass
 		else:
