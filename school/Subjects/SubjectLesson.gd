@@ -20,6 +20,8 @@ func setup(name, size):
 	$Background.rect_size = size
 	$Title.rect_size = Vector2(size.x - 15, size.y - 10)
 	$Title.text = name
+	$Lock.rect_size = Vector2(size.y - 10, size.y - 10)
+	$Lock.rect_position = Vector2(size.x - $Lock.rect_size.x - 5, 5)
 	
 	type = db.get_lesson_type(self.id)
 	if type == "info":
@@ -38,6 +40,8 @@ func setup(name, size):
 			unlock()
 		else:
 			var remaining_time = get_remaining_locktime(locked_time, lock_duration)
+			
+			$Lock.show()
 			self.disabled = true
 			modulate = Color(1, 0, 0)
 			$Title.text = str("Time remaning: ", remaining_time)
@@ -70,6 +74,7 @@ func unlock():
 	var School = get_tree().get_root().get_node("School")
 	
 	School.unlock_questionnaire(id)
+	$Lock.hide()
 	self.disabled = false
 	modulate = Color(1, 1, 1)
 	$Title.text = self.title
