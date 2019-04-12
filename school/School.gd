@@ -10,7 +10,8 @@ var theme_entered
 
 
 func _ready():
-	$Background/Panel.rect_size = OS.get_screen_size()
+	$Background/ParallaxLayer/Panel.rect_size = OS.get_window_size()
+	$Background/ParallaxLayer.motion_mirroring = OS.get_window_size()
 	add_theme_tree()
 
 

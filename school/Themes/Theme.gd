@@ -14,11 +14,11 @@ func setup(name, icon, locked=false):
 	
 	$Label.text = name
 	yield(get_tree(),"idle_frame") # needs to wait for Label's rect_size to update
-	$Label.rect_position = Vector2((texture_normal.get_size().x - $Label.rect_size.x)/2, texture_normal.get_size().y)
+	$Label.rect_position = Vector2((self.rect_size.x - $Label.rect_size.x)/2, self.rect_size.y)
 
 
 func lock():
-	$Lock.set_position(texture_normal.get_size()/2)
+	$Lock.set_position(self.rect_size/2)
 	$Lock.show()
 	disabled = true
 

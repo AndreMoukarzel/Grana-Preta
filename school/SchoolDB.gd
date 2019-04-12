@@ -42,6 +42,34 @@ var themes = [
 		INFO : [],
 		DEPEN : ["Stuff1", "Stuff2"],
 		HEIGHT : 2
+	},
+	{
+		NAME : "Stuff5",
+		ICON : null,
+		INFO : [],
+		DEPEN : ["Stuff1", "Stuff2"],
+		HEIGHT : 2
+	},
+	{
+		NAME : "Stuff6",
+		ICON : null,
+		INFO : [],
+		DEPEN : ["Stuff1", "Stuff2"],
+		HEIGHT : 2
+	},
+	{
+		NAME : "Stuff7",
+		ICON : null,
+		INFO : [],
+		DEPEN : ["Stuff1", "Stuff2"],
+		HEIGHT : 2
+	},
+	{
+		NAME : "Stuff8",
+		ICON : null,
+		INFO : [],
+		DEPEN : ["Stuff1", "Stuff2"],
+		HEIGHT : 2
 	}
 ]
 

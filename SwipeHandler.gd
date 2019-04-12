@@ -14,6 +14,13 @@ func _ready():
 	min_cam_pos = window_size_by_2
 
 
+func update_cam_minmax():
+	var window_size_by_2 = OS.get_real_window_size()/2
+	max_cam_pos.x = LocalCamera.limit_right - window_size_by_2.x
+	max_cam_pos.y = LocalCamera.limit_bottom - window_size_by_2.y
+	min_cam_pos.x = LocalCamera.limit_left + window_size_by_2.x
+	min_cam_pos.y = LocalCamera.limit_top + window_size_by_2.y
+
 func _input(event):
 	if event.is_pressed() and (event is InputEventScreenTouch or event is InputEventMouseButton):
 		swiping = true

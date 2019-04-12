@@ -11,9 +11,11 @@ use_filter = true
 font_data = ExtResource( 4 )
 
 [node name="Theme" type="TextureButton"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 200.0
+margin_bottom = 64.0
 texture_normal = ExtResource( 1 )
+expand = true
+stretch_mode = 3
 script = ExtResource( 2 )
 
 [node name="Lock" type="Sprite" parent="."]
