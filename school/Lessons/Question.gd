@@ -129,9 +129,10 @@ func parse_content(parent, content, centralize=false):
 	return vpos
 
 
-func position_back_and_next(pos_y):
-	$Back.rect_position = Vector2(OS.get_window_size().x/3 - $Back.rect_size.x/2, pos_y + 50)
-	$Next.rect_position = Vector2(2 * OS.get_window_size().x/3 - $Next.rect_size.x/2, pos_y + 50)
+func position_back_next_count(pos_y):
+	$Back.rect_position = Vector2(OS.get_window_size().x/4 - $Back.rect_size.x/2, pos_y + 50)
+	$Next.rect_position = Vector2(3 * OS.get_window_size().x/4 - $Next.rect_size.x/2, pos_y + 50)
+	$PageCount.rect_position = Vector2(OS.get_window_size().x/2 - $PageCount.rect_size.x/2, pos_y + 70)
 	
 	return $Next.rect_size.y + $Next.rect_position.y + 20
 
@@ -144,6 +145,7 @@ func show_question_and_answer(index):
 	get_node(str("Question",index)).show()
 	var CurAns = get_node(str("Answer",index))
 	CurAns.show()
+	$PageCount.text = str(index + 1, "/", questions.size())
 	
 	return CurAns.rect_size.y + CurAns.rect_position.y
 
@@ -226,7 +228,7 @@ func set_height(height):
 
 
 func set_questionnaire_size(answers_height):
-	var total_height = position_back_and_next(answers_height + 60)
+	var total_height = position_back_next_count(answers_height + 60)
 
 	set_camera_limits(total_height)
 	set_height(total_height + 25)
@@ -242,13 +244,13 @@ func _on_Next_pressed():
 		set_questionnaire_size(answers_height)
 		
 		if current_question == questions.size() - 1:
-			$Next/Label.text = "Finish"
-			$Next/Panel.set_modulate(Color(.3, 1, .3))
+			$Next.text = "Finish"
+			$Next.set_modulate(Color(.3, 1, .3))
 
 
 func _on_Back_pressed():
-	$Next/Label.text = "NEXT"
-	$Next/Panel.set_modulate(Color(1, 1, 1))
+	$Next.text = "NEXT"
+	$Next.set_modulate(Color(1, 1, 1))
 	current_question = max(current_question - 1, 0)
 	var answers_height = show_question_and_answer(current_question)
 	set_questionnaire_size(answers_height)
@@ -263,5 +265,5 @@ func Alternative_selected(Alternative):
 	
 	for Alt in Answers.get_children():
 		Alt.get_node("Panel").set_modulate(Color(1, 1, 1))
-	Alternative.get_node("Panel").set_modulate(Color(.3, 1, .3))
+	Alternative.get_node("Panel").set_modulate(Color(.95, .95, .6))
 	selected_answers[current_question] = alt_num
