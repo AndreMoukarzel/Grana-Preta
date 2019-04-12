@@ -66,7 +66,9 @@ custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
 text = "BACK"
 
-[node name="Result" type="Label" parent="." index="5"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
+
+[node name="Result" type="Label" parent="CanvasLayer" index="0"]
 margin_left = 272.573
 margin_top = -165.081
 margin_right = 571.573
