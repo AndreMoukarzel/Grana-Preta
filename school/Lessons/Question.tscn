@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://school/Lessons/Lesson.tscn" type="PackedScene" id=1]
 [ext_resource path="res://school/Lessons/Question.gd" type="Script" id=2]
@@ -22,8 +22,21 @@ size = 40
 use_filter = true
 font_data = ExtResource( 3 )
 
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.937255, 0.905882, 0.866667, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [sub_resource type="DynamicFont" id=3]
 size = 100
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 40
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 3 )
@@ -68,21 +81,39 @@ text = "BACK"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
 
-[node name="Result" type="Label" parent="CanvasLayer" index="0"]
-margin_left = 272.573
-margin_top = -165.081
-margin_right = 571.573
-margin_bottom = -58.081
+[node name="ResultPanel" type="Panel" parent="CanvasLayer" index="0"]
+margin_left = 100.0
+margin_top = -400.0
+margin_right = 410.0
+margin_bottom = -100.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="Text" type="Label" parent="CanvasLayer/ResultPanel" index="0"]
+margin_top = 150.0
+margin_right = 299.0
+margin_bottom = 257.0
 rect_rotation = -30.0
 custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.105882, 0.690196, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 2
 text = "PASSED"
 align = 1
 valign = 1
 
-[node name="Tween" type="Tween" parent="CanvasLayer/Result" index="0"]
+[node name="Info" type="Label" parent="CanvasLayer/ResultPanel" index="1"]
+visible = false
+margin_top = 230.0
+margin_right = 310.0
+margin_bottom = 273.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "3 wrong answers"
+align = 1
+valign = 1
+
+[node name="Tween" type="Tween" parent="CanvasLayer/ResultPanel" index="2"]
 
 [connection signal="pressed" from="Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

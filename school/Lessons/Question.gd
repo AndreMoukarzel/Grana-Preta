@@ -12,10 +12,11 @@ var correct_answers = []
 var current_question = 0
 var text_font
 var id
+var done = false
 
 
 func _ready():
-	var Result = $CanvasLayer/Result
+	var Result = $CanvasLayer/ResultPanel
 	randomize()
 	rect_size = OS.get_window_size() - OFFSET
 	rect_position = OFFSET/2
@@ -23,7 +24,14 @@ func _ready():
 	text_font = DynamicFont.new()
 	text_font.font_data = load("res://school/Lessons/LessonFont.otf")
 	text_font.use_filter = true
-	Result.rect_position = Vector2((rect_size.x - Result.rect_size.x * cos(Result.rect_rotation))/2, -OS.get_window_size().y/2)
+	Result.rect_position = Vector2(OS.get_window_size().x * 0.2, -OS.get_window_size().y)
+
+
+func _input(event):
+	if done:
+		if event.is_pressed() and (event is InputEventScreenTouch or event is InputEventMouseButton):
+			var School = get_tree().get_root().get_node("School")
+			School._on_Back_pressed()
 
 
 # Must be setup after being added to tree, or label height will be gotten incorrectly
@@ -151,9 +159,7 @@ func show_question_and_answer(index):
 
 
 func display_results():
-	var School = get_tree().get_root().get_node("School")
 	var wrong_answers = 0
-	var Twn = $CanvasLayer/Result/Tween
 	
 	for i in range(selected_answers.size()):
 		if selected_answers[i] == -1:
@@ -162,31 +168,41 @@ func display_results():
 			wrong_answers += 1
 	
 	if wrong_answers == 0:
-		$CanvasLayer/Result.text = "PASSED"
-		$CanvasLayer/Result.set("custom_colors/font_color",Color(.03, .26, .03))
-		move_child($CanvasLayer/Result, get_child_count() - 1)
-		Twn.interpolate_property($CanvasLayer/Result, "rect_position:y", null,  OS.get_window_size().y/2, 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
-		Twn.interpolate_property($CanvasLayer/Result, "rect_scale", Vector2(0.1, 0.1), Vector2(1.5, 1.5), 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
-		Twn.start()
-		yield(Twn, "tween_completed")
+		disable_all()
+		$CanvasLayer/ResultPanel.rect_size.y = 250
+		tween_result()
 		
 		if not Save.completed_lessons.has(id): # if not completed, complete
 			complete()
-		else:
-			School._on_Back_pressed()
 	else:
-		$CanvasLayer/Result.text = "FAILED"
-		$CanvasLayer/Result.set("custom_colors/font_color",Color(.5, .08, .08))
-		Twn.interpolate_property($CanvasLayer/Result, "rect_position:y", null,  OS.get_window_size().y/2, 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
-		Twn.interpolate_property($CanvasLayer/Result, "rect_scale", Vector2(0.1, 0.1), Vector2(1.5, 1.5), 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
-		Twn.start()
-		yield(Twn, "tween_completed")
+		disable_all()
+		$CanvasLayer/ResultPanel/Text.text = "FAILED"
+		$CanvasLayer/ResultPanel/Text.set("custom_colors/font_color",Color(.5, .08, .08))
+		$CanvasLayer/ResultPanel/Info.show()
+		if wrong_answers == 1:
+			$CanvasLayer/ResultPanel/Info.text = str(wrong_answers, " incorrect answer") # singular
+		else:
+			$CanvasLayer/ResultPanel/Info.text = str(wrong_answers, " incorrect answers") # plural
+		tween_result()
 		
-		print(wrong_answers, " incorrect answers")
 		if not Save.completed_lessons.has(id): # if not completed, lock
 			lock()
-		else:
-			School._on_Back_pressed()
+
+
+func disable_all():
+	$Next.disabled = true
+	$Back.disabled = true
+	for child in get_node(str("Answer",current_question)).get_children():
+		child.disabled = true
+
+
+func tween_result():
+	var Twn = $CanvasLayer/ResultPanel/Tween
+	
+	Twn.interpolate_property($CanvasLayer/ResultPanel, "rect_position:y", null,  (OS.get_window_size().y - $CanvasLayer/ResultPanel.rect_size.y)/2, 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+	Twn.start()
+	yield(Twn, "tween_completed")
+	done = true
 
 
 func complete():
