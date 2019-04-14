@@ -89,6 +89,7 @@ func set_camera_limits():
 	Cam.limit_right = max_x
 	Cam.limit_left = min_x
 	$SwipeHandler.update_cam_minmax()
+	Cam.position.x = (min_x + max_x)/2 # centralize camera
 
 
 func draw_lines():
