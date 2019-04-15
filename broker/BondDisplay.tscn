@@ -55,10 +55,15 @@ text = "SEGURO"
 align = 1
 valign = 1
 
+[node name="Bonds" type="Control" parent="Safe"]
+margin_top = 110.0
+margin_right = 40.0
+margin_bottom = 150.0
+
 [node name="Moderate" type="Panel" parent="."]
-margin_top = 100.0
+margin_top = 300.0
 margin_right = 576.0
-margin_bottom = 200.0
+margin_bottom = 400.0
 custom_styles/panel = SubResource( 3 )
 
 [node name="Label" type="Label" parent="Moderate"]
@@ -70,10 +75,15 @@ text = "MODERADO"
 align = 1
 valign = 1
 
+[node name="Bonds" type="Control" parent="Moderate"]
+margin_top = 110.0
+margin_right = 40.0
+margin_bottom = 150.0
+
 [node name="Chanceful" type="Panel" parent="."]
-margin_top = 200.0
+margin_top = 600.0
 margin_right = 576.0
-margin_bottom = 300.0
+margin_bottom = 700.0
 custom_styles/panel = SubResource( 4 )
 
 [node name="Label" type="Label" parent="Chanceful"]
@@ -84,4 +94,11 @@ custom_colors/font_color = Color( 0.611765, 0, 0, 1 )
 text = "ARROJADO"
 align = 1
 valign = 1
+
+[node name="Bonds" type="Control" parent="Chanceful"]
+margin_top = 110.0
+margin_right = 40.0
+margin_bottom = 150.0
+
+[node name="Tween" type="Tween" parent="."]
 
