@@ -73,7 +73,7 @@ func unlock():
 	$Lock.hide()
 	self.disabled = false
 	self.text = self.title
-	modulate = Color(1, 1, 1)
+	modulate = Color(.6, .6, 1)
 
 
 func set_completed():
