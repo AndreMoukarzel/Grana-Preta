@@ -15,19 +15,15 @@ func setup(name, size):
 	
 	self.id = db.get_lesson_id(name)
 	self.title = name
-	
-	rect_min_size = size
+	self.rect_min_size = size
+	self.text = name
 	$Background.rect_size = size
-	$Title.rect_size = Vector2(size.x - 15, size.y - 10)
-	$Title.text = name
 	$Lock.rect_size = Vector2(size.y - 10, size.y - 10)
 	$Lock.rect_position = Vector2(size.x - $Lock.rect_size.x - 5, 5)
 	
 	type = db.get_lesson_type(self.id)
-	if type == "info":
-		pass
-	elif type == "question":
-		pass
+	if type == "question":
+		self.set_modulate(Color(.6, .6, 1))
 	
 	if Save.completed_lessons.has(id): # lesson previously completed
 		set_completed()
@@ -43,8 +39,8 @@ func setup(name, size):
 			
 			$Lock.show()
 			self.disabled = true
+			self.text = str("Time remaning: ", remaining_time)
 			modulate = Color(1, 0, 0)
-			$Title.text = str("Time remaning: ", remaining_time)
 			$Timer.start()
 
 
@@ -76,8 +72,8 @@ func unlock():
 	School.unlock_questionnaire(id)
 	$Lock.hide()
 	self.disabled = false
+	self.text = self.title
 	modulate = Color(1, 1, 1)
-	$Title.text = self.title
 
 
 func set_completed():
@@ -128,5 +124,5 @@ func _on_Timer_timeout():
 	for r in remaining_time:
 		remain_string += str(":", r)
 	remain_string.erase(0, 1) # removes first ":"
-	$Title.text = str("Time remaning: ", remain_string)
+	self.text = str("Time remaning: ", remain_string)
 	modulate = Color(1, 0, 0)
