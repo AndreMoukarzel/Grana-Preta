@@ -94,13 +94,14 @@ valign = 1
 
 [node name="Taxes" type="Label" parent="."]
 visible = false
-margin_left = 350.0
+margin_left = 220.0
 margin_top = 100.0
-margin_right = 451.0
+margin_right = 321.0
 margin_bottom = 170.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.635294, 0.101961, 0.101961, 1 )
-text = "12000"
+text = "IR(20%), Adm(3%),
+Perf(200%)"
 valign = 1
 
 [node name="Apply" type="Button" parent="."]

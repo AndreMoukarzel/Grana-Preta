@@ -18,15 +18,25 @@ var min_time
 var taxes
 
 
-func setup():
-	rect_size = Vector2(get_parent().rect_size.x, 70)
-
-
-func _on_Bond_pressed():
-	if is_open:
-		close()
-	else:
-		open()
+func setup(bond_name : String, rentability : float, rentability_type : String, expiration : Array, min_investment : int, min_time : Array, taxes : Array):
+#	rect_size = Vector2(get_parent().rect_size.x, 70)
+	self.bond_name = bond_name
+	self.rentability = rentability
+	self.rentability_type = rentability_type
+	self.expiration = expiration
+	self.min_investment = min_investment
+	self.min_time = min_time
+	self.taxes = taxes
+	
+	$Name.text = bond_name
+	if rentability_type == "Pré-fixada":
+		$Rentability.text = str("PRE", rentability)
+	elif rentability_type == "Pós-fixada":
+		$Rentability.text = str("POS", rentability)
+	# expiration
+	$MinInvestment.text = min_investment
+	# min_time
+	$Taxes.text = str("IR(", taxes[0], "), Adm(", taxes[1], "),\nPerf(", taxes[2], ")")
 
 
 func close():
@@ -61,3 +71,10 @@ func open():
 	
 	is_open = true
 	emit_signal("opened", self)
+
+
+func _on_Bond_pressed():
+	if is_open:
+		close()
+	else:
+		open()
