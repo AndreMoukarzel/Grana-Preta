@@ -8,8 +8,6 @@ const BASE_HEIGHT = 80
 const TWN_TIME = .2
 const SUBJECT_LESSON_SCN = preload("res://school/Subjects/SubjectLesson.tscn")
 
-onready var font = $Rentability.get("custom_fonts/font")
-
 var is_open = false
 var bond_name : String
 var rentability : float
@@ -43,26 +41,31 @@ func setup(bond_name : String, rentability : float, rentability_type : String, e
 
 
 func resume_info():
+	$Rentability.rect_scale = Vector2(1, 1)
 	if rentability_type == "Pre-fixada":
 		$Rentability.text = str("PRE", rentability)
 	elif rentability_type == "Pos-fixada":
 		$Rentability.text = str("POS", rentability)
 	
+	$Expiration.rect_scale = Vector2(1, 1)
 	if expiration[0] > 0: # days left
 		$Expiration.text = str(expiration[0], "D")
 	elif expiration[1] > 0: # hours left
 		$Expiration.text = str(expiration[1], "H")
 	
+	$MinInvestment.rect_scale = Vector2(1, 1)
 	$MinInvestment.text = str(min_investment)
 
 
 func expand_info():
+	$Rentability.rect_scale = Vector2(.7, .7)
 	$Rentability.text = "Rentabilidade:\n"
 	if rentability_type == "Pre-fixada":
 		$Rentability.text += str("Pre-fixada em ", rentability , "%")
 	elif rentability_type == "Pos-fixada":
 		$Rentability.text += str("Pos-fixada em ", rentability , "%")
 	
+	$Expiration.rect_scale = Vector2(.7, .7)
 	$Expiration.text = "Vencimento:\n"
 	if expiration[0] > 0: # days left
 		$Expiration.text += str(expiration[0], " dias")
@@ -71,29 +74,29 @@ func expand_info():
 	elif expiration[1] > 0: # hours left
 		$Expiration.text += str(expiration[1], " horas")
 	
+	$MinInvestment.rect_scale = Vector2(.7, .7)
 	$MinInvestment.text = str("Requisito:\nG$ ", min_investment)
 
 
 func close():
+	resume_info()
 	$MinTime.hide()
 	$Taxes.hide()
 	$Tween.interpolate_property(self, "rect_size:y", null, 70, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Name, "rect_position:x", null, 10, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($Rentability, "rect_position", null, Vector2(130, 0), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($Expiration, "rect_position", null, Vector2(260, 0), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($MinInvestment, "rect_position", null, Vector2(320, 0), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Rentability, "rect_position", null, Vector2(130, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Expiration, "rect_position", null, Vector2(260, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($MinInvestment, "rect_position", null, Vector2(320, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Apply, "rect_position", null, Vector2(425, 2), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Apply, "rect_size", null, Vector2(147, 64), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.start()
-	
-	font.size = 50
-	resume_info()
 	
 	is_open = false
 	emit_signal("closed", self)
 
 
 func open():
+	expand_info()
 	$MinTime.show()
 	$Taxes.show()
 	$Tween.interpolate_property(self, "rect_size:y", null, 360, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
@@ -106,9 +109,6 @@ func open():
 	$Tween.interpolate_property($MinTime, "modulate", Color(1, 1, 1, 0), Color(1, 1, 1, 1), 2*TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Taxes, "modulate", Color(1, 1, 1, 0), Color(1, 1, 1, 1), 2*TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.start()
-	
-	font.size = 35
-	expand_info()
 	
 	is_open = true
 	emit_signal("opened", self)
