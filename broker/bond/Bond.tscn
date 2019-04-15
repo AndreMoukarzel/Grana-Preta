@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://broker/bond/Bond.gd" type="Script" id=1]
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
@@ -15,6 +15,12 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=4]
+size = 50
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 50
@@ -49,7 +55,7 @@ script = ExtResource( 1 )
 margin_left = 10.0
 margin_right = 120.0
 margin_bottom = 70.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "NAME"
 valign = 1
@@ -84,20 +90,21 @@ valign = 1
 [node name="MinTime" type="Label" parent="."]
 visible = false
 margin_left = 10.0
-margin_top = 150.0
-margin_right = 111.0
-margin_bottom = 220.0
+margin_top = 190.0
+margin_right = 168.0
+margin_bottom = 301.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "2 dias"
+text = "2 dias e
+15 horas"
 valign = 1
 
 [node name="Taxes" type="Label" parent="."]
 visible = false
-margin_left = 220.0
-margin_top = 100.0
-margin_right = 321.0
-margin_bottom = 170.0
+margin_left = 300.0
+margin_top = 140.0
+margin_right = 641.0
+margin_bottom = 251.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.635294, 0.101961, 0.101961, 1 )
 text = "IR(20%), Adm(3%),

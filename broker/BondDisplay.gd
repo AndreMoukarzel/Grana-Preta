@@ -1,7 +1,7 @@
 extends Control
 
 const BOND_SCN = preload("res://broker/bond/Bond.tscn")
-const BOND_EXPANSION = 230
+const BOND_EXPANSION = 380
 const TWN_TIME = .2
 
 onready var SafeBonds = $Safe/Bonds
@@ -14,6 +14,7 @@ func _ready():
 		var Bond = BOND_SCN.instance()
 		Bond.rect_position.y = i * 100
 		SafeBonds.add_child(Bond)
+		Bond.setup("POP-I", 12.1, "Pre-fixada", [0, 3], 4000, [2, 1], [15, 2, 0.3])
 		Bond.connect("opened", self, "bond_opened")
 		Bond.connect("closed", self, "bond_closed")
 
