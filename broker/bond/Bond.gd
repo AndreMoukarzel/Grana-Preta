@@ -20,7 +20,7 @@ var taxes
 
 func setup(bond_name : String, rentability : float, rentability_type : String, expiration : Array, min_investment : int, min_time : Array, taxes : Array):
 	self.bond_name = bond_name
-	self.rentability = rentability
+	self.rentability = stepify(rentability, 0.1)
 	self.rentability_type = rentability_type
 	self.expiration = expiration
 	self.min_investment = min_investment
@@ -35,7 +35,7 @@ func setup(bond_name : String, rentability : float, rentability_type : String, e
 			$MinTime.text += str(" e\n", min_time[1], " horas")
 	elif min_time[1] > 0:
 		$MinTime.text += str(min_time[1], " horas")
-	$Taxes.text = str("Taxas:\nIR(", taxes[0], "%), Adm(", taxes[1], "%),\nPerf(", taxes[2], "%)")
+	$Taxes.text = str("Taxas:\nIR(", taxes[0], "%), Adm(", stepify(taxes[1], 0.1), "%),\nPerf(", stepify(taxes[2], 0.1), "%)")
 	resume_info()
 
 
@@ -83,8 +83,8 @@ func close():
 	$Taxes.hide()
 	$Tween.interpolate_property(self, "rect_size:y", null, 70, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Name, "rect_position:x", null, 10, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($Rentability, "rect_position", null, Vector2(130, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($Expiration, "rect_position", null, Vector2(260, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Rentability, "rect_position", null, Vector2(110, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Expiration, "rect_position", null, Vector2(260, -45), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($MinInvestment, "rect_position", null, Vector2(320, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Apply, "rect_position", null, Vector2(425, 2), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Apply, "rect_size", null, Vector2(147, 64), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)

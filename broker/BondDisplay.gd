@@ -15,11 +15,10 @@ var total_height = 300
 
 
 func _ready():
-	for i in range(2):
-		var Bond = add_bond(ModerBonds)
-		Bond.setup("POP-I", 12.1, "Pre-fixada", [0, 3], 4000, [2, 1], [15, 2, 0.3])
-		Bond.connect("opened", self, "bond_opened")
-		Bond.connect("closed", self, "bond_closed")
+#	for i in range(2):
+#		var Bond = add_bond(ModerBonds)
+#		Bond.setup("POP-I", 12.1, "Pre-fixada", [0, 3], 4000, [2, 1], [15, 2, 0.3])
+	$BondGenerator.generate()
 	s_pos = $Safe.rect_position.y
 	m_pos = $Moderate.rect_position.y
 	c_pos = $Chanceful.rect_position.y
@@ -28,6 +27,9 @@ func _ready():
 func add_bond(parent):
 	var Bond = BOND_SCN.instance()
 	Bond.rect_position.y =  parent.get_child_count() * 100
+	Bond.set_name(str(parent.get_child_count()))
+	Bond.connect("opened", self, "bond_opened")
+	Bond.connect("closed", self, "bond_closed")
 	parent.add_child(Bond)
 	
 	if parent != ChanceBonds:
@@ -37,6 +39,7 @@ func add_bond(parent):
 		total_height += 110
 	
 	return Bond
+
 
 func close_all_bonds(exception = null):
 	for child in $Safe/Bonds.get_children():
@@ -76,8 +79,8 @@ func bond_opened(bond):
 	close_all_bonds(bond)
 	for child in bond.get_parent().get_children():
 		if child.rect_global_position.y > pos_y:
-			var pos = child.rect_position.y
-			$Tween.interpolate_property(child, "rect_position:y", pos, pos + BOND_EXPANSION, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+			var pos = int(child.get_name()) * 100
+			$Tween.interpolate_property(child, "rect_position:y", null, pos + BOND_EXPANSION, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	
 	if group != "Chanceful":
 		$Tween.interpolate_property($Chanceful, "rect_position:y", null, c_pos + BOND_EXPANSION, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
@@ -95,8 +98,8 @@ func bond_closed(bond):
 	disable_all_bonds()
 	for child in bond.get_parent().get_children():
 		if child.rect_global_position.y > pos_y:
-			var pos = child.rect_position.y
-			$Tween.interpolate_property(child, "rect_position:y", pos, pos - BOND_EXPANSION, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+			var pos = int(child.get_name()) * 100
+			$Tween.interpolate_property(child, "rect_position:y", null, pos, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	
 	if group != "Chanceful":
 		$Tween.interpolate_property($Chanceful, "rect_position:y", null, c_pos, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
