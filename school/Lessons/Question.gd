@@ -210,6 +210,7 @@ func complete():
 	
 	School.complete_lesson(id)
 	School._on_Back_pressed()
+	Save.money += 50
 
 
 func lock():

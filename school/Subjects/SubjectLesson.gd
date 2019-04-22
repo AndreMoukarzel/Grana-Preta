@@ -63,7 +63,7 @@ func complete():
 	
 	School.complete_lesson(id)
 	set_completed()
-	# add other possible effects of completion
+	Save.money += 50
 
 
 func unlock():

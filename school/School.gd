@@ -67,12 +67,13 @@ func complete_lesson(id):
 	
 	print("lesson ", id, " completed")
 	Save.completed_lessons.append(id)
+	Save.save_game()
 	for lesson in all_lessons:
 		var lesson_id = lesson_db.get_lesson_id(lesson)
 		
 		if not Save.completed_lessons.has(lesson_id): # a lesson from subject was not completed
 			return
-			
+	
 	complete_subject(subject_id)
 
 
@@ -84,6 +85,7 @@ func complete_subject(subject_id):
 	
 	print("subject ", subject_id, " completed")
 	Save.completed_subjects.append(subject_id)
+	Save.save_game()
 	for subject in all_subjects:
 		var sub_id = school_db.get_subject_id(subject)
 		
@@ -96,12 +98,14 @@ func complete_subject(subject_id):
 func complete_theme(theme_id):
 	print("theme ", theme_id, " completed")
 	Save.completed_themes.append(theme_id)
+	Save.save_game()
 
 
 func lock_questionnaire(id):
 	print("Questionnaire ", id, " locked")
 	Save.failed_questions.append(id)
 	Save.failed_questions_time.append(OS.get_datetime())
+	Save.save_game()
 
 
 func unlock_questionnaire(id):
@@ -110,6 +114,7 @@ func unlock_questionnaire(id):
 	print("Questionnaire ", id, " unlocked")
 	Save.failed_questions.remove(index)
 	Save.failed_questions_time.remove(index)
+	Save.save_game()
 
 
 func instance_test_lesson():
@@ -143,7 +148,6 @@ func _on_Back_pressed():
 	elif current_scene == "Lesson":
 		add_subject_tree(theme_entered)
 	elif current_scene == "ThemeTree":
-		Save.save_game()
 		var e = get_tree().change_scene("res://City.tscn")
 		if e != 0:
 			print("City scene couldn't be loaded")
