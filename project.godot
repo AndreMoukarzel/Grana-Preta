@@ -22,6 +22,8 @@ config/icon="res://school/lock.png"
 [autoload]
 
 Save="*res://Save.gd"
+Selic="*res://Index.gd"
+Inflation="*res://Index.gd"
 
 [display]
 

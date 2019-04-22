@@ -6,6 +6,8 @@ var completed_themes = []
 var failed_questions = []
 var failed_questions_time = []
 var money = 0
+var selic_last100 = []
+var inflation_last100 = []
 
 
 func save():
@@ -15,7 +17,9 @@ func save():
 		completed_themes = completed_themes,
 		failed_questions = failed_questions,
 		failed_questions_time = failed_questions_time,
-		money = money
+		money = money,
+		selic_last100 = selic_last100,
+		inflation_last100 = inflation_last100
 	}
 	return savedict
 
@@ -31,6 +35,15 @@ func save_game():
 func load_game():
 	var savegame = File.new()
 	if !savegame.file_exists("user://savegame.save"):
+		Selic.create(10.0, 3.0, 6.0, 15.0)
+		Inflation.create(3.0, 1.0, -0.5, 10.0)
+		
+		for i in range(100):
+			Selic.iterate()
+			Inflation.iterate()
+			selic_last100.append(Selic.value)
+			inflation_last100.append(Inflation.value)
+		
 		return #Error!  We don't have a save to load
 	
 	savegame.open("user://savegame.save", File.READ)
@@ -50,6 +63,12 @@ func load_game():
 	for element in savedata.failed_questions_time:
 		failed_questions_time.append(element)
 	money = int(savedata.money)
+	for element in savedata.selic_last100:
+		selic_last100.append(float(element))
+	for element in savedata.inflation_last100:
+		inflation_last100.append(float(element))
+	Selic.create(selic_last100[99], 3.0, 6.0, 15.0)
+	Inflation.create(inflation_last100[99], 1.0, -0.5, 10.0)
 
 
 func clear_save():
