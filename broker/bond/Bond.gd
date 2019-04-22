@@ -19,7 +19,6 @@ var taxes
 
 
 func setup(bond_name : String, rentability : float, rentability_type : String, expiration : Array, min_investment : int, min_time : Array, taxes : Array):
-#	rect_size = Vector2(get_parent().rect_size.x, 70)
 	self.bond_name = bond_name
 	self.rentability = rentability
 	self.rentability_type = rentability_type

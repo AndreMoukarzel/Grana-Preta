@@ -61,9 +61,9 @@ margin_right = 40.0
 margin_bottom = 150.0
 
 [node name="Moderate" type="Panel" parent="."]
-margin_top = 300.0
+margin_top = 100.0
 margin_right = 576.0
-margin_bottom = 400.0
+margin_bottom = 200.0
 custom_styles/panel = SubResource( 3 )
 
 [node name="Label" type="Label" parent="Moderate"]
@@ -81,9 +81,9 @@ margin_right = 40.0
 margin_bottom = 150.0
 
 [node name="Chanceful" type="Panel" parent="."]
-margin_top = 600.0
+margin_top = 200.0
 margin_right = 576.0
-margin_bottom = 700.0
+margin_bottom = 300.0
 custom_styles/panel = SubResource( 4 )
 
 [node name="Label" type="Label" parent="Chanceful"]

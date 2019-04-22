@@ -11,16 +11,32 @@ onready var s_pos = $Safe.rect_position.y
 onready var m_pos = $Moderate.rect_position.y
 onready var c_pos = $Chanceful.rect_position.y
 
+var total_height = 300
+
 
 func _ready():
 	for i in range(2):
-		var Bond = BOND_SCN.instance()
-		Bond.rect_position.y = i * 100
-		SafeBonds.add_child(Bond)
+		var Bond = add_bond(ModerBonds)
 		Bond.setup("POP-I", 12.1, "Pre-fixada", [0, 3], 4000, [2, 1], [15, 2, 0.3])
 		Bond.connect("opened", self, "bond_opened")
 		Bond.connect("closed", self, "bond_closed")
+	s_pos = $Safe.rect_position.y
+	m_pos = $Moderate.rect_position.y
+	c_pos = $Chanceful.rect_position.y
 
+
+func add_bond(parent):
+	var Bond = BOND_SCN.instance()
+	Bond.rect_position.y =  parent.get_child_count() * 100
+	parent.add_child(Bond)
+	
+	if parent != ChanceBonds:
+		$Chanceful.rect_position.y += 110
+		if parent != ModerBonds:
+			$Moderate.rect_position.y += 110
+		total_height += 110
+	
+	return Bond
 
 func close_all_bonds(exception = null):
 	for child in $Safe/Bonds.get_children():
