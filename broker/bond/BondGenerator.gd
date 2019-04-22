@@ -26,7 +26,7 @@ func generate_safe_bond(possible_names, index_name):
 		index = Save.selic_last100
 	
 	for i in range(expiration[0]):
-		avg += index[99 - i]
+		avg += index[99 - i] - index[98 - i]
 	avg /= expiration[0]
 	rentability = index[99] + avg + rand_range(-2.0, 2.0)
 	Bond.setup(bond_name, rentability, "Pre-fixada", expiration, min_investment, min_time, taxes)
