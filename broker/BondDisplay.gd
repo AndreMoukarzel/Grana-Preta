@@ -13,11 +13,7 @@ onready var c_pos = $Chanceful.rect_position.y
 
 var total_height = 300
 
-
 func _ready():
-#	for i in range(2):
-#		var Bond = add_bond(ModerBonds)
-#		Bond.setup("POP-I", 12.1, "Pre-fixada", [0, 3], 4000, [2, 1], [15, 2, 0.3])
 	$BondGenerator.generate()
 	s_pos = $Safe.rect_position.y
 	m_pos = $Moderate.rect_position.y
@@ -33,10 +29,13 @@ func add_bond(parent):
 	parent.add_child(Bond)
 	
 	if parent != ChanceBonds:
-		$Chanceful.rect_position.y += 110
+		$Chanceful.rect_position.y += 100
 		if parent != ModerBonds:
-			$Moderate.rect_position.y += 110
-		total_height += 110
+			$Moderate.rect_position.y += 100
+		total_height += 100
+	
+	$SwipeHandler/SwipingCamera.limit_bottom = max(1324, total_height + 300)
+	$SwipeHandler.update_cam_minmax()
 	
 	return Bond
 

@@ -16,9 +16,10 @@ var expiration
 var min_investment : int
 var min_time
 var taxes
+var creation_time
 
 
-func setup(bond_name : String, rentability : float, rentability_type : String, expiration : Array, min_investment : int, min_time : Array, taxes : Array):
+func setup(bond_name : String, rentability : float, rentability_type : String, expiration : Array, min_investment : int, min_time : Array, taxes : Array, creation_time):
 	self.bond_name = bond_name
 	self.rentability = stepify(rentability, 0.1)
 	self.rentability_type = rentability_type
@@ -36,6 +37,7 @@ func setup(bond_name : String, rentability : float, rentability_type : String, e
 	elif min_time[1] > 0:
 		$MinTime.text += str(min_time[1], " horas")
 	$Taxes.text = str("Taxas:\nIR(", taxes[0], "%), Adm(", stepify(taxes[1], 0.1), "%),\nPerf(", stepify(taxes[2], 0.1), "%)")
+	expand_info() # used here to adapt labels to correct size
 	resume_info()
 
 
@@ -45,6 +47,7 @@ func resume_info():
 		$Rentability.text = str("PRE", rentability)
 	elif rentability_type == "Pos-fixada":
 		$Rentability.text = str("POS", rentability)
+		$Name.text = bond_name
 	
 	$Expiration.rect_scale = Vector2(1, 1)
 	if expiration[0] > 0: # days left
@@ -63,6 +66,11 @@ func expand_info():
 		$Rentability.text += str("Pre-fixada em ", rentability , "%")
 	elif rentability_type == "Pos-fixada":
 		$Rentability.text += str("Pos-fixada em ", rentability , "%")
+		var name_split = bond_name.split("-")
+		if name_split[0] == "S":
+			$Name.text = str("Selic - ", name_split[1])
+		elif name_split[0] == "I":
+			$Name.text = str("Inflation - ", name_split[1])
 	
 	$Expiration.rect_scale = Vector2(.7, .7)
 	$Expiration.text = "Vencimento:\n"
