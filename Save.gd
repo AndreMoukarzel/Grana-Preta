@@ -8,6 +8,7 @@ var failed_questions_time = []
 var money = 0
 var selic_last100 = []
 var inflation_last100 = []
+var last_index_iteration_date
 
 
 func save():
@@ -19,7 +20,8 @@ func save():
 		failed_questions_time = failed_questions_time,
 		money = money,
 		selic_last100 = selic_last100,
-		inflation_last100 = inflation_last100
+		inflation_last100 = inflation_last100,
+		last_index_iteration_date = last_index_iteration_date
 	}
 	return savedict
 
@@ -43,6 +45,7 @@ func load_game():
 			Inflation.iterate()
 			selic_last100.append(Selic.value)
 			inflation_last100.append(Inflation.value)
+		last_index_iteration_date = OS.get_date()
 		
 		return #Error!  We don't have a save to load
 	
@@ -69,8 +72,45 @@ func load_game():
 		inflation_last100.append(float(element))
 	Selic.create(selic_last100[99], 3.0, 6.0, 15.0)
 	Inflation.create(inflation_last100[99], 1.0, -0.5, 10.0)
+	last_index_iteration_date = savedata.last_index_iteration_date
+	
+	var days = get_days_to_today(last_index_iteration_date)
+	if days > 0:
+		for i in range(days):
+			Selic.iterate()
+			Inflation.iterate()
+			selic_last100.pop_front()
+			inflation_last100.pop_front()
+			selic_last100.append(Selic.value)
+			inflation_last100.append(Inflation.value)
+		last_index_iteration_date = OS.get_date()
 
 
 func clear_save():
 	var dir = Directory.new()
 	dir.remove("user://savegame.save")
+
+
+# Returns the numbers of days from past_date to today
+func get_days_to_today(past_date):
+	var today = OS.get_date()
+	var months = 0
+	var days = 0
+	
+	if today.year > past_date.year:
+		months += 12 * (today.year - past_date.year)
+	if today.month + months > past_date.month:
+		var m = past_date.month
+		for i in range((today.month + months) - past_date.month):
+			if m % 2 == 0:
+				if m == 2: # February
+					days += 28
+					if past_date.year % 4 == 0: # leap year
+						days += 1
+				else:
+					days += 30
+			else:
+				days += 31
+	days += today.day - past_date.day
+	
+	return days
