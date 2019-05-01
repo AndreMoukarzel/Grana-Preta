@@ -26,9 +26,10 @@ func generate_safe_bond(possible_names, index_name):
 	var avg = 0
 	var index = Save.inflation_last100
 	
+	if bond_name == "LCI" or bond_name == "LCA":
+		taxes[0] = 0
 	if index_name == "Selic":
 		index = Save.selic_last100
-		
 	if expiration[1] > 23: # Correct expiration
 		expiration[1] -= 24
 		expiration[0] += 1
@@ -36,7 +37,7 @@ func generate_safe_bond(possible_names, index_name):
 	for i in range(expiration[0]): # Calculate index tendencies
 		avg += index[99 - i] - index[98 - i]
 	avg /= expiration[0]
-	rentability = index[99] + avg + rand_range(-2.0, 2.0) + ((min_time[0] * 24) + min_time[1]) * 0.1
+	rentability = index[99] + avg + rand_range(-2.0, 2.0) + ((min_time[0] * 24) + min_time[1]) * 0.06
 	Bond.setup(bond_name, rentability, "Pre-fixada", expiration, min_investment, min_time, taxes, OS.get_datetime())
 
 

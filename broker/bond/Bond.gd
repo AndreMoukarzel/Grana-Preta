@@ -10,7 +10,8 @@ const SUBJECT_LESSON_SCN = preload("res://school/Subjects/SubjectLesson.tscn")
 
 var is_open = false
 var bond_name : String
-var rentability : float
+var display_rentability : float
+var rentability : float # How much the bond returns each 4 hours ( or each day, in case of provisioned bonds )
 var rentability_type : String # Pre, Pos index or Pos provisioned 
 var expiration
 var min_investment : int
@@ -21,7 +22,7 @@ var creation_time
 
 func setup(bond_name : String, rentability : float, rentability_type : String, expiration : Array, min_investment : int, min_time : Array, taxes : Array, creation_time):
 	self.bond_name = bond_name
-	self.rentability = stepify(rentability, 0.1)
+	self.display_rentability = rentability
 	self.rentability_type = rentability_type
 	self.expiration = expiration
 	self.min_investment = min_investment
@@ -44,9 +45,9 @@ func setup(bond_name : String, rentability : float, rentability_type : String, e
 func resume_info():
 	$Rentability.rect_scale = Vector2(1, 1)
 	if rentability_type == "Pre-fixada":
-		$Rentability.text = str("PRE", rentability)
+		$Rentability.text = str("PRE", stepify(display_rentability, 0.1))
 	elif rentability_type == "Pos-fixada":
-		$Rentability.text = str("POS", rentability)
+		$Rentability.text = str("POS", stepify(display_rentability, 0.1))
 		$Name.text = bond_name
 	
 	
@@ -64,14 +65,17 @@ func expand_info():
 	$Rentability.rect_scale = Vector2(.7, .7)
 	$Rentability.text = "Rentabilidade:\n"
 	if rentability_type == "Pre-fixada":
-		$Rentability.text += str("Pre-fixada em ", rentability , "%")
+		$Rentability.text += str("Pre-fixada em ", stepify(display_rentability, 0.1) , "%")
 	elif rentability_type == "Pos-fixada":
-		$Rentability.text += str("Pos-fixada em ", rentability , "%")
+		var index_name
 		var name_split = bond_name.split("-")
+		
 		if name_split[0] == "S":
-			$Name.text = str("Selic - ", name_split[1])
+			index_name = "Selic"
 		elif name_split[0] == "I":
-			$Name.text = str("Inflation - ", name_split[1])
+			index_name == "Inflação"
+		$Rentability.text += str(stepify(display_rentability * 100, 0.1) , "% da ", index_name)
+		$Name.text = str(index_name, " - ", name_split[1])
 	
 	$Expiration.rect_scale = Vector2(.7, .7)
 	$Expiration.text = "Vencimento:\n"
