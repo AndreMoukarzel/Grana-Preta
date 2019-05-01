@@ -10,7 +10,7 @@ const SUBJECT_LESSON_SCN = preload("res://school/Subjects/SubjectLesson.tscn")
 
 var is_open = false
 var bond_name : String
-var display_rentability : float
+var display_rentability : float # Expected rentability of bond in 5 days
 var rentability : float # How much the bond returns each 4 hours ( or each day, in case of provisioned bonds )
 var rentability_type : String # Pre, Pos index or Pos provisioned 
 var expiration
@@ -20,15 +20,19 @@ var taxes
 var creation_time
 
 
-func setup(bond_name : String, rentability : float, rentability_type : String, expiration : Array, min_investment : int, min_time : Array, taxes : Array, creation_time):
+func setup(bond_name : String, five_day_rentability : float, rentability_type : String, expiration : Array, min_investment : int, min_time : Array, taxes : Array, creation_time):
 	self.bond_name = bond_name
-	self.display_rentability = rentability
+	self.display_rentability = five_day_rentability
 	self.rentability_type = rentability_type
 	self.expiration = expiration
 	self.min_investment = min_investment
 	self.min_time = min_time
 	self.taxes = taxes
 	
+	if rentability_type == "Pre-fixada":
+		self.rentability = calculate_safebond_rentability(self.display_rentability)
+	elif rentability_type == "Pos-fixada":
+		self.rentability = calculate_moderatebond_rentability(self.display_rentability)
 	$Name.text = bond_name
 	$MinTime.text = "Carencia: "
 	if min_time[0] > 0:
@@ -127,6 +131,21 @@ func open():
 	
 	is_open = true
 	emit_signal("opened", self)
+
+
+# Look at "Working out interest rates" at https://www.mathsisfun.com/money/compound-interest.html
+func calculate_safebond_rentability(five_day_rentability):
+	var fdr = (100 + five_day_rentability)/100
+	var four_hour_rentability = pow(fdr, 1.0/30.0)
+	
+	return four_hour_rentability
+
+
+# Look at "Working out interest rates" at https://www.mathsisfun.com/money/compound-interest.html
+func calculate_moderatebond_rentability(five_day_rentability):
+	var four_hour_rentability = pow(five_day_rentability, 1.0/30.0)
+	
+	return four_hour_rentability
 
 
 func _on_Bond_pressed():
