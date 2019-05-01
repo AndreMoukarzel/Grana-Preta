@@ -23,7 +23,7 @@ func setup(name, size):
 	
 	type = db.get_lesson_type(self.id)
 	if type == "question":
-		self.set_modulate(Color(.6, .6, 1))
+		$Background.set_modulate(Color(.6, .6, 1))
 	
 	if Save.completed_lessons.has(id): # lesson previously completed
 		set_completed()
@@ -40,7 +40,7 @@ func setup(name, size):
 			$Lock.show()
 			self.disabled = true
 			self.text = str("Time remaning: ", remaining_time)
-			modulate = Color(1, 0, 0)
+			$Background.set_modulate(Color(1, .6, .6))
 			$Timer.start()
 
 
@@ -73,11 +73,11 @@ func unlock():
 	$Lock.hide()
 	self.disabled = false
 	self.text = self.title
-	modulate = Color(.6, .6, 1)
+	$Background.set_modulate(Color(.6, .6, 1))
 
 
 func set_completed():
-	modulate = Color(0, 1, 0)
+	$Background.set_modulate(Color(0, 1, 0))
 	completed = true
 
 
@@ -125,4 +125,4 @@ func _on_Timer_timeout():
 		remain_string += str(":", r)
 	remain_string.erase(0, 1) # removes first ":"
 	self.text = str("Time remaning: ", remain_string)
-	modulate = Color(1, 0, 0)
+	$Background.set_modulate(Color(1, .6, .6))
