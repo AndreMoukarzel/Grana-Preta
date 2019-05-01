@@ -36,7 +36,7 @@ func generate_safe_bond(possible_names, index_name):
 	for i in range(expiration[0]): # Calculate index tendencies
 		avg += index[99 - i] - index[98 - i]
 	avg /= expiration[0]
-	rentability = index[99] + avg + rand_range(-2.0, 2.0)
+	rentability = index[99] + avg + rand_range(-2.0, 2.0) + ((min_time[0] * 24) + min_time[1]) * 0.1
 	Bond.setup(bond_name, rentability, "Pre-fixada", expiration, min_investment, min_time, taxes, OS.get_datetime())
 
 
@@ -47,7 +47,7 @@ func generate_moderate_bonds(possible_names):
 	var min_time = [round(rand_range(0, 1.8)), (1 + randi() % 4) * 4]
 	var expiration = [min_time[0] + 2 + randi() % 12, min_time[1] + (randi() % 6) * 4]
 	var taxes = [22.5, rand_range(0.0, 2.5), 0] # IR, Adm, Performance
-	var rentability = rand_range(0.5, 6.0)
+	var rentability = rand_range(0.8, 1.10) + ((min_time[0] * 24) + min_time[1]) * 0.005
 	
 	if expiration[1] > 23: # Correct expiration
 		expiration[1] -= 24
