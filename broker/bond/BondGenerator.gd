@@ -18,7 +18,7 @@ func generate():
 func generate_safe_bond(possible_names, index_name):
 	var Bond = BondDisplay.add_bond(BondDisplay.SafeBonds)
 	var bond_name = possible_names[randi() % possible_names.size()]
-	var min_investment = 200 + randi() % 4801
+	var min_investment = 200 + (randi() % 49) * 100
 	var min_time = [round(rand_range(.0, .6)), (1 + randi() % 4) * 4]
 	var expiration = [min_time[0] + 4 + randi() % 4, min_time[1] + (randi() % 6) * 4]
 	var taxes = [22.5, rand_range(0.0, 2.5), 0] # IR, Adm, Performance
@@ -43,7 +43,7 @@ func generate_safe_bond(possible_names, index_name):
 func generate_moderate_bonds(possible_names):
 	var Bond = BondDisplay.add_bond(BondDisplay.ModerBonds)
 	var bond_name = possible_names[randi() % possible_names.size()]
-	var min_investment = 200 + randi() % 4801
+	var min_investment = 200 + (randi() % 49) * 100
 	var min_time = [round(rand_range(0, 1.8)), (1 + randi() % 4) * 4]
 	var expiration = [min_time[0] + 2 + randi() % 12, min_time[1] + (randi() % 6) * 4]
 	var taxes = [22.5, rand_range(0.0, 2.5), 0] # IR, Adm, Performance
