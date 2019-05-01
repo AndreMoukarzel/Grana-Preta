@@ -2,7 +2,7 @@
 
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=1]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.901961, 0.901961, 0.901961, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -22,7 +22,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -35,16 +35,17 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Confirmation" type="Panel"]
+[node name="ConfirmationPanel" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 63.0
 margin_right = -63.0
 margin_bottom = -624.0
-custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="BackGround" type="Panel" parent="."]
+margin_right = 450.0
+margin_bottom = 400.0
+custom_styles/panel = SubResource( 4 )
 
 [node name="Label" type="Label" parent="."]
 margin_top = 10.0
@@ -72,10 +73,10 @@ custom_constants/separation = 20
 margin_right = 400.0
 margin_bottom = 90.0
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/normal = SubResource( 2 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
 custom_fonts/font = SubResource( 3 )
 text = "CONTINUAR"
 
@@ -84,10 +85,10 @@ margin_top = 110.0
 margin_right = 400.0
 margin_bottom = 200.0
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/normal = SubResource( 2 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
 custom_fonts/font = SubResource( 3 )
 text = "VOLTAR"
 
