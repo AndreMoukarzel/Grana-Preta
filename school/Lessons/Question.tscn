@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://school/Lessons/Lesson.tscn" type="PackedScene" id=1]
 [ext_resource path="res://school/Lessons/Question.gd" type="Script" id=2]
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://school/ConfirmationPanel.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
@@ -22,14 +23,14 @@ size = 40
 use_filter = true
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.937255, 0.905882, 0.866667, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 100
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
@@ -82,18 +83,19 @@ text = "BACK"
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
 
 [node name="ResultPanel" type="Panel" parent="CanvasLayer" index="0"]
+editor/display_folded = true
 margin_left = 100.0
 margin_top = -400.0
 margin_right = 410.0
 margin_bottom = -100.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Text" type="Label" parent="CanvasLayer/ResultPanel" index="0"]
 margin_top = 150.0
 margin_right = 299.0
 margin_bottom = 257.0
 rect_rotation = -30.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.690196, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 2
@@ -114,6 +116,11 @@ align = 1
 valign = 1
 
 [node name="Tween" type="Tween" parent="CanvasLayer/ResultPanel" index="2"]
+
+[node name="ConfirmationPanel" parent="CanvasLayer" index="1" instance=ExtResource( 4 )]
+visible = false
+margin_top = 312.0
+margin_bottom = -312.0
 
 [connection signal="pressed" from="Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

@@ -49,7 +49,7 @@ func add_question(question_name, question_content, question_id):
 	clear_school()
 	add_child(Question)
 	Question.setup(question_name, question_content, question_id)
-	current_scene = "Lesson"
+	current_scene = str("Question_", question_id)
 
 
 func clear_school():
@@ -117,6 +117,12 @@ func unlock_questionnaire(id):
 	Save.save_game()
 
 
+func leave_questionnaire():
+	var id = int(current_scene.split("_")[1])
+	lock_questionnaire(id)
+	add_subject_tree(theme_entered)
+
+
 func instance_test_lesson():
 	var db = load("res://school/Lessons/LessonDB.gd").new()
 	var id = db.get_lesson_id("Basic Stuff")
@@ -151,3 +157,5 @@ func _on_Back_pressed():
 		var e = get_tree().change_scene("res://City.tscn")
 		if e != 0:
 			print("City scene couldn't be loaded")
+	else: # Questionnaire
+		pass # Resolved in Question.tscn

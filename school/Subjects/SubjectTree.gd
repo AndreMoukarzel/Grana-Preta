@@ -5,7 +5,9 @@ const HEIGHT_ADD = 100
 
 
 func setup(theme_name):
+	var CP = $CanvasLayer/ConfirmationPanel
 	position_subjects(theme_name)
+	CP.rect_position.y = (1024 - CP.rect_size.y)/2
 	connect_signals()
 
 
@@ -46,13 +48,14 @@ func connect_signals():
 	for child in get_children():
 		var Subject = child.get_node("Subject")
 		
-		Subject.connect("opened", self, "subject_opened")
-		Subject.connect("closed", self, "subject_closed")
+		if child.get_name() != "CanvasLayer":
+			Subject.connect("opened", self, "subject_opened")
+			Subject.connect("closed", self, "subject_closed")
 
 
 func subject_opened(node):
 	for child in get_children():
-		if child != node:
+		if child != node and child.get_name() != "CanvasLayer":
 			var Subject = child.get_node("Subject")
 			if Subject.is_open:
 				Subject.close()

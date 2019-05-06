@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://school/ConfirmationPanel.gd" type="Script" id=1]
+[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.901961, 0.901961, 0.901961, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -15,14 +16,14 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 27
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 1 )
+font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -41,17 +42,18 @@ anchor_bottom = 1.0
 margin_left = 63.0
 margin_right = -63.0
 margin_bottom = -624.0
+script = ExtResource( 1 )
 
 [node name="BackGround" type="Panel" parent="."]
 margin_right = 450.0
 margin_bottom = 400.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
 margin_top = 10.0
 margin_right = 450.0
 margin_bottom = 140.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Sair do teste antes de o completar
  resultará em uma reprovação. 
@@ -73,11 +75,11 @@ custom_constants/separation = 20
 margin_right = 400.0
 margin_bottom = 90.0
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "CONTINUAR"
 
 [node name="Back" type="Button" parent="VBoxContainer"]
@@ -85,10 +87,12 @@ margin_top = 110.0
 margin_right = 400.0
 margin_bottom = 200.0
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "VOLTAR"
 
+[connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]

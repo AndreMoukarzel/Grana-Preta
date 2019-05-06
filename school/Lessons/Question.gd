@@ -17,6 +17,9 @@ var done = false
 
 func _ready():
 	var Result = $CanvasLayer/ResultPanel
+	var BackButton = get_tree().get_root().get_node("School/HUD/Back")
+	
+	BackButton.connect("pressed", self, "confirm_exit")
 	randomize()
 	rect_size = OS.get_window_size() - OFFSET
 	rect_position = OFFSET/2
@@ -203,6 +206,17 @@ func tween_result():
 	Twn.start()
 	yield(Twn, "tween_completed")
 	done = true
+
+
+func confirm_exit():
+	if not done:
+		$CanvasLayer/ConfirmationPanel.id = id
+		$CanvasLayer/ConfirmationPanel.show()
+	else:
+		var School = get_tree().get_root().get_node("School")
+	
+		School.lock_questionnaire(id)
+		School.add_subject_tree(School.theme_entered)
 
 
 func complete():
