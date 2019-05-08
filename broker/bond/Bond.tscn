@@ -28,7 +28,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.117647, 0.427451, 0.129412, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -127,12 +127,13 @@ margin_left = 425.0
 margin_top = 10.0
 margin_right = 567.0
 margin_bottom = 63.0
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
 custom_fonts/font = SubResource( 5 )
 text = "APLICAR"
 
 [node name="Tween" type="Tween" parent="."]
 
 [connection signal="pressed" from="." to="." method="_on_Bond_pressed"]
+[connection signal="pressed" from="Apply" to="." method="_on_Apply_pressed"]

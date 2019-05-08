@@ -6,7 +6,7 @@ signal closed(parent)
 const FONT_WIDTH = 15
 const BASE_HEIGHT = 80
 const TWN_TIME = .2
-const SUBJECT_LESSON_SCN = preload("res://school/Subjects/SubjectLesson.tscn")
+const TRADE_CONFIRM_SCN = preload("res://broker/TradeConfirmation.tscn")
 
 var is_open = false
 var bond_name : String
@@ -153,3 +153,17 @@ func _on_Bond_pressed():
 		close()
 	else:
 		open()
+
+
+func _on_Apply_pressed():
+	var TradeConfirm = TRADE_CONFIRM_SCN.instance()
+	var Canvas = get_tree().get_root().get_node("Broker/CanvasLayer")
+	
+	TradeConfirm.setup(1, min_investment) 
+	Canvas.add_child(TradeConfirm)
+	TradeConfirm.connect("trade_confirmed", self, "_on_trade_confirmed")
+
+
+func _on_trade_confirmed(ammount):
+	print("confirmed")
+	print(ammount)

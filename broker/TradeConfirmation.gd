@@ -1,5 +1,7 @@
 extends Control
 
+signal trade_confirmed(ammount)
+
 var ammount = 1
 var min_ammount = 1
 var multiplier = 1
@@ -36,7 +38,6 @@ func _on_Plus_pressed():
 
 
 func _on_Multiplier_pressed():
-	Save.money = 50
 	multiplier *= 10
 	$Ammount/Multiplier.text = str("x", multiplier)
 	if showing_max:
@@ -55,4 +56,5 @@ func _on_Cancel_pressed():
 
 
 func _on_Confirm_pressed():
-	pass
+	emit_signal("trade_confirmed", ammount)
+	queue_free()
