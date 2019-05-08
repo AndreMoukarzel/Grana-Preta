@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://school/School.gd" type="Script" id=1]
+[ext_resource path="res://back_arrow.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [node name="School" type="Control"]
 margin_right = 40.0
@@ -23,10 +27,13 @@ custom_styles/panel = SubResource( 1 )
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Back" type="Button" parent="HUD"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 90.0
-margin_bottom = 50.0
-text = "Back"
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 266.0
+margin_bottom = 266.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+icon = ExtResource( 2 )
 
 [connection signal="pressed" from="HUD/Back" to="." method="_on_Back_pressed"]

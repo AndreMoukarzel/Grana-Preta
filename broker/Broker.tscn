@@ -1,16 +1,20 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://broker/Broker.gd" type="Script" id=1]
-[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
-[ext_resource path="res://broker/BondDisplay.tscn" type="PackedScene" id=3]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 0.623529, 0.623529, 1 )
+[ext_resource path="res://back_arrow.png" type="Texture" id=2]
+[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://broker/BondDisplay.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0.898039, 0.203922, 1 )
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 0.623529, 0.623529, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0.898039, 0.203922, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.827451, 0.827451, 0.827451, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -23,13 +27,13 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 40
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=7]
 
 [node name="Broker" type="Control"]
 anchor_right = 1.0
@@ -42,16 +46,21 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Button" type="Button" parent="CanvasLayer"]
-margin_right = 100.0
-margin_bottom = 100.0
-text = "BACK"
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 266.0
+margin_bottom = 260.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+icon = ExtResource( 2 )
 
 [node name="Background" type="ParallaxBackground" parent="."]
 
 [node name="Panel" type="Panel" parent="Background"]
 margin_right = 576.0
 margin_bottom = 1024.0
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Turtle" type="Control" parent="."]
 margin_right = 40.0
@@ -60,9 +69,10 @@ margin_bottom = 40.0
 [node name="Panel" type="Panel" parent="Turtle"]
 margin_right = 40.0
 margin_bottom = 40.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="Menu" type="VBoxContainer" parent="."]
+editor/display_folded = true
 margin_right = 400.0
 margin_bottom = 600.0
 size_flags_vertical = 7
@@ -73,8 +83,8 @@ margin_top = 118.0
 margin_right = 400.0
 margin_bottom = 171.0
 size_flags_vertical = 6
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Investir"
 
@@ -83,22 +93,24 @@ margin_top = 428.0
 margin_right = 400.0
 margin_bottom = 481.0
 size_flags_vertical = 6
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Sua Carteira"
 
 [node name="InvestmentMenu" type="Control" parent="."]
+editor/display_folded = true
 margin_left = 576.0
 margin_right = 976.0
 margin_bottom = 600.0
 size_flags_vertical = 7
 
-[node name="BondDisplay" parent="InvestmentMenu" instance=ExtResource( 3 )]
+[node name="BondDisplay" parent="InvestmentMenu" instance=ExtResource( 4 )]
 margin_top = 20.0
 margin_bottom = 20.0
 
 [node name="PortfolioMenu" type="Control" parent="."]
+editor/display_folded = true
 margin_left = -576.0
 margin_right = -176.0
 margin_bottom = 600.0
@@ -107,7 +119,7 @@ size_flags_vertical = 7
 [node name="Panel2" type="Panel" parent="PortfolioMenu"]
 margin_right = 400.0
 margin_bottom = 600.0
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 7 )
 
 [node name="Tween" type="Tween" parent="."]
 
