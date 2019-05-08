@@ -1,20 +1,20 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://broker/Broker.gd" type="Script" id=1]
-[ext_resource path="res://back_arrow.png" type="Texture" id=2]
+[ext_resource path="res://city_icon.png" type="Texture" id=2]
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://broker/BondDisplay.tscn" type="PackedScene" id=4]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 0.623529, 0.623529, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0.898039, 0.203922, 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.827451, 0.827451, 0.827451, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -27,13 +27,13 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 40
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=6]
 
 [node name="Broker" type="Control"]
 anchor_right = 1.0
@@ -43,16 +43,18 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="Back" type="Button" parent="HUD"]
 modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 266.0
-margin_bottom = 260.0
-rect_scale = Vector2( 0.3, 0.3 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 2 )
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 133.0
+margin_bottom = 133.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
 icon = ExtResource( 2 )
 
 [node name="Background" type="ParallaxBackground" parent="."]
@@ -60,7 +62,7 @@ icon = ExtResource( 2 )
 [node name="Panel" type="Panel" parent="Background"]
 margin_right = 576.0
 margin_bottom = 1024.0
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 2 )
 
 [node name="Turtle" type="Control" parent="."]
 margin_right = 40.0
@@ -69,7 +71,7 @@ margin_bottom = 40.0
 [node name="Panel" type="Panel" parent="Turtle"]
 margin_right = 40.0
 margin_bottom = 40.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Menu" type="VBoxContainer" parent="."]
 editor/display_folded = true
@@ -83,8 +85,8 @@ margin_top = 118.0
 margin_right = 400.0
 margin_bottom = 171.0
 size_flags_vertical = 6
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Investir"
 
@@ -93,8 +95,8 @@ margin_top = 428.0
 margin_right = 400.0
 margin_bottom = 481.0
 size_flags_vertical = 6
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Sua Carteira"
 
@@ -119,10 +121,10 @@ size_flags_vertical = 7
 [node name="Panel2" type="Panel" parent="PortfolioMenu"]
 margin_right = 400.0
 margin_bottom = 600.0
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 6 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HUD/Back" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Menu/Investments" to="." method="_on_Investments_pressed"]
 [connection signal="pressed" from="Menu/Portfolio" to="." method="_on_Portfolio_pressed"]

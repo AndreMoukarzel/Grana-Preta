@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://school/School.gd" type="Script" id=1]
-[ext_resource path="res://back_arrow.png" type="Texture" id=2]
+[ext_resource path="res://city_icon.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -28,9 +28,11 @@ custom_styles/panel = SubResource( 1 )
 
 [node name="Back" type="Button" parent="HUD"]
 modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 266.0
-margin_bottom = 266.0
-rect_scale = Vector2( 0.3, 0.3 )
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 133.0
+margin_bottom = 133.0
+rect_scale = Vector2( 0.6, 0.6 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 2 )

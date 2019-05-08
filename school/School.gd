@@ -27,6 +27,7 @@ func add_theme_tree():
 func add_subject_tree(theme_name):
 	var SubjTree = SUBJ_TREE_SCN.instance()
 	
+	$HUD/Back.icon = load("res://back_arrow.png")
 	clear_school()
 	add_child(SubjTree)
 	SubjTree.setup(theme_name)
@@ -151,6 +152,7 @@ func instance_test_theme():
 func _on_Back_pressed():
 	if current_scene == "SubjectTree":
 		add_theme_tree()
+		$HUD/Back.icon = load("res://city_icon.png")
 	elif current_scene == "Lesson":
 		add_subject_tree(theme_entered)
 	elif current_scene == "ThemeTree":
