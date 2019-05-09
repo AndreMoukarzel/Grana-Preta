@@ -6,35 +6,31 @@ var ammount = 1
 var min_ammount = 1
 var multiplier = 1
 var showing_max = false
-var price_per_unit = 1
 
 
-func setup(min_ammount, price_per_unit):
+func setup(min_ammount):
 	self.min_ammount = min_ammount
-	self.price_per_unit = price_per_unit
 	ammount = min_ammount
-	update_price_and_ammout()
+	update_ammount()
 
 
-func update_price_and_ammout():
-	var price = price_per_unit * ammount
-	$Price/AmmountLabel.text = str("G$ ", price)
-	$Ammount/AmmountLabel.text = str(ammount)
-	if price > Save.money:
-		$Price/AmmountLabel.modulate = Color(50, 0.0, 0.0)
+func update_ammount():
+	$Ammount/AmmountLabel.text = str("G$ ", ammount)
+	if ammount > Save.money:
+		$Ammount/AmmountLabel.modulate = Color(50, 0.0, 0.0)
 	else:
-		$Price/AmmountLabel.modulate = Color(1.0, 1.0, 1.0)
+		$Ammount/AmmountLabel.modulate = Color(1.0, 1.0, 1.0)
 
 
 func _on_Minus_pressed():
 	ammount -= multiplier
 	ammount = max(min_ammount, ammount)
-	update_price_and_ammout()
+	update_ammount()
 
 
 func _on_Plus_pressed():
 	ammount += multiplier
-	update_price_and_ammout()
+	update_ammount()
 
 
 func _on_Multiplier_pressed():
@@ -44,9 +40,8 @@ func _on_Multiplier_pressed():
 		multiplier = 1
 		showing_max = 0
 		$Ammount/Multiplier.text = "x1"
-	elif multiplier == 10000: # After x10000, multiplies to maximum buyable
-		var money_dif = Save.money - (price_per_unit * ammount)
-		multiplier= money_dif/price_per_unit
+	elif multiplier > 10000: # After x10000, multiplies to maximum buyable
+		multiplier = Save.money - ammount
 		showing_max = true
 		$Ammount/Multiplier.text = str("MAX BUYABLE")
 
