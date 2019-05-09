@@ -1,15 +1,15 @@
 extends Control
 
-
+const SCREEN_SIZE = Vector2(576, 1024)
 const OFFSET = Vector2(10, 5)
 const TEXT_OFFSET = 10
 
 var text_font
 
 func _ready():
-	rect_size = OS.get_window_size() - OFFSET
+	rect_size = SCREEN_SIZE - OFFSET
 	rect_position = OFFSET/2
-	$Title.rect_size.x = OS.get_window_size().x - OFFSET.x
+	$Title.rect_size.x = SCREEN_SIZE.x - OFFSET.x
 	text_font = DynamicFont.new()
 	text_font.size = 20
 	text_font.font_data = load("res://school/Lessons/LessonFont.otf")
@@ -80,5 +80,5 @@ func set_camera_limits(height):
 
 
 func set_height(height):
-	var h = max(OS.get_window_size().y, height)
+	var h = max(SCREEN_SIZE.y - OFFSET.y, height)
 	rect_size.y = h
