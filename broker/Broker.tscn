@@ -101,7 +101,6 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Sua Carteira"
 
 [node name="InvestmentMenu" type="Control" parent="."]
-editor/display_folded = true
 margin_left = 576.0
 margin_right = 976.0
 margin_bottom = 600.0

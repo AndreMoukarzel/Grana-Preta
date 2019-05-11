@@ -6,9 +6,12 @@ var ammount = 1
 var min_ammount = 1
 var multiplier = 1
 var showing_max = false
+var Swipe = null
 
 
-func setup(min_ammount):
+func setup(min_ammount, Swipe):
+	self.Swipe = Swipe
+	Swipe.deactivate()
 	self.min_ammount = min_ammount
 	ammount = min_ammount
 	update_ammount()
@@ -47,9 +50,11 @@ func _on_Multiplier_pressed():
 
 
 func _on_Cancel_pressed():
+	Swipe.activate()
 	queue_free()
 
 
 func _on_Confirm_pressed():
+	Swipe.activate()
 	emit_signal("trade_confirmed", ammount)
 	queue_free()

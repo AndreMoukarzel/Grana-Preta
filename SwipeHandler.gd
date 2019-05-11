@@ -12,7 +12,15 @@ func _ready():
 	max_cam_pos.x = LocalCamera.limit_right - window_size_by_2.x
 	max_cam_pos.y = LocalCamera.limit_bottom - window_size_by_2.y
 	min_cam_pos = window_size_by_2
+	activate()
 
+func activate():
+	set_process_input(true)
+	$SwipingCamera.current = true
+
+func deactivate():
+	set_process_input(false)
+	$SwipingCamera.current = false
 
 func update_cam_minmax():
 	var window_size_by_2 = OS.get_real_window_size()/2

@@ -158,8 +158,9 @@ func _on_Bond_pressed():
 func _on_Apply_pressed():
 	var TradeConfirm = TRADE_CONFIRM_SCN.instance()
 	var Canvas = get_tree().get_root().get_node("Broker/HUD")
+	var Swipe = get_parent().get_parent().get_parent().get_node("SwipeHandler")
 	
-	TradeConfirm.setup(min_investment) 
+	TradeConfirm.setup(min_investment, Swipe) 
 	Canvas.add_child(TradeConfirm)
 	TradeConfirm.connect("trade_confirmed", self, "_on_trade_confirmed")
 
