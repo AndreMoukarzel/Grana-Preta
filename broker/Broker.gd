@@ -13,6 +13,7 @@ func _ready():
 	$Turtle.rect_position.x = self.rect_size.x * 0.8
 	$InvestmentMenu.rect_position.x = 1.5 * SCREEN_SIZE.x
 	$PortfolioMenu.rect_position.x = -1.5 * SCREEN_SIZE.x
+	$InvestmentMenu/BondDisplay/SwipeHandler.deactivate()
 
 
 func tween_menus(middle_position):
@@ -26,6 +27,7 @@ func _on_Investments_pressed():
 	on_main_menu = false
 	$HUD/Back.icon = load("res://back_arrow.png")
 	tween_menus(-1.5 * SCREEN_SIZE.x)
+	$InvestmentMenu/BondDisplay/SwipeHandler.activate()
 
 
 func _on_Portfolio_pressed():
@@ -43,3 +45,4 @@ func _on_Button_pressed():
 		$HUD/Back.icon = load("res://city_icon.png")
 		tween_menus(0)
 		on_main_menu = true
+		$InvestmentMenu/BondDisplay/SwipeHandler.deactivate()
