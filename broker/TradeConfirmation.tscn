@@ -101,6 +101,20 @@ a serem comprados"
 align = 1
 valign = 1
 
+[node name="Warning" type="Label" parent="."]
+editor/display_folded = true
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 280.0
+margin_right = 450.0
+margin_bottom = 310.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Sem grana suficiente!"
+align = 1
+valign = 1
+
+[node name="Tween" type="Tween" parent="Warning"]
+
 [node name="Ammount" type="Control" parent="."]
 editor/display_folded = true
 margin_left = 25.0

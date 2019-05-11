@@ -55,6 +55,14 @@ func _on_Cancel_pressed():
 
 
 func _on_Confirm_pressed():
-	Swipe.activate()
-	emit_signal("trade_confirmed", ammount)
-	queue_free()
+	if ammount > Save.money:
+		var Twn = $Warning/Tween
+		
+		Twn.stop_all()
+		$Warning.modulate = Color(1, 1, 1, 1)
+		Twn.interpolate_property($Warning, "modulate:a", 1, 0, 2.0, Tween.TRANS_QUAD, Tween.EASE_IN, 3.0)
+		Twn.start()
+	else:
+		Swipe.activate()
+		emit_signal("trade_confirmed", ammount)
+		queue_free()
