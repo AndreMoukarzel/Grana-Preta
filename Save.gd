@@ -120,9 +120,8 @@ func get_days_to_today(past_date):
 
 func save_available_bond(Bond):
 	var bond_json = {
-		"bond_name" : Bond.bond_name,
+		"name" : Bond.bond_name,
 		"display_rentability" : Bond.display_rentability,
-		"rentability" : Bond.rentability,
 		"rentability_type" : Bond.rentability_type,
 		"expiration" : Bond.expiration,
 		"min_investment" : Bond.min_investment,
@@ -131,3 +130,4 @@ func save_available_bond(Bond):
 		"creation_time" : Bond.creation_time
 	}
 	available_bonds.append(bond_json)
+	save_game()

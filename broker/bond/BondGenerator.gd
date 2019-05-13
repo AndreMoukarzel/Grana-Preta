@@ -5,19 +5,88 @@ onready var BondDisplay = get_parent()
 
 func generate():
 	randomize()
-	# Generate pre-fixated bonds
-	generate_safe_bond(["LCI", "LCA"], "Inflation")
-	generate_safe_bond(["CRI", "CRA", "CDB"], "Inflation")
-	generate_safe_bond(["TES"], "Selic")
-	# Generate pos-fixated bonds
-	generate_moderate_bonds(["S-1", "I-1"])
-	generate_moderate_bonds(["S-2", "I-2"])
-	generate_moderate_bonds(["S-3", "I-3"])
-	# Generate pos-fixated bonds provisionated on risky funds
-	generate_chanceful_bonds(["R-1", "X-1"])
-	generate_chanceful_bonds(["R-2", "X-2"])
-	generate_chanceful_bonds(["R-3", "X-3"])
+	load_bonds()
+	generate_missing_bonds()
+
+
+func load_bonds():
+	var safe_names = ["LCI", "LCA", "CRI", "CRA", "CDB", "TES"]
+	var moderate_names = ["S", "I"]
+	var chanceful_names = ["R", "X"]
 	
+	for b in Save.available_bonds:
+		if safe_names.has(b.name):
+			var Bond = BondDisplay.add_bond(BondDisplay.SafeBonds)
+			Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
+		else:
+			var split = b.name.split("-")[0]
+			
+			if moderate_names.has(split):
+				var Bond = BondDisplay.add_bond(BondDisplay.ModerBonds)
+				Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
+			elif chanceful_names.has(split):
+				var Bond = BondDisplay.add_bond(BondDisplay.ChanceBonds)
+				Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
+
+
+func generate_missing_bonds():
+	var has_LC = false
+	var has_CR = false
+	var has_TRE = false
+	
+	# Check for missing safe bonds
+	for bond in BondDisplay.SafeBonds.get_children():
+		if ["LCI", "LCA"].has(bond.bond_name):
+			has_LC = true
+		elif ["CRI", "CRA", "CDB"].has(bond.bond_name):
+			has_CR = true
+		elif "TES" == bond.bond_name:
+			has_TRE = true
+	
+	# Generate pre-fixated bonds
+	if not has_LC:
+		generate_safe_bond(["LCI", "LCA"], "Inflation")
+	if not has_CR:
+		generate_safe_bond(["CRI", "CRA", "CDB"], "Inflation")
+	if not has_TRE:
+		generate_safe_bond(["TES"], "Selic")
+	
+	var has_1 = false
+	var has_2 = false
+	var has_3 = false
+	
+	# Check for missing moderate bonds
+	for bond in BondDisplay.ModerBonds.get_children():
+		if ["S-1", "I-1"].has(bond.bond_name):
+			has_1 = true
+		elif ["S-2", "I-2"].has(bond.bond_name):
+			has_2 = true
+		elif ["S-3", "I-3"].has(bond.bond_name):
+			has_3 = true
+	
+	# Generate moderate bonds
+	if not has_1:
+		generate_moderate_bonds(["S-1", "I-1"])
+	if not has_2:
+		generate_moderate_bonds(["S-2", "I-2"])
+	if not has_3:
+		generate_moderate_bonds(["S-3", "I-3"])
+	
+	var has_R = false
+	var has_X = false
+	
+	# Check for missing chanceful bonds
+	for bond in BondDisplay.ChanceBonds.get_children():
+		if "R" == bond.bond_name:
+			has_R = true
+		elif "X" == bond.bond_name:
+			has_X = true
+	
+	# Generate moderate bonds
+	if not has_R:
+		generate_chanceful_bonds(["R"])
+	if not has_X:
+		generate_chanceful_bonds(["X"])
 
 
 func generate_safe_bond(possible_names, index_name):
@@ -70,7 +139,7 @@ func generate_chanceful_bonds(possible_names):
 	var min_investment = 200 + randi() % 4801
 	var min_time = [1, 0]
 	var expiration = [min_time[0] + 2 + randi() % 12, 0]
-	var taxes = [22.5, rand_range(0.0, 2.5), 20 + (5 * randi() % 2)] # IR, Adm, Performance
+	var taxes = [22.5, rand_range(0.0, 2.5), 20 + (5 * (randi() % 2))] # IR, Adm, Performance
 	var rentability
 	var simulation = [0.0]
 	var avg = 0.0

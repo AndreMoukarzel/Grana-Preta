@@ -53,9 +53,13 @@ func resume_info():
 	$Rentability.rect_scale = Vector2(1, 1)
 	if rentability_type == "Pre-fixada":
 		$Rentability.text = str("PRE", stepify(display_rentability, 0.1))
-	elif rentability_type == "Pos-fixada" or rentability_type == "Prov":
+	elif rentability_type == "Pos-fixada":
 		$Rentability.text = str("POS", stepify(display_rentability, 0.1))
 		$Name.text = bond_name
+	elif rentability_type == "Prov":
+		$Rentability.text = str("PR", stepify(display_rentability, 0.1))
+		$Name.text = bond_name
+		
 	
 	
 	$Expiration.rect_scale = Vector2(1, 1)
@@ -85,14 +89,13 @@ func expand_info():
 		$Name.text = str(index_name, " - ", name_split[1])
 	elif rentability_type == "Prov":
 		var index_name
-		var name_split = bond_name.split("-")
 		
-		if name_split[0] == 'R':
+		if bond_name == "R":
 			index_name = "Riscado"
-		elif name_split[0] == 'X':
+		elif bond_name == "X":
 			index_name = "Xtremo"
 		$Rentability.text += str(stepify(display_rentability, 0.1) , "% em ", index_name)
-		$Name.text = str(index_name, " - ", name_split[1])
+		$Name.text = index_name
 	
 	$Expiration.rect_scale = Vector2(.7, .7)
 	$Expiration.text = "Vencimento:\n"
