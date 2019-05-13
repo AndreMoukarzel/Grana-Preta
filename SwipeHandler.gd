@@ -20,7 +20,8 @@ func activate():
 
 func deactivate():
 	set_process_input(false)
-	$SwipingCamera.current = false
+	LocalCamera.set_position(Vector2(0, 0))
+	LocalCamera.call_deferred("set_current", false)
 
 func update_cam_minmax():
 	var window_size_by_2 = OS.get_real_window_size()/2

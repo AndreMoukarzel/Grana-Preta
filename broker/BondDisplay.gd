@@ -85,7 +85,7 @@ func bond_opened(bond):
 		$Tween.interpolate_property($Chanceful, "rect_position:y", null, c_pos + BOND_EXPANSION, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	if group == "Safe":
 		$Tween.interpolate_property($Moderate, "rect_position:y", null, m_pos + BOND_EXPANSION, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	if not (group == "Chanceful" and bond.get_name() == "2"): # last bond has no tween
+	if not (group == "Chanceful" and bond.get_name() == "1"): # last bond has no tween
 		$Tween.start()
 		yield($Tween, "tween_completed")
 	disable_all_bonds(false)
@@ -105,7 +105,7 @@ func bond_closed(bond):
 		$Tween.interpolate_property($Chanceful, "rect_position:y", null, c_pos, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	if group == "Safe":
 		$Tween.interpolate_property($Moderate, "rect_position:y", null, m_pos, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	if not (group == "Chanceful" and bond.get_name() == "2"): # last bond has no tween
+	if not (group == "Chanceful" and bond.get_name() == "1"): # last bond has no tween
 		$Tween.start()
 		yield($Tween, "tween_completed")
 	disable_all_bonds(false)

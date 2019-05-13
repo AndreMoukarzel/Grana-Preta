@@ -108,7 +108,6 @@ margin_bottom = 150.0
 script = ExtResource( 3 )
 
 [node name="SwipeHandler" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
 
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
 limit_right = 576
