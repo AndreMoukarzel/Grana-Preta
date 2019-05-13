@@ -28,11 +28,14 @@ func setup(bond_name : String, five_day_rentability : float, rentability_type : 
 	self.min_investment = min_investment
 	self.min_time = min_time
 	self.taxes = taxes
+	self.creation_time = creation_time
 	
 	if rentability_type == "Pre-fixada":
 		self.rentability = calculate_safebond_rentability(self.display_rentability)
 	elif rentability_type == "Pos-fixada":
 		self.rentability = calculate_moderatebond_rentability(self.display_rentability)
+	elif rentability_type == "Prov":
+		self.rentability = self.display_rentability
 	$Name.text = bond_name
 	$MinTime.text = "Carencia: "
 	if min_time[0] > 0:
@@ -50,7 +53,7 @@ func resume_info():
 	$Rentability.rect_scale = Vector2(1, 1)
 	if rentability_type == "Pre-fixada":
 		$Rentability.text = str("PRE", stepify(display_rentability, 0.1))
-	elif rentability_type == "Pos-fixada":
+	elif rentability_type == "Pos-fixada" or rentability_type == "Prov":
 		$Rentability.text = str("POS", stepify(display_rentability, 0.1))
 		$Name.text = bond_name
 	
@@ -77,8 +80,18 @@ func expand_info():
 		if name_split[0] == "S":
 			index_name = "Selic"
 		elif name_split[0] == "I":
-			index_name == "Inflação"
+			index_name = "Inflação"
 		$Rentability.text += str(stepify(display_rentability * 100, 0.1) , "% da ", index_name)
+		$Name.text = str(index_name, " - ", name_split[1])
+	elif rentability_type == "Prov":
+		var index_name
+		var name_split = bond_name.split("-")
+		
+		if name_split[0] == 'R':
+			index_name = "Riscado"
+		elif name_split[0] == 'X':
+			index_name = "Xtremo"
+		$Rentability.text += str(stepify(display_rentability, 0.1) , "% em ", index_name)
 		$Name.text = str(index_name, " - ", name_split[1])
 	
 	$Expiration.rect_scale = Vector2(.7, .7)

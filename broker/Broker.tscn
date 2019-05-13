@@ -112,9 +112,6 @@ editor/display_folded = true
 margin_top = 20.0
 margin_bottom = 20.0
 
-[node name="SwipeHandler" parent="InvestmentMenu/BondDisplay" index="5"]
-editor/display_folded = true
-
 [node name="PortfolioMenu" type="Control" parent="."]
 editor/display_folded = true
 margin_left = -576.0

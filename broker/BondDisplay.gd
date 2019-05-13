@@ -34,7 +34,7 @@ func add_bond(parent):
 			$Moderate.rect_position.y += 100
 		total_height += 100
 	
-	$SwipeHandler/SwipingCamera.limit_bottom = max(1324, total_height + 300)
+	$SwipeHandler/SwipingCamera.limit_bottom = max(1324, total_height + 600)
 	$SwipeHandler.update_cam_minmax()
 	
 	return Bond
@@ -85,8 +85,9 @@ func bond_opened(bond):
 		$Tween.interpolate_property($Chanceful, "rect_position:y", null, c_pos + BOND_EXPANSION, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	if group == "Safe":
 		$Tween.interpolate_property($Moderate, "rect_position:y", null, m_pos + BOND_EXPANSION, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.start()
-	yield($Tween, "tween_completed")
+	if not (group == "Chanceful" and bond.get_name() == "2"): # last bond has no tween
+		$Tween.start()
+		yield($Tween, "tween_completed")
 	disable_all_bonds(false)
 
 
@@ -104,6 +105,7 @@ func bond_closed(bond):
 		$Tween.interpolate_property($Chanceful, "rect_position:y", null, c_pos, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	if group == "Safe":
 		$Tween.interpolate_property($Moderate, "rect_position:y", null, m_pos, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.start()
-	yield($Tween, "tween_completed")
+	if not (group == "Chanceful" and bond.get_name() == "2"): # last bond has no tween
+		$Tween.start()
+		yield($Tween, "tween_completed")
 	disable_all_bonds(false)
