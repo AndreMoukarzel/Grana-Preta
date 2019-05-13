@@ -13,8 +13,15 @@ func load_bonds():
 	var safe_names = ["LCI", "LCA", "CRI", "CRA", "CDB", "TES"]
 	var moderate_names = ["S", "I"]
 	var chanceful_names = ["R", "X"]
+	var to_remove_bonds = []
 	
 	for b in Save.available_bonds:
+		var time_diff = Save.get_time_difference(add_time(b.expiration, b.min_time), OS.get_datetime())
+		
+		if time_diff[0] < 0 or time_diff[1] < 0: # Bond expired, skip it and add it to remove list
+			to_remove_bonds.append(b)
+			continue
+		
 		if safe_names.has(b.name):
 			var Bond = BondDisplay.add_bond(BondDisplay.SafeBonds)
 			Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
@@ -27,7 +34,10 @@ func load_bonds():
 			elif chanceful_names.has(split):
 				var Bond = BondDisplay.add_bond(BondDisplay.ChanceBonds)
 				Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
-
+	
+	for b in to_remove_bonds: # remove obsolete bonds
+		var index = Save.available_bonds.find(b)
+		Save.available_bonds.remove(index)
 
 func generate_missing_bonds():
 	var has_LC = false

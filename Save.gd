@@ -118,6 +118,34 @@ func get_days_to_today(past_date):
 	return days
 
 
+# Returns [days, hours] of difference between time1 and time2 datetimes. 
+# Used on Bonds
+func get_time_difference(time1, time2):
+	if time1.year > time2.year or time1.month > time2.month:
+		return [-1, -1]
+	
+	var diff = [time2.day - time1.day - 1, time2.hour - time1.hour + 24]
+	
+	if time1.month < time2.month:
+		var m = time2.month - 1
+		if m % 2 == 1:
+			diff[0] += 31
+		else:
+			if m == 2:
+				if time2.year % 4 == 0: # leap year
+					diff[0] += 29
+				else:
+					diff[0] += 28
+			else:
+				diff[0] += 30
+	
+	if diff[1] > 23:
+		diff[1] -= 24
+		diff[0] += 1
+	
+	return diff
+
+
 func save_available_bond(Bond):
 	var bond_json = {
 		"name" : Bond.bond_name,

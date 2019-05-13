@@ -30,7 +30,7 @@ func setup(bond_name : String, five_day_rentability : float, rentability_type : 
 	self.min_time = min_time
 	self.taxes = taxes
 	self.creation_time = creation_time
-	self.time_left = get_time_difference(creation_time, expiration)
+	self.time_left = Save.get_time_difference(creation_time, expiration)
 	
 	if rentability_type == "Pre-fixada":
 		self.rentability = calculate_safebond_rentability(self.display_rentability)
@@ -164,33 +164,6 @@ func calculate_moderatebond_rentability(five_day_rentability):
 	var four_hour_rentability = pow(five_day_rentability, 1.0/30.0)
 	
 	return four_hour_rentability
-
-
-# Returns [days, hours] of difference between time1 and time2 datetimes. 
-func get_time_difference(time1, time2):
-	if time1.year > time2.year or time1.month > time2.month:
-		return [-1, -1]
-	
-	var diff = [time2.day - time1.day - 1, time2.hour - time1.hour + 24]
-	
-	if time1.month < time2.month:
-		var m = time2.month - 1
-		if m % 2 == 1:
-			diff[0] += 31
-		else:
-			if m == 2:
-				if time2.year % 4 == 0: # leap year
-					diff[0] += 29
-				else:
-					diff[0] += 28
-			else:
-				diff[0] += 30
-	
-	if diff[1] > 23:
-		diff[1] -= 24
-		diff[0] += 1
-	
-	return diff
 
 
 func _on_Bond_pressed():
