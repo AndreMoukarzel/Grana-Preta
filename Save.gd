@@ -9,6 +9,8 @@ var money = 0
 var selic_last100 = []
 var inflation_last100 = []
 var last_index_iteration_date
+var available_bonds = []
+var bought_bonds = []
 
 
 func save():
@@ -114,3 +116,18 @@ func get_days_to_today(past_date):
 	days += today.day - past_date.day
 	
 	return days
+
+
+func save_available_bond(Bond):
+	var bond_json = {
+		"bond_name" : Bond.bond_name,
+		"display_rentability" : Bond.display_rentability,
+		"rentability" : Bond.rentability,
+		"rentability_type" : Bond.rentability_type,
+		"expiration" : Bond.expiration,
+		"min_investment" : Bond.min_investment,
+		"min_time" : Bond.min_time,
+		"taxes" : Bond.taxes,
+		"creation_time" : Bond.creation_time
+	}
+	available_bonds.append(bond_json)
