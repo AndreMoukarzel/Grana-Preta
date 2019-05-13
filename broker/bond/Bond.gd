@@ -18,9 +18,10 @@ var min_investment : int
 var min_time
 var taxes
 var creation_time
+var time_left
 
 
-func setup(bond_name : String, five_day_rentability : float, rentability_type : String, expiration : Array, min_investment : int, min_time : Array, taxes : Array, creation_time):
+func setup(bond_name : String, five_day_rentability : float, rentability_type : String, expiration, min_investment : int, min_time : Array, taxes : Array, creation_time):
 	self.bond_name = bond_name
 	self.display_rentability = five_day_rentability
 	self.rentability_type = rentability_type
@@ -29,6 +30,7 @@ func setup(bond_name : String, five_day_rentability : float, rentability_type : 
 	self.min_time = min_time
 	self.taxes = taxes
 	self.creation_time = creation_time
+	self.time_left = get_time_difference(creation_time, expiration)
 	
 	if rentability_type == "Pre-fixada":
 		self.rentability = calculate_safebond_rentability(self.display_rentability)
@@ -63,10 +65,10 @@ func resume_info():
 	
 	
 	$Expiration.rect_scale = Vector2(1, 1)
-	if expiration[0] > 0: # days left
-		$Expiration.text = str(expiration[0], "D")
-	elif expiration[1] > 0: # hours left
-		$Expiration.text = str(expiration[1], "H")
+	if time_left[0] > 0: # days left
+		$Expiration.text = str(time_left[0], "D")
+	elif time_left[1] > 0: # hours left
+		$Expiration.text = str(time_left[1], "H")
 	
 	$MinInvestment.rect_scale = Vector2(1, 1)
 	$MinInvestment.text = str(min_investment)
@@ -99,12 +101,12 @@ func expand_info():
 	
 	$Expiration.rect_scale = Vector2(.7, .7)
 	$Expiration.text = "Vencimento:\n"
-	if expiration[0] > 0: # days left
-		$Expiration.text += str(expiration[0], " dias")
-		if expiration[1] > 0: # hours left
-			$Expiration.text += str("\ne ", expiration[1], " horas")
-	elif expiration[1] > 0: # hours left
-		$Expiration.text += str(expiration[1], " horas")
+	if time_left[0] > 0: # days left
+		$Expiration.text += str(time_left[0], " dias")
+		if time_left[1] > 0: # hours left
+			$Expiration.text += str("\ne ", time_left[1], " horas")
+	elif time_left[1] > 0: # hours left
+		$Expiration.text += str(time_left[1], " horas")
 	
 	$MinInvestment.rect_scale = Vector2(.7, .7)
 	$MinInvestment.text = str("Requisito:\nG$ ", min_investment)
@@ -117,7 +119,7 @@ func close():
 	$Tween.interpolate_property(self, "rect_size:y", null, 70, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Name, "rect_position:x", null, 10, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Rentability, "rect_position", null, Vector2(110, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	if expiration[0] > 0 and expiration[1] > 0:
+	if time_left[0] > 0 and time_left[1] > 0:
 		$Tween.interpolate_property($Expiration, "rect_position", null, Vector2(260, -45), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	else:
 		$Tween.interpolate_property($Expiration, "rect_position", null, Vector2(260, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
@@ -162,6 +164,33 @@ func calculate_moderatebond_rentability(five_day_rentability):
 	var four_hour_rentability = pow(five_day_rentability, 1.0/30.0)
 	
 	return four_hour_rentability
+
+
+# Returns [days, hours] of difference between time1 and time2 datetimes. 
+func get_time_difference(time1, time2):
+	if time1.year > time2.year or time1.month > time2.month:
+		return [-1, -1]
+	
+	var diff = [time2.day - time1.day - 1, time2.hour - time1.hour + 24]
+	
+	if time1.month < time2.month:
+		var m = time2.month - 1
+		if m % 2 == 1:
+			diff[0] += 31
+		else:
+			if m == 2:
+				if time2.year % 4 == 0: # leap year
+					diff[0] += 29
+				else:
+					diff[0] += 28
+			else:
+				diff[0] += 30
+	
+	if diff[1] > 23:
+		diff[1] -= 24
+		diff[0] += 1
+	
+	return diff
 
 
 func _on_Bond_pressed():

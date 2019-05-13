@@ -112,7 +112,7 @@ func generate_safe_bond(possible_names, index_name):
 		avg += index[99 - i] - index[98 - i]
 	avg /= expiration[0]
 	rentability = index[99] + avg + rand_range(-2.0, 2.0) + ((min_time[0] * 24) + min_time[1]) * 0.06
-	Bond.setup(bond_name, rentability, "Pre-fixada", expiration, min_investment, min_time, taxes, OS.get_datetime())
+	Bond.setup(bond_name, rentability, "Pre-fixada", add_time(OS.get_datetime(), expiration), min_investment, min_time, taxes, OS.get_datetime())
 	Save.save_available_bond(Bond)
 
 
@@ -129,7 +129,7 @@ func generate_moderate_bonds(possible_names):
 		expiration[1] -= 24
 		expiration[0] += 1
 	
-	Bond.setup(bond_name, rentability, "Pos-fixada", expiration, min_investment, min_time, taxes, OS.get_datetime())
+	Bond.setup(bond_name, rentability, "Pos-fixada", add_time(OS.get_datetime(), expiration), min_investment, min_time, taxes, OS.get_datetime())
 	Save.save_available_bond(Bond)
 
 
@@ -152,6 +152,38 @@ func generate_chanceful_bonds(possible_names):
 	rentability = avg
 	
 	
-	Bond.setup(bond_name, rentability, "Prov", expiration, min_investment, min_time, taxes, OS.get_datetime())
+	Bond.setup(bond_name, rentability, "Prov", add_time(OS.get_datetime(), expiration), min_investment, min_time, taxes, OS.get_datetime())
 	Save.save_available_bond(Bond)
 
+
+# adds time_added's hours and days to base_time
+func add_time(base_time, time_added):
+	var final_time = base_time
+	
+	final_time.hour = base_time.hour + time_added[1]
+	if final_time.hour > 23:
+		final_time.hour -= 24
+		final_time.day += 1
+	final_time.day += time_added[0]
+	
+	if final_time.day > 31 and final_time.month % 2 == 1:
+		final_time.day -= 31
+		final_time.month += 1
+	elif final_time.day > 28 and final_time.month % 2 == 0:
+		if final_time.month == 2:
+			if final_time.year % 4 == 0: # leap year
+				if final_time.day > 29:
+					final_time.day -= 29
+					final_time.month += 1
+			else:
+				final_time.day -= 28
+				final_time.month += 1
+		elif final_time.day > 30:
+			final_time.day -= 30
+			final_time.month += 1
+	
+	if final_time.month > 12:
+		final_time.month -= 12
+		final_time.year += 1
+	
+	return final_time
