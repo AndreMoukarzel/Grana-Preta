@@ -39,6 +39,7 @@ func save_game():
 func load_game():
 	var savegame = File.new()
 	if !savegame.file_exists("user://savegame.save"):
+		money = 10000
 		Selic.create(10.0, 3.0, 6.0, 15.0)
 		Inflation.create(3.0, 1.0, -0.5, 10.0)
 		
@@ -158,4 +159,21 @@ func save_available_bond(Bond):
 		"creation_time" : Bond.creation_time
 	}
 	available_bonds.append(bond_json)
+	save_game()
+
+
+func save_bought_bond(Bond, ammount):
+	var bond_json = {
+		"ammount" : ammount,
+		"bought_time" : OS.get_datetime(),
+		"name" : Bond.bond_name,
+		"display_rentability" : Bond.display_rentability,
+		"rentability_type" : Bond.rentability_type,
+		"expiration" : Bond.expiration,
+		"min_investment" : Bond.min_investment,
+		"min_time" : Bond.min_time,
+		"taxes" : Bond.taxes,
+		"creation_time" : Bond.creation_time
+	}
+	bought_bonds.append(bond_json)
 	save_game()

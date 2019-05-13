@@ -184,5 +184,8 @@ func _on_Apply_pressed():
 
 
 func _on_trade_confirmed(ammount):
-	print("confirmed")
-	print(ammount)
+	var Portfolio = get_tree().get_root().get_node("Broker/PortfolioMenu/Portfolio")
+	
+	Save.money -= ammount
+	Save.save_bought_bond(self, ammount)
+	Portfolio.update_bought_bonds()
