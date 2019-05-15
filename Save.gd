@@ -23,7 +23,9 @@ func save():
 		money = money,
 		selic_last100 = selic_last100,
 		inflation_last100 = inflation_last100,
-		last_index_iteration_date = last_index_iteration_date
+		last_index_iteration_date = last_index_iteration_date,
+		available_bonds = available_bonds,
+		bought_bonds = bought_bonds
 	}
 	return savedict
 
@@ -73,6 +75,10 @@ func load_game():
 		selic_last100.append(float(element))
 	for element in savedata.inflation_last100:
 		inflation_last100.append(float(element))
+	for element in savedata.available_bonds:
+		available_bonds.append(element)
+	for element in savedata.bought_bonds:
+		bought_bonds.append(element)
 	Selic.create(selic_last100[99], 3.0, 6.0, 15.0)
 	Inflation.create(inflation_last100[99], 1.0, -0.5, 10.0)
 	last_index_iteration_date = savedata.last_index_iteration_date

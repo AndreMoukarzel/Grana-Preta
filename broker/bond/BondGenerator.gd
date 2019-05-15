@@ -17,7 +17,7 @@ func load_bonds():
 	
 	for b in Save.available_bonds:
 		var time_diff = Save.get_time_difference(add_time(b.expiration, b.min_time), OS.get_datetime())
-		
+		print(time_diff)
 		if time_diff[0] < 0 or time_diff[1] < 0: # Bond expired, skip it and add it to remove list
 			to_remove_bonds.append(b)
 			continue
@@ -38,6 +38,7 @@ func load_bonds():
 	for b in to_remove_bonds: # remove obsolete bonds
 		var index = Save.available_bonds.find(b)
 		Save.available_bonds.remove(index)
+
 
 func generate_missing_bonds():
 	var has_LC = false
@@ -176,12 +177,12 @@ func add_time(base_time, time_added):
 		final_time.day += 1
 	final_time.day += time_added[0]
 	
-	if final_time.day > 31 and final_time.month % 2 == 1:
+	if final_time.day > 31 and int(final_time.month) % 2 == 1:
 		final_time.day -= 31
 		final_time.month += 1
-	elif final_time.day > 28 and final_time.month % 2 == 0:
+	elif final_time.day > 28 and int(final_time.month) % 2 == 0:
 		if final_time.month == 2:
-			if final_time.year % 4 == 0: # leap year
+			if int(final_time.year) % 4 == 0: # leap year
 				if final_time.day > 29:
 					final_time.day -= 29
 					final_time.month += 1
