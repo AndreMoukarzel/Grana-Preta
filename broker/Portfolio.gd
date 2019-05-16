@@ -1,6 +1,6 @@
 extends Control
 
-const BOND_SCN = preload("res://broker/bond/Bond.tscn")
+const BOUGHT_BOND_SCN = preload("res://broker/bond/BoughtBond.tscn")
 
 var total_height = 10
 
@@ -14,10 +14,12 @@ func update_bought_bonds():
 		var Bond = add_bond(self)
 		Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
 		Bond.setup_owned(b.ammount, b.bought_time)
+		Bond.open()
+		Bond.close()
 
 
 func add_bond(parent):
-	var Bond = BOND_SCN.instance()
+	var Bond = BOUGHT_BOND_SCN.instance()
 	Bond.rect_position.y =  parent.get_child_count() * 100
 	Bond.set_name(str(parent.get_child_count()))
 	Bond.connect("opened", self, "bond_opened")

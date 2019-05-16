@@ -4,7 +4,7 @@ var ammount
 var bought_time
 
 
-func setup_owned(ammount):
+func setup_owned(ammount, bought_time):
 	self.ammount = ammount
 	self.bought_time = bought_time
 	

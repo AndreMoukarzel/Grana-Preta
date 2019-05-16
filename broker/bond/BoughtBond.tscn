@@ -16,7 +16,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="BoughtBond" index="0" instance=ExtResource( 1 )]
+[node name="BoughtBond" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="MinInvestment" parent="." index="3"]
