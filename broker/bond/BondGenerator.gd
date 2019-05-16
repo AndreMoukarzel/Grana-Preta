@@ -16,8 +16,8 @@ func load_bonds():
 	var to_remove_bonds = []
 	
 	for b in Save.available_bonds:
-		var time_diff = Save.get_time_difference(add_time(b.expiration, b.min_time), OS.get_datetime())
-		print(time_diff)
+		var time_diff = Save.get_time_difference(add_time(OS.get_datetime(), b.min_time), b.expiration)
+		
 		if time_diff[0] < 0 or time_diff[1] < 0: # Bond expired, skip it and add it to remove list
 			to_remove_bonds.append(b)
 			continue
