@@ -16,7 +16,7 @@ func _on_Apply_pressed():
 	var Canvas = get_tree().get_root().get_node("Broker/HUD")
 	var Swipe = get_parent().get_parent().get_parent().get_node("SwipeHandler")
 	
-	TradeConfirm.setup(min_investment, Swipe) 
+	TradeConfirm.setup(0, ammount, Swipe) 
 	Canvas.add_child(TradeConfirm)
 	TradeConfirm.connect("trade_confirmed", self, "_on_trade_confirmed")
 
@@ -24,6 +24,6 @@ func _on_Apply_pressed():
 func _on_trade_confirmed(ammount):
 	var Portfolio = get_tree().get_root().get_node("Broker/PortfolioMenu/Portfolio")
 	
-	Save.money -= ammount
+	Save.money += ammount
 	Save.save_bought_bond(self, ammount)
 	Portfolio.update_bought_bonds()

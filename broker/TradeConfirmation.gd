@@ -4,12 +4,13 @@ signal trade_confirmed(ammount)
 
 var ammount = 1
 var min_ammount = 1
+var max_ammount # if max_ammount is not null, we know the trade is a sell
 var multiplier = 1
 var showing_max = false
 var Swipe = null
 
 
-func setup(min_ammount, Swipe):
+func setup(Swipe, min_ammount, max_ammount = null):
 	self.Swipe = Swipe
 	Swipe.deactivate()
 	self.min_ammount = min_ammount
@@ -19,10 +20,15 @@ func setup(min_ammount, Swipe):
 
 func update_ammount():
 	$Ammount/AmmountLabel.text = str("G$ ", ammount)
-	if ammount > Save.money:
-		$Ammount/AmmountLabel.modulate = Color(50, 0.0, 0.0)
+	if max_ammount:
+		if ammount > max_ammount:
+			ammount = max_ammount
+			$Ammount/AmmountLabel.text = str("G$ ", ammount)
 	else:
-		$Ammount/AmmountLabel.modulate = Color(1.0, 1.0, 1.0)
+		if ammount > Save.money:
+			$Ammount/AmmountLabel.modulate = Color(50, 0.0, 0.0)
+		else:
+			$Ammount/AmmountLabel.modulate = Color(1.0, 1.0, 1.0)
 
 
 func _on_Minus_pressed():
@@ -55,7 +61,7 @@ func _on_Cancel_pressed():
 
 
 func _on_Confirm_pressed():
-	if ammount > Save.money:
+	if not max_ammount and ammount > Save.money:
 		var Twn = $Warning/Tween
 		
 		Twn.stop_all()

@@ -211,7 +211,6 @@ custom_styles/focus = SubResource( 7 )
 custom_styles/normal = SubResource( 7 )
 custom_fonts/font = SubResource( 2 )
 text = "CONFIRMAR"
-
 [connection signal="pressed" from="Ammount/Minus" to="." method="_on_Minus_pressed"]
 [connection signal="pressed" from="Ammount/Plus" to="." method="_on_Plus_pressed"]
 [connection signal="pressed" from="Ammount/Multiplier" to="." method="_on_Multiplier_pressed"]
