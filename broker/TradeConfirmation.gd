@@ -12,8 +12,10 @@ var Swipe = null
 
 func setup(Swipe, min_ammount, max_ammount = null):
 	self.Swipe = Swipe
-	Swipe.deactivate()
+	if Swipe:
+		Swipe.deactivate()
 	self.min_ammount = min_ammount
+	self.max_ammount = max_ammount
 	ammount = min_ammount
 	update_ammount()
 
@@ -50,13 +52,17 @@ func _on_Multiplier_pressed():
 		showing_max = 0
 		$Ammount/Multiplier.text = "x1"
 	elif multiplier > 10000: # After x10000, multiplies to maximum buyable
-		multiplier = Save.money - ammount
+		if max_ammount:
+			multiplier = max_ammount
+		else:
+			multiplier = Save.money - ammount
 		showing_max = true
 		$Ammount/Multiplier.text = str("MAX BUYABLE")
 
 
 func _on_Cancel_pressed():
-	Swipe.activate()
+	if Swipe:
+		Swipe.activate()
 	queue_free()
 
 
@@ -69,6 +75,7 @@ func _on_Confirm_pressed():
 		Twn.interpolate_property($Warning, "modulate:a", 1, 0, 2.0, Tween.TRANS_QUAD, Tween.EASE_IN, 3.0)
 		Twn.start()
 	else:
-		Swipe.activate()
+		if Swipe:
+			Swipe.activate()
 		emit_signal("trade_confirmed", ammount)
 		queue_free()

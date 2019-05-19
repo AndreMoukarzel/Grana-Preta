@@ -183,3 +183,20 @@ func save_bought_bond(Bond, ammount):
 	}
 	bought_bonds.append(bond_json)
 	save_game()
+
+func delete_bought_bond(BoughtBond):
+	var bond_json = {
+		"ammount" : BoughtBond.original_ammount,
+		"bought_time" : BoughtBond.bought_time,
+		"name" : BoughtBond.bond_name,
+		"display_rentability" : BoughtBond.display_rentability,
+		"rentability_type" : BoughtBond.rentability_type,
+		"expiration" : BoughtBond.expiration,
+		"min_investment" : BoughtBond.min_investment,
+		"min_time" : BoughtBond.min_time,
+		"taxes" : BoughtBond.taxes,
+		"creation_time" : BoughtBond.creation_time
+	}
+	var index = bought_bonds.find(bond_json)
+	bought_bonds.remove(index)
+	save_game()
