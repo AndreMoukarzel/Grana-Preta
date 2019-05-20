@@ -15,7 +15,7 @@ func update_bought_bonds():
 	for b in Save.bought_bonds:
 		var Bond = add_bond($Sorter/Bonds)
 		Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
-		Bond.setup_owned(b.ammount, b.bought_time)
+		Bond.setup_owned(b.ammount, b.bought_time, b.id)
 		
 		total_height += 100
 

@@ -71,7 +71,7 @@ func resume_info():
 		$Expiration.text = str(time_left[1], "H")
 	
 	$MinInvestment.rect_scale = Vector2(1, 1)
-	$MinInvestment.text = str(min_investment)
+	resume_min_investment()
 
 
 func expand_info():
@@ -109,6 +109,14 @@ func expand_info():
 		$Expiration.text += str(time_left[1], " horas")
 	
 	$MinInvestment.rect_scale = Vector2(.7, .7)
+	expand_min_investment()
+
+
+func resume_min_investment(): # Overwritten in BoughtBond.gd
+	$MinInvestment.text = str(min_investment)
+
+
+func expand_min_investment(): # Overwritten in BoughtBond.gd
 	$MinInvestment.text = str("Requisito:\nG$ ", min_investment)
 
 

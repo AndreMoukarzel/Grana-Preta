@@ -10,7 +10,9 @@ var selic_last100 = []
 var inflation_last100 = []
 var last_index_iteration_date
 var available_bonds = []
+var available_bonds_id = 0
 var bought_bonds = []
+var bought_bonds_id = 0
 
 
 func save():
@@ -25,7 +27,9 @@ func save():
 		inflation_last100 = inflation_last100,
 		last_index_iteration_date = last_index_iteration_date,
 		available_bonds = available_bonds,
-		bought_bonds = bought_bonds
+		available_bonds_id = available_bonds_id,
+		bought_bonds = bought_bonds,
+		bought_bonds_id = bought_bonds_id
 	}
 	return savedict
 
@@ -77,8 +81,10 @@ func load_game():
 		inflation_last100.append(float(element))
 	for element in savedata.available_bonds:
 		available_bonds.append(element)
+	available_bonds_id = int(savedata.available_bonds_id)
 	for element in savedata.bought_bonds:
 		bought_bonds.append(element)
+	bought_bonds_id = int(savedata.bought_bonds_id)
 	Selic.create(selic_last100[99], 3.0, 6.0, 15.0)
 	Inflation.create(inflation_last100[99], 1.0, -0.5, 10.0)
 	last_index_iteration_date = savedata.last_index_iteration_date
@@ -155,6 +161,7 @@ func get_time_difference(time1, time2):
 
 func save_available_bond(Bond):
 	var bond_json = {
+		"id" : available_bonds_id,
 		"name" : Bond.bond_name,
 		"display_rentability" : Bond.display_rentability,
 		"rentability_type" : Bond.rentability_type,
@@ -165,11 +172,13 @@ func save_available_bond(Bond):
 		"creation_time" : Bond.creation_time
 	}
 	available_bonds.append(bond_json)
+	available_bonds_id = (available_bonds_id + 1) % 30
 	save_game()
 
 
 func save_bought_bond(Bond, ammount):
 	var bond_json = {
+		"id" : bought_bonds_id,
 		"ammount" : ammount,
 		"bought_time" : OS.get_datetime(),
 		"name" : Bond.bond_name,
@@ -182,21 +191,15 @@ func save_bought_bond(Bond, ammount):
 		"creation_time" : Bond.creation_time
 	}
 	bought_bonds.append(bond_json)
+	bought_bonds_id = (bought_bonds_id + 1) % 10000
 	save_game()
 
-func delete_bought_bond(BoughtBond):
-	var bond_json = {
-		"ammount" : BoughtBond.original_ammount,
-		"bought_time" : BoughtBond.bought_time,
-		"name" : BoughtBond.bond_name,
-		"display_rentability" : BoughtBond.display_rentability,
-		"rentability_type" : BoughtBond.rentability_type,
-		"expiration" : BoughtBond.expiration,
-		"min_investment" : BoughtBond.min_investment,
-		"min_time" : BoughtBond.min_time,
-		"taxes" : BoughtBond.taxes,
-		"creation_time" : BoughtBond.creation_time
-	}
-	var index = bought_bonds.find(bond_json)
-	bought_bonds.remove(index)
+
+func delete_bought_bond(id):
+	var i = 0
+	for bond in bought_bonds:
+		if bond.id == id:
+			break
+		i += 1
+	bought_bonds.remove(i)
 	save_game()

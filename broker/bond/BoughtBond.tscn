@@ -27,3 +27,4 @@ custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 1 )
 custom_styles/normal = SubResource( 1 )
 text = "VENDER"
+
