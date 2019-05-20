@@ -28,7 +28,7 @@ func _on_trade_confirmed(ammount):
 	
 	Save.money += ammount
 	ammount -= ammount
-	if ammount <= 0:
-		print("need deletion")
-		Save.delete_bought_bond(self)
+	Save.delete_bought_bond(self)
+	if ammount > 0:
+		Save.save_bought_bond(self, ammount)
 	Portfolio.update_bought_bonds()

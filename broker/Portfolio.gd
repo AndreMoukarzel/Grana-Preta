@@ -2,7 +2,7 @@ extends Control
 
 const BOUGHT_BOND_SCN = preload("res://broker/bond/BoughtBond.tscn")
 
-var total_height = 10
+var total_height = 100
 
 
 func _ready():
@@ -10,12 +10,14 @@ func _ready():
 
 
 func update_bought_bonds():
+	for b in $Sorter/Bonds.get_children():
+		b.queue_free()
 	for b in Save.bought_bonds:
-		var Bond = add_bond(self)
+		var Bond = add_bond($Sorter/Bonds)
 		Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
 		Bond.setup_owned(b.ammount, b.bought_time)
-		Bond.open()
-		Bond.close()
+		
+		total_height += 100
 
 
 func add_bond(parent):
