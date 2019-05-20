@@ -9,9 +9,13 @@ func _ready():
 	update_bought_bonds()
 
 
-func update_bought_bonds():
+func clear_bonds():
 	for b in $Sorter/Bonds.get_children():
 		b.queue_free()
+
+
+func update_bought_bonds():
+	clear_bonds()
 	for b in Save.bought_bonds:
 		var Bond = add_bond($Sorter/Bonds)
 		Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)

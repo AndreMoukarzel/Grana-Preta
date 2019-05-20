@@ -33,6 +33,7 @@ func _on_Investments_pressed():
 func _on_Portfolio_pressed():
 	on_main_menu = false
 	$HUD/Back.icon = load("res://back_arrow.png")
+	$PortfolioMenu/Portfolio.update_bought_bonds()
 	tween_menus(1.5 * SCREEN_SIZE.x)
 
 

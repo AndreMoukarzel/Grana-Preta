@@ -9,7 +9,9 @@ func setup_owned(ammount, bought_time, id):
 	self.id = id
 	self.ammount = ammount
 	self.bought_time = bought_time
-	$MinInvestment.text = str(ammount)
+	$MinInvestment.text = str(int(ammount))
+	if min_time[0] > 0 or min_time[1] > 0:
+		$Apply.disabled = true
 
 
 func resume_min_investment():
@@ -17,6 +19,20 @@ func resume_min_investment():
 
 func expand_min_investment():
 	$MinInvestment.text = str("Valor:\nG$ ", ammount)
+
+
+func iterate(times_iterated):
+	for i in range(times_iterated): 
+		bought_time = OS.get_datetime()
+		ammount = (ammount * rentability) # Prefixated iteration
+		min_time[1] -= 4
+		if min_time[1] < 0 and min_time[0] > 0:
+			min_time[1] = 24 - min_time[1]
+			min_time[0] -= 1
+	if min_time[0] <= 0 and min_time[1] <= 0:
+		$Apply.disabled = false
+	Save.delete_bought_bond(id)
+	Save.save_bought_bond(self, self.ammount)
 
 
 func _on_Apply_pressed():

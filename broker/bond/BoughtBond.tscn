@@ -1,10 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://broker/bond/Bond.tscn" type="PackedScene" id=1]
 [ext_resource path="res://broker/bond/BoughtBond.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.117647, 0.403922, 0.427451, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.0823529, 0.247059, 0.294118, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.172549, 0.278431, 0.286275, 1 )
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
@@ -25,6 +38,7 @@ custom_colors/font_color = Color( 0.215686, 0.215686, 0.215686, 1 )
 [node name="Apply" parent="." index="6"]
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 1 )
+custom_styles/disabled = SubResource( 2 )
 custom_styles/normal = SubResource( 1 )
 text = "VENDER"
 
