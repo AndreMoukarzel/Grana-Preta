@@ -48,7 +48,7 @@ func _on_Apply_pressed():
 func _on_trade_confirmed(ammount):
 	var Portfolio = get_tree().get_root().get_node("Broker/PortfolioMenu/Portfolio")
 	
-	Save.money += ammount
+	Save.money += int(ammount)
 	self.ammount -= ammount
 	Save.delete_bought_bond(id)
 	if self.ammount > 0:

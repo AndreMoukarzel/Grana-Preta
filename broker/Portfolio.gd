@@ -11,6 +11,14 @@ func clear_bonds():
 		b.queue_free()
 
 
+func sell_expired_bonds():
+	for b in $Sorter/Bonds.get_children():
+		var time_diff = Save.get_time_difference(OS.get_datetime(), b.expiration)
+		
+		if time_diff[0] <= 0 and time_diff[0] <= 0:
+			b._on_trade_confirmed(b.ammount)
+
+
 func update_bought_bonds():
 	clear_bonds()
 	for b in Save.bought_bonds:
@@ -26,6 +34,7 @@ func update_bought_bonds():
 			Bond.queue_free()
 		else:
 			total_height += 100
+	sell_expired_bonds()
 
 
 func add_bond(parent):
