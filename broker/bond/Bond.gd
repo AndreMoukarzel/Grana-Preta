@@ -10,7 +10,7 @@ const TRADE_CONFIRM_SCN = preload("res://broker/TradeConfirmation.tscn")
 
 var is_open = false
 var bond_name : String
-var display_rentability : float # Expected rentability of bond in 5 days
+var display_rentability # Expected rentability of bond in 5 days
 var rentability : float # How much the bond returns each 4 hours ( or each day, in case of provisioned bonds )
 var rentability_type : String # Pre, Pos index or Pos provisioned 
 var expiration
@@ -21,7 +21,7 @@ var creation_time
 var time_left
 
 
-func setup(bond_name : String, five_day_rentability : float, rentability_type : String, expiration, min_investment : int, min_time : Array, taxes : Array, creation_time):
+func setup(bond_name : String, five_day_rentability, rentability_type : String, expiration, min_investment : int, min_time : Array, taxes : Array, creation_time):
 	self.bond_name = bond_name
 	self.display_rentability = five_day_rentability
 	self.rentability_type = rentability_type
@@ -37,7 +37,8 @@ func setup(bond_name : String, five_day_rentability : float, rentability_type : 
 	elif rentability_type == "Pos-fixada":
 		self.rentability = calculate_moderatebond_rentability(self.display_rentability)
 	elif rentability_type == "Prov":
-		self.rentability = self.display_rentability
+		self.display_rentability = five_day_rentability[0]
+		self.rentability = five_day_rentability[1]
 	$Name.text = bond_name
 	$MinTime.text = "Carencia: "
 	if min_time[0] > 0:

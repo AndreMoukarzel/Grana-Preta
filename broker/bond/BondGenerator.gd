@@ -163,7 +163,7 @@ func generate_chanceful_bonds(possible_names):
 	rentability = avg
 	
 	
-	Bond.setup(bond_name, rentability, "Prov", add_time(OS.get_datetime(), expiration), min_investment, min_time, taxes, OS.get_datetime())
+	Bond.setup(bond_name, [rentability, simulation[7]], "Prov", add_time(OS.get_datetime(), expiration), min_investment, min_time, taxes, OS.get_datetime())
 	Save.save_available_bond(Bond)
 
 

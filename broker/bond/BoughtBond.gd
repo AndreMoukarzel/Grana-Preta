@@ -17,6 +17,7 @@ func setup_owned(ammount, bought_time, id):
 func resume_min_investment():
 	$MinInvestment.text = str(ammount)
 
+
 func expand_min_investment():
 	$MinInvestment.text = str("Valor:\nG$ ", ammount)
 
@@ -24,13 +25,27 @@ func expand_min_investment():
 func iterate(times_iterated):
 	for i in range(times_iterated): 
 		bought_time = OS.get_datetime()
-		ammount = (ammount * rentability) # Prefixated iteration
+		if rentability_type == "Pre-fixada": # Prefixated interest rentability
+			ammount = (ammount * rentability)
+		elif rentability_type == "Pos-fixada": # Posfixated interest rentability
+			var name_split = bond_name.split("-")[0]
+		
+			if name_split == "S":
+				ammount = (ammount * rentability * Selic.value)
+			elif name_split == "I":
+				ammount = (ammount * rentability * Inflation.value)
+		elif rentability_type == "Prov":
+			rentability += (randf() - randf()) * 20
+			ammount = ammount * rentability
+		
+		# Decrease time left to be able to sell
 		min_time[1] -= 4
 		if min_time[1] < 0 and min_time[0] > 0:
 			min_time[1] = 24 - min_time[1]
 			min_time[0] -= 1
 	if min_time[0] <= 0 and min_time[1] <= 0:
 		$Apply.disabled = false
+		$MinTime.hide()
 	Save.delete_bought_bond(id)
 	Save.save_bought_bond(self, self.ammount)
 
