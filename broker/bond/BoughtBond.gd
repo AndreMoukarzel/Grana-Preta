@@ -12,6 +12,10 @@ func setup_owned(ammount, bought_time, id):
 	$MinInvestment.text = str(int(ammount))
 	if min_time[0] > 0 or min_time[1] > 0:
 		$Apply.disabled = true
+	var time_diff = Save.get_time_difference(creation_time, OS.get_datetime())
+	if time_diff[0] > 0:
+		taxes[0] = taxes[0] - (min(3, time_diff[0]) * 2.5)
+		$Taxes.text = str("Taxas:\nIR(", taxes[0], "%), Adm(", stepify(taxes[1], 0.1), "%),\nPerf(", stepify(taxes[2], 0.1), "%)")
 
 
 func resume_min_investment():

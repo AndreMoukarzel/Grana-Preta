@@ -17,6 +17,7 @@ func sell_expired_bonds():
 		
 		if time_diff[0] <= 0 and time_diff[0] <= 0:
 			b._on_trade_confirmed(b.ammount)
+			b.queue_free()
 
 
 func update_bought_bonds():
