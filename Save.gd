@@ -159,6 +159,38 @@ func get_time_difference(time1, time2):
 	return diff
 
 
+func get_min_datetime(time1, time2):
+	if time1.year < time2.year:
+		return time1
+	elif time1.year > time2.year:
+		return time2
+	
+	if time1.month < time2.month:
+		return time1
+	elif time1.month > time2.month:
+		return time2
+	
+	if time1.day < time2.day:
+		return time1
+	elif time1.day > time2.day:
+		return time2
+	
+	if time1.hour < time2.hour:
+		return time1
+	elif time1.hour > time2.hour:
+		return time2
+	
+	if time1.minute < time2.minute:
+		return time1
+	elif time1.minute > time2.minute:
+		return time2
+	
+	if time1.second < time2.second:
+		return time1
+	elif time1.second > time2.second:
+		return time2
+
+
 func save_available_bond(Bond):
 	var bond_json = {
 		"id" : available_bonds_id,

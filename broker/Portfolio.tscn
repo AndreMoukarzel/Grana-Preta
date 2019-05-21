@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://broker/Portfolio.gd" type="Script" id=1]
+[ext_resource path="res://broker/Sorter.gd" type="Script" id=2]
 
 [node name="Portfolio" type="Control"]
 anchor_right = 1.0
@@ -10,14 +11,37 @@ script = ExtResource( 1 )
 [node name="Sorter" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 2 )
 
-[node name="Button" type="Button" parent="Sorter"]
+[node name="Value" type="Button" parent="Sorter"]
 margin_right = 12.0
 margin_bottom = 20.0
-text = "Sort"
+text = "Valor"
+
+[node name="Expiration" type="Button" parent="Sorter"]
+margin_left = 100.0
+margin_right = 166.0
+margin_bottom = 20.0
+text = "Validade"
+
+[node name="Rentability" type="Button" parent="Sorter"]
+margin_left = 200.0
+margin_right = 299.0
+margin_bottom = 20.0
+text = "Rentabilidade"
+
+[node name="Type" type="Button" parent="Sorter"]
+margin_left = 400.0
+margin_right = 499.0
+margin_bottom = 20.0
+text = "Tipo"
 
 [node name="Bonds" type="Control" parent="Sorter"]
 margin_top = 100.0
 margin_right = 40.0
 margin_bottom = 140.0
 
+[connection signal="pressed" from="Sorter/Value" to="Sorter" method="_on_Value_pressed"]
+[connection signal="pressed" from="Sorter/Expiration" to="Sorter" method="_on_Expiration_pressed"]
+[connection signal="pressed" from="Sorter/Rentability" to="Sorter" method="_on_Rentability_pressed"]
+[connection signal="pressed" from="Sorter/Type" to="Sorter" method="_on_Type_pressed"]

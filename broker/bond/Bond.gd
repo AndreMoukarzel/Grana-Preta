@@ -30,7 +30,7 @@ func setup(bond_name : String, five_day_rentability : float, rentability_type : 
 	self.min_time = min_time
 	self.taxes = taxes
 	self.creation_time = creation_time
-	self.time_left = Save.get_time_difference(creation_time, expiration)
+	self.time_left = Save.get_time_difference(OS.get_datetime(), expiration)
 	
 	if rentability_type == "Pre-fixada":
 		self.rentability = calculate_safebond_rentability(self.display_rentability)
