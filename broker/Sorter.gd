@@ -102,9 +102,9 @@ func expiration_sort(a, b):
 
 func inverse_expiration_sort(a, b):
 	var time_diff = Save.get_time_difference(a.expiration, b.expiration)
-	if time_diff[0] >= 0 and time_diff[1] > 0:
-		return false
-	return true
+	if time_diff[0] < 0 or time_diff[1] < 0:
+		return true
+	return false
 
 
 func rentability_sort(a, b):
@@ -140,6 +140,6 @@ func bought_time_sort(a, b):
 
 func inverse_bought_time_sort(a, b):
 	var time_diff = Save.get_time_difference(a.bought_time, b.bought_time)
-	if time_diff[0] >= 0 and time_diff[1] > 0:
-		return false
-	return true
+	if time_diff[0] < 0 or time_diff[1] < 0:
+		return true
+	return false
