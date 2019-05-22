@@ -23,11 +23,10 @@ func sell_expired_bonds():
 func update_bought_bonds():
 	clear_bonds()
 	for b in Save.bought_bonds:
-		print("Name = ", b.name, " | Value = ", b.ammount)
 		var iteration_number = get_iteration_number(b)
 		var Bond = add_bond($Sorter/Bonds)
 		
-		Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
+		Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time, b.index_value)
 		Bond.setup_owned(b.ammount, b.bought_time, b.id)
 		if iteration_number > 0:
 			print("iterating, ", iteration_number, " times")

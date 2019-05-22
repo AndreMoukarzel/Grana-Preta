@@ -14,34 +14,49 @@ margin_bottom = 40.0
 script = ExtResource( 2 )
 
 [node name="Value" type="Button" parent="Sorter"]
-margin_right = 12.0
-margin_bottom = 20.0
+margin_left = 38.0
+margin_top = 10.0
+margin_right = 138.0
+margin_bottom = 30.0
 text = "Valor"
 
 [node name="Expiration" type="Button" parent="Sorter"]
-margin_left = 100.0
-margin_right = 166.0
-margin_bottom = 20.0
+margin_left = 138.0
+margin_top = 10.0
+margin_right = 238.0
+margin_bottom = 30.0
 text = "Validade"
 
 [node name="Rentability" type="Button" parent="Sorter"]
-margin_left = 200.0
-margin_right = 299.0
-margin_bottom = 20.0
+margin_left = 238.0
+margin_top = 10.0
+margin_right = 338.0
+margin_bottom = 30.0
 text = "Rentabilidade"
 
 [node name="Type" type="Button" parent="Sorter"]
-margin_left = 400.0
-margin_right = 499.0
-margin_bottom = 20.0
+margin_left = 338.0
+margin_top = 10.0
+margin_right = 438.0
+margin_bottom = 30.0
 text = "Tipo"
+
+[node name="BoughtTime" type="Button" parent="Sorter"]
+margin_left = 438.0
+margin_top = 10.0
+margin_right = 538.0
+margin_bottom = 30.0
+text = "Aquisição"
 
 [node name="Bonds" type="Control" parent="Sorter"]
 margin_top = 100.0
 margin_right = 40.0
 margin_bottom = 140.0
 
+[node name="Tween" type="Tween" parent="Sorter"]
+
 [connection signal="pressed" from="Sorter/Value" to="Sorter" method="_on_Value_pressed"]
 [connection signal="pressed" from="Sorter/Expiration" to="Sorter" method="_on_Expiration_pressed"]
 [connection signal="pressed" from="Sorter/Rentability" to="Sorter" method="_on_Rentability_pressed"]
 [connection signal="pressed" from="Sorter/Type" to="Sorter" method="_on_Type_pressed"]
+[connection signal="pressed" from="Sorter/BoughtTime" to="Sorter" method="_on_BoughtTime_pressed"]

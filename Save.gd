@@ -137,10 +137,10 @@ func get_time_difference(time1, time2):
 	if time1.year > time2.year or time1.month > time2.month:
 		return [-1, -1]
 	
-	var diff = [time2.day - time1.day - 1, time2.hour - time1.hour + 24]
+	var diff = [int(time2.day - time1.day - 1), int(time2.hour - time1.hour + 24)]
 	
 	if time1.month < time2.month:
-		var m = time2.month - 1
+		var m = int(time2.month) - 1
 		if m % 2 == 1:
 			diff[0] += 31
 		else:
@@ -201,7 +201,8 @@ func save_available_bond(Bond):
 		"min_investment" : Bond.min_investment,
 		"min_time" : Bond.min_time,
 		"taxes" : Bond.taxes,
-		"creation_time" : Bond.creation_time
+		"creation_time" : Bond.creation_time,
+		"index_value" : Bond.index_value # used only on chanceful bonds
 	}
 	available_bonds.append(bond_json)
 	available_bonds_id = (available_bonds_id + 1) % 30
@@ -220,7 +221,8 @@ func save_bought_bond(Bond, ammount):
 		"min_investment" : Bond.min_investment,
 		"min_time" : Bond.min_time,
 		"taxes" : Bond.taxes,
-		"creation_time" : Bond.creation_time
+		"creation_time" : Bond.creation_time,
+		"index_value" : Bond.index_value # used only on chanceful bonds
 	}
 	bought_bonds.append(bond_json)
 	bought_bonds_id = (bought_bonds_id + 1) % 10000

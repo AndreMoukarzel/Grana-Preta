@@ -33,7 +33,7 @@ func load_bonds():
 				Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
 			elif chanceful_names.has(split):
 				var Bond = BondDisplay.add_bond(BondDisplay.ChanceBonds)
-				Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time)
+				Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time, b.index_value)
 	
 	for b in to_remove_bonds: # remove obsolete bonds
 		var index = Save.available_bonds.find(b)
@@ -163,7 +163,7 @@ func generate_chanceful_bonds(possible_names):
 	rentability = avg
 	
 	
-	Bond.setup(bond_name, [rentability, simulation[7]], "Prov", add_time(OS.get_datetime(), expiration), min_investment, min_time, taxes, OS.get_datetime())
+	Bond.setup(bond_name, rentability, "Prov", add_time(OS.get_datetime(), expiration), min_investment, min_time, taxes, OS.get_datetime(), simulation[7])
 	Save.save_available_bond(Bond)
 
 
