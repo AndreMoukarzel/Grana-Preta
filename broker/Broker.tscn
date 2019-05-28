@@ -97,6 +97,7 @@ margin_top = 20.0
 margin_bottom = 20.0
 
 [node name="PortfolioMenu" type="Control" parent="."]
+editor/display_folded = true
 margin_left = -576.0
 margin_right = -176.0
 margin_bottom = 600.0

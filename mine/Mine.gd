@@ -5,7 +5,7 @@ func _input(event):
 	if event.is_pressed() and (event is InputEventScreenTouch or event is InputEventMouseButton):
 		if $Timer.time_left <= 0:
 			play_mining_animation()
-			Save.money += 50
+			$HUD.add_money(10)
 
 
 func play_mining_animation():

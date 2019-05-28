@@ -63,7 +63,7 @@ func complete():
 	
 	School.complete_lesson(id)
 	set_completed()
-	Save.money += 50
+	School.get_node("HUD").add_money(50)
 
 
 func unlock():
