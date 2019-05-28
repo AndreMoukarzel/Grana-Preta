@@ -1,0 +1,97 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://mine/Mine.gd" type="Script" id=1]
+[ext_resource path="res://mine/pickaxe.png" type="Texture" id=2]
+[ext_resource path="res://mine/ore.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pickaxe:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 45, 660 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pickaxe:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "mine"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pickaxe:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 45, 660 ), Vector2( 86.0974, 570.956 ), Vector2( 58.6991, 588.08 ), Vector2( 45, 660 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pickaxe:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -30.0, 59.9999, 0.0 ]
+}
+
+[node name="Mine" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pickaxe" type="Sprite" parent="."]
+position = Vector2( 51.8495, 624.04 )
+rotation = 0.523598
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 2 )
+offset = Vector2( 256, -256 )
+
+[node name="Ore" type="Sprite" parent="."]
+position = Vector2( 294.531, 811.672 )
+z_index = -2
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 1 )
+anims/mine = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="SaveTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="SaveTimer" to="." method="_on_SaveTimer_timeout"]
