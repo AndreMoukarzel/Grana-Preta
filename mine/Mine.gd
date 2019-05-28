@@ -15,3 +15,11 @@ func play_mining_animation():
 
 func _on_SaveTimer_timeout():
 	Save.save_game()
+
+
+func _on_HUD_on_Back_pressed():
+	$SaveTimer.stop()
+	Save.save_game()
+	var e = get_tree().change_scene("res://City.tscn")
+	if e != 0:
+		print("City scene couldn't be loaded")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://mine/Mine.gd" type="Script" id=1]
 [ext_resource path="res://mine/pickaxe.png" type="Texture" id=2]
 [ext_resource path="res://mine/ore.png" type="Texture" id=3]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -94,4 +95,7 @@ one_shot = true
 wait_time = 5.0
 autostart = true
 
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+
 [connection signal="timeout" from="SaveTimer" to="." method="_on_SaveTimer_timeout"]
+[connection signal="on_Back_pressed" from="HUD" to="." method="_on_HUD_on_Back_pressed"]
