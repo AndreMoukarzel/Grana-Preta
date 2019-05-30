@@ -42,7 +42,7 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 3 )
 
-[node name="Question" index="0" instance=ExtResource( 1 )]
+[node name="Question" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="SwipeHandler" parent="." index="1"]

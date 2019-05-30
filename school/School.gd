@@ -112,10 +112,12 @@ func lock_questionnaire(id):
 func unlock_questionnaire(id):
 	var index = Save.failed_questions.find(id)
 	
-	print("Questionnaire ", id, " unlocked")
-	Save.failed_questions.remove(index)
-	Save.failed_questions_time.remove(index)
-	Save.save_game()
+	while index != - 1:
+		print("Questionnaire ", id, " unlocked")
+		Save.failed_questions.remove(index)
+		Save.failed_questions_time.remove(index)
+		Save.save_game()
+		index = Save.failed_questions.find(id)
 
 
 func leave_questionnaire():
