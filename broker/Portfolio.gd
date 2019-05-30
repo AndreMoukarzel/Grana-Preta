@@ -27,7 +27,7 @@ func update_bought_bonds():
 		var Bond = add_bond($Sorter/Bonds)
 		
 		Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time, b.index_value)
-		Bond.setup_owned(b.ammount, b.bought_time, b.id)
+		Bond.setup_owned(b.ammount, b.bought_time, b.last_updated_time, b.id)
 		if iteration_number > 0:
 			print("iterating, ", iteration_number, " times")
 			Bond.iterate(iteration_number)
@@ -49,7 +49,7 @@ func add_bond(parent):
 
 
 func get_iteration_number(bond_save):
-	var t1 = bond_save.bought_time
+	var t1 = bond_save.last_updated_time
 	var t2 = Save.get_min_datetime(bond_save.expiration, OS.get_datetime())
 	var time_diff = Save.get_time_difference(t1, t2)
 	

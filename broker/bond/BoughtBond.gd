@@ -2,13 +2,14 @@ extends "res://broker/bond/Bond.gd"
 
 var id
 var ammount
-var bought_time
+var bought_time # more like last_updated_time, but whatever, it is used in Portfolio.gd
+var last_updated_time
 
-
-func setup_owned(ammount, bought_time, id):
+func setup_owned(ammount, bought_time, last_updated_time, id):
 	self.id = id
 	self.ammount = ammount
 	self.bought_time = bought_time
+	self.last_updated_time = last_updated_time
 	$MinInvestment.text = str(int(ammount))
 	if min_time[0] > 0 or min_time[1] > 0:
 		$Apply.disabled = true
@@ -55,6 +56,12 @@ func iterate(times_iterated):
 	Save.save_bought_bond(self, self.ammount)
 
 
+func had_profit(ammount_sold):
+	var total_cost = self.ammount + ammount_sold * (taxes[0] + taxes[1] + taxes[2])
+	
+	return total_cost < ammount_sold
+
+
 func _on_Apply_pressed():
 	var TradeConfirm = TRADE_CONFIRM_SCN.instance()
 	var Canvas = get_tree().get_root().get_node("Broker/HUD")
@@ -70,8 +77,10 @@ func _on_trade_confirmed(ammount):
 	var HUD = get_tree().get_root().get_node("Broker/HUD")
 	
 	HUD.add_money(int(ammount))
+	if had_profit(ammount): # Only create debt in profit
+		Save.save_debt(self, int(ammount))
 	self.ammount -= ammount
 	Save.delete_bought_bond(id)
 	if self.ammount > 0:
-		Save.save_bought_bond(self, self.ammount)
+		Save.save_bought_bond(self, self.ammount, false)
 	Portfolio.call_deferred("update_bought_bonds")
