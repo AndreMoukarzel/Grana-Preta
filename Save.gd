@@ -120,7 +120,7 @@ func get_days_to_today(past_date):
 	if today.year > past_date.year:
 		months += 12 * (today.year - past_date.year)
 	if today.month + months > past_date.month:
-		var m = past_date.month
+		var m = int(past_date.month)
 		for i in range((today.month + months) - past_date.month):
 			if m % 2 == 0:
 				if m == 2: # February
