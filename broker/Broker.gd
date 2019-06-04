@@ -7,7 +7,6 @@ onready var SCREEN_SIZE = OS.get_window_size()
 var on_main_menu = true
 
 func _ready():
-	$Background/Panel.rect_size = OS.get_screen_size()
 	$Menu.rect_size = self.rect_size * 0.8
 	$Menu.rect_position.y = self.rect_size.y * 0.2
 	$Turtle.rect_position.x = self.rect_size.x * 0.8

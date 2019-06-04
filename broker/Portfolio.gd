@@ -51,6 +51,9 @@ func add_bond(parent, name):
 	Bond.connect("closed", self, "bond_closed")
 	parent.add_child(Bond)
 	
+	$SwipeHandler/SwipingCamera.limit_bottom = max(1024, total_height + 400 + 150)
+	$SwipeHandler.update_cam_minmax()
+	
 	return Bond
 
 
