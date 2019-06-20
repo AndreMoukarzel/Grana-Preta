@@ -10,7 +10,7 @@ const HEIGHT = 4 # height of theme on tree
 var themes = [
 	{
 		NAME : "A Escola",
-		ICON : "res://school/School.png",
+		ICON : "res://school/school_icon.png",
 		INFO : ["Test"],
 		DEPEN : [],
 		HEIGHT : 0

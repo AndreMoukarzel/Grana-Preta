@@ -34,7 +34,7 @@ margin_bottom = 709.0
 texture_normal = ExtResource( 2 )
 expand = true
 
-[node name="Mine" type="TextureButton" parent="."]
+[node name="TextureButton4" type="TextureButton" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 margin_left = 1384.0
 margin_top = 822.0
@@ -53,6 +53,6 @@ limit_bottom = 950
 [connection signal="pressed" from="House" to="." method="_on_House_pressed"]
 [connection signal="pressed" from="School" to="." method="_on_School_pressed"]
 [connection signal="pressed" from="Broker" to="." method="_on_Broker_pressed"]
-[connection signal="pressed" from="Mine" to="." method="_on_Mine_pressed"]
+[connection signal="pressed" from="TextureButton4" to="." method="_on_TextureButton_pressed"]
 
 [editable path="SwipeHandler"]
