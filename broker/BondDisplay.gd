@@ -34,7 +34,7 @@ func add_bond(parent):
 			$Moderate.rect_position.y += 100
 		total_height += 100
 	
-	$SwipeHandler/SwipingCamera.limit_bottom = max(1324, total_height + 600)
+	$SwipeHandler/SwipingCamera.limit_bottom = max(1324, total_height + 500)
 	$SwipeHandler.update_cam_minmax()
 	
 	return Bond

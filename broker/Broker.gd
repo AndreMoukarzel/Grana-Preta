@@ -7,7 +7,6 @@ onready var SCREEN_SIZE = OS.get_window_size()
 var on_main_menu = true
 
 func _ready():
-	$Background/Panel.rect_size = OS.get_screen_size()
 	$Menu.rect_size = self.rect_size * 0.8
 	$Menu.rect_position.y = self.rect_size.y * 0.2
 	$Turtle.rect_position.x = self.rect_size.x * 0.8
@@ -25,25 +24,25 @@ func tween_menus(middle_position):
 
 func _on_Investments_pressed():
 	on_main_menu = false
-	$HUD/Back.icon = load("res://back_arrow.png")
+	$HUD.set_arrow_texture()
 	tween_menus(-1.5 * SCREEN_SIZE.x)
 	$InvestmentMenu/BondDisplay/SwipeHandler.activate()
 
 
 func _on_Portfolio_pressed():
 	on_main_menu = false
-	$HUD/Back.icon = load("res://back_arrow.png")
+	$HUD.set_arrow_texture()
 	$PortfolioMenu/Portfolio.update_bought_bonds()
 	tween_menus(1.5 * SCREEN_SIZE.x)
 
 
-func _on_Button_pressed():
+func _on_HUD_on_Back_pressed():
 	if on_main_menu:
 		var e = get_tree().change_scene("res://City.tscn")
 		if e != 0:
 			print("City scene couldn't be loaded")
 	else:
-		$HUD/Back.icon = load("res://city_icon.png")
+		$HUD.set_city_texture()
 		tween_menus(0)
 		on_main_menu = true
 		$InvestmentMenu/BondDisplay/SwipeHandler.deactivate()

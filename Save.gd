@@ -13,6 +13,7 @@ var available_bonds = []
 var available_bonds_id = 0
 var bought_bonds = []
 var bought_bonds_id = 0
+var debts = []
 
 
 func save():
@@ -29,7 +30,8 @@ func save():
 		available_bonds = available_bonds,
 		available_bonds_id = available_bonds_id,
 		bought_bonds = bought_bonds,
-		bought_bonds_id = bought_bonds_id
+		bought_bonds_id = bought_bonds_id,
+		debts = debts
 	}
 	return savedict
 
@@ -85,6 +87,9 @@ func load_game():
 	for element in savedata.bought_bonds:
 		bought_bonds.append(element)
 	bought_bonds_id = int(savedata.bought_bonds_id)
+	for element in savedata.debts:
+		debts.append(element)
+	
 	Selic.create(selic_last100[99], 3.0, 6.0, 15.0)
 	Inflation.create(inflation_last100[99], 1.0, -0.5, 10.0)
 	last_index_iteration_date = savedata.last_index_iteration_date
@@ -115,7 +120,7 @@ func get_days_to_today(past_date):
 	if today.year > past_date.year:
 		months += 12 * (today.year - past_date.year)
 	if today.month + months > past_date.month:
-		var m = past_date.month
+		var m = int(past_date.month)
 		for i in range((today.month + months) - past_date.month):
 			if m % 2 == 0:
 				if m == 2: # February
@@ -209,11 +214,19 @@ func save_available_bond(Bond):
 	save_game()
 
 
-func save_bought_bond(Bond, ammount):
+func save_bought_bond(Bond, ammount, first_buy = true):
+	var bt = OS.get_datetime()
+	var lut = OS.get_datetime()
+	
+	if not first_buy: # The bond has been bought before and is being re-saved
+		bt = Bond.bought_time
+		lut = Bond.last_updated_time
+
 	var bond_json = {
 		"id" : bought_bonds_id,
 		"ammount" : ammount,
-		"bought_time" : OS.get_datetime(),
+		"bought_time" : bt,
+		"last_updated_time" : lut,
 		"name" : Bond.bond_name,
 		"display_rentability" : Bond.display_rentability,
 		"rentability_type" : Bond.rentability_type,
@@ -237,3 +250,13 @@ func delete_bought_bond(id):
 		i += 1
 	bought_bonds.remove(i)
 	save_game()
+
+
+func save_debt(Bond, profit : int):
+	var debt_json = {
+		"source_name" : Bond.name,
+		"buy_date" : Bond.bought_time,
+		"sell_date" : OS.get_datetime(),
+		"profit" : profit,
+		"taxes" : Bond.taxes
+	}

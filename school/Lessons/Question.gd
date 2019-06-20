@@ -34,7 +34,7 @@ func _input(event):
 	if done:
 		if event.is_pressed() and (event is InputEventScreenTouch or event is InputEventMouseButton):
 			var School = get_tree().get_root().get_node("School")
-			School._on_Back_pressed()
+			School._on_HUD_on_Back_pressed()
 
 
 # Must be setup after being added to tree, or label height will be gotten incorrectly
@@ -47,6 +47,7 @@ func setup(name, content, id):
 		add_answers(i, question_height + 80)
 	var answers_height = show_question_and_answer(0)
 	set_questionnaire_size(answers_height)
+	lock()
 
 
 func add_title(title):
@@ -189,7 +190,9 @@ func display_results():
 		tween_result()
 		
 		if not Save.completed_lessons.has(id): # if not completed, lock
+			var School = get_tree().get_root().get_node("School")
 			lock()
+			School._on_HUD_on_Back_pressed()
 
 
 func disable_all():
@@ -223,15 +226,15 @@ func complete():
 	var School = get_tree().get_root().get_node("School")
 	
 	School.complete_lesson(id)
-	School._on_Back_pressed()
-	Save.money += 50
+	School.unlock_questionnaire(id)
+	School._on_HUD_on_Back_pressed()
+	School.get_node("HUD").add_money(50)
 
 
 func lock():
 	var School = get_tree().get_root().get_node("School")
 	
 	School.lock_questionnaire(id)
-	School._on_Back_pressed()
 
 
 func get_all_questions_and_answers(content):

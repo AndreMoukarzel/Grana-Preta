@@ -194,5 +194,7 @@ func _on_Apply_pressed():
 
 
 func _on_trade_confirmed(ammount):
-	Save.money -= ammount
+	var HUD = get_tree().get_root().get_node("Broker/HUD")
+	
+	HUD.subtract_money(ammount)
 	Save.save_bought_bond(self, ammount)

@@ -9,66 +9,31 @@ const HEIGHT = 4 # height of theme on tree
 
 var themes = [
 	{
-		NAME : "The School",
+		NAME : "A Escola",
 		ICON : "res://school/School.png",
 		INFO : ["Test"],
 		DEPEN : [],
 		HEIGHT : 0
 	},
 	{
-		NAME : "Stuff1",
+		NAME : "A cidade",
 		ICON : null,
 		INFO : [],
-		DEPEN : ["The School"],
+		DEPEN : [],
 		HEIGHT : 1
 	},
 	{
-		NAME : "Stuff2",
-		ICON : null,
-		INFO : [],
-		DEPEN : ["The School"],
-		HEIGHT : 1
-	},
-	{
-		NAME : "Stuff3",
+		NAME : "Fixa 1",
 		ICON : null,
 		INFO : [],
 		DEPEN : [],
 		HEIGHT : 2
 	},
 	{
-		NAME : "Stuff4",
+		NAME : "Variável 1",
 		ICON : null,
 		INFO : [],
-		DEPEN : ["Stuff1", "Stuff2"],
-		HEIGHT : 2
-	},
-	{
-		NAME : "Stuff5",
-		ICON : null,
-		INFO : [],
-		DEPEN : ["Stuff1", "Stuff2"],
-		HEIGHT : 2
-	},
-	{
-		NAME : "Stuff6",
-		ICON : null,
-		INFO : [],
-		DEPEN : ["Stuff1", "Stuff2"],
-		HEIGHT : 2
-	},
-	{
-		NAME : "Stuff7",
-		ICON : null,
-		INFO : [],
-		DEPEN : ["Stuff1", "Stuff2"],
-		HEIGHT : 2
-	},
-	{
-		NAME : "Stuff8",
-		ICON : null,
-		INFO : [],
-		DEPEN : ["Stuff1", "Stuff2"],
+		DEPEN : [],
 		HEIGHT : 2
 	}
 ]

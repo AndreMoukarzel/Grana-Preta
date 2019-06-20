@@ -139,6 +139,8 @@ func generate_moderate_bonds(possible_names):
 	if expiration[1] > 23: # Correct expiration
 		expiration[1] -= 24
 		expiration[0] += 1
+	if bond_name.split("-")[0] == "I": # Operates on inflation
+		rentability += 0.1 # Adds flat bonus to bonds indexed on inflation, since inflation tends to be lower
 	
 	Bond.setup(bond_name, rentability, "Pos-fixada", add_time(OS.get_datetime(), expiration), min_investment, min_time, taxes, OS.get_datetime())
 	Save.save_available_bond(Bond)

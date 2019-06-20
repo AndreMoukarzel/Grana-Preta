@@ -21,8 +21,16 @@ func tween_bonds(bonds):
 	$Tween.start()
 
 
+func rename_bonds(bonds):
+	for b in bonds:
+		b.set_name(b.get_name() + "old")
+	for i in range(bonds.size()):
+		bonds[i].set_name(str(i))
+
+
 func _on_Value_pressed():
 	var bonds = get_all_bonds()
+	get_parent().close_all_bonds()
 	
 	if not last_sort == "value":
 		bonds.sort_custom(self, "value_sort")
@@ -31,10 +39,12 @@ func _on_Value_pressed():
 		bonds.sort_custom(self, "inverse_value_sort")
 		last_sort = ""
 	tween_bonds(bonds)
+	rename_bonds(bonds)
 
 
 func _on_Expiration_pressed():
 	var bonds = get_all_bonds()
+	get_parent().close_all_bonds()
 	
 	if not last_sort == "expiration":
 		bonds.sort_custom(self, "expiration_sort")
@@ -43,10 +53,12 @@ func _on_Expiration_pressed():
 		bonds.sort_custom(self, "inverse_expiration_sort")
 		last_sort = ""
 	tween_bonds(bonds)
+	rename_bonds(bonds)
 
 
 func _on_Rentability_pressed():
 	var bonds = get_all_bonds()
+	get_parent().close_all_bonds()
 	
 	if not last_sort == "rentability":
 		bonds.sort_custom(self, "rentability_sort")
@@ -55,10 +67,12 @@ func _on_Rentability_pressed():
 		bonds.sort_custom(self, "inverse_rentability_sort")
 		last_sort = ""
 	tween_bonds(bonds)
+	rename_bonds(bonds)
 
 
 func _on_Type_pressed():
 	var bonds = get_all_bonds()
+	get_parent().close_all_bonds()
 	
 	if not last_sort == "type":
 		bonds.sort_custom(self, "type_sort")
@@ -67,10 +81,12 @@ func _on_Type_pressed():
 		bonds.sort_custom(self, "inverse_type_sort")
 		last_sort = ""
 	tween_bonds(bonds)
+	rename_bonds(bonds)
 
 
 func _on_BoughtTime_pressed():
 	var bonds = get_all_bonds()
+	get_parent().close_all_bonds()
 	
 	if not last_sort == "bought_time":
 		bonds.sort_custom(self, "bought_time_sort")
@@ -79,6 +95,7 @@ func _on_BoughtTime_pressed():
 		bonds.sort_custom(self, "inverse_bought_time_sort")
 		last_sort = ""
 	tween_bonds(bonds)
+	rename_bonds(bonds)
 
 
 func value_sort(a, b):
@@ -102,9 +119,9 @@ func expiration_sort(a, b):
 
 func inverse_expiration_sort(a, b):
 	var time_diff = Save.get_time_difference(a.expiration, b.expiration)
-	if time_diff[0] >= 0 and time_diff[1] > 0:
-		return false
-	return true
+	if time_diff[0] < 0 or time_diff[1] < 0:
+		return true
+	return false
 
 
 func rentability_sort(a, b):
@@ -140,6 +157,6 @@ func bought_time_sort(a, b):
 
 func inverse_bought_time_sort(a, b):
 	var time_diff = Save.get_time_difference(a.bought_time, b.bought_time)
-	if time_diff[0] >= 0 and time_diff[1] > 0:
-		return false
-	return true
+	if time_diff[0] < 0 or time_diff[1] < 0:
+		return true
+	return false

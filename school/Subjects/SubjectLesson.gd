@@ -1,6 +1,9 @@
 extends Control
 
 const LESSON_DB = preload("res://school/Lessons/LessonDB.gd")
+const BLUE = Color(.2, .2, 1)
+const GREEN = Color(0, 1, 0)
+const RED = Color(1.5, 0, 0)
 
 var title : String
 var id : int
@@ -23,7 +26,7 @@ func setup(name, size):
 	
 	type = db.get_lesson_type(self.id)
 	if type == "question":
-		$Background.set_modulate(Color(.6, .6, 1))
+		$Background.set_modulate(BLUE)
 	
 	if Save.completed_lessons.has(id): # lesson previously completed
 		set_completed()
@@ -40,7 +43,7 @@ func setup(name, size):
 			$Lock.show()
 			self.disabled = true
 			self.text = str("Time remaning: ", remaining_time)
-			$Background.set_modulate(Color(1, .6, .6))
+			$Background.set_modulate(RED)
 			$Timer.start()
 
 
@@ -63,7 +66,7 @@ func complete():
 	
 	School.complete_lesson(id)
 	set_completed()
-	Save.money += 50
+	School.get_node("HUD").add_money(50)
 
 
 func unlock():
@@ -73,11 +76,11 @@ func unlock():
 	$Lock.hide()
 	self.disabled = false
 	self.text = self.title
-	$Background.set_modulate(Color(.6, .6, 1))
+	$Background.set_modulate(BLUE)
 
 
 func set_completed():
-	$Background.set_modulate(Color(0, 1, 0))
+	$Background.set_modulate(GREEN)
 	completed = true
 
 
@@ -126,4 +129,4 @@ func _on_Timer_timeout():
 		remain_string += str(":", r)
 	remain_string.erase(0, 1) # removes first ":"
 	self.text = str("Time remaning: ", remain_string)
-	$Background.set_modulate(Color(1, .6, .6))
+	$Background.set_modulate(RED)
