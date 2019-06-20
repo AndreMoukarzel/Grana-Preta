@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://City.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://school/School.png" type="Texture" id=3]
-[ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=4]
+[ext_resource path="res://broker/Broker.png" type="Texture" id=4]
+[ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=5]
 
 [node name="City" type="Control"]
 margin_right = 40.0
@@ -18,20 +19,19 @@ texture_normal = ExtResource( 2 )
 expand = true
 
 [node name="School" type="TextureButton" parent="."]
-margin_left = 595.0
-margin_top = 372.0
-margin_right = 715.0
-margin_bottom = 492.0
+margin_left = 576.545
+margin_top = 376.101
+margin_right = 776.545
+margin_bottom = 576.101
 texture_normal = ExtResource( 3 )
 expand = true
 
 [node name="Broker" type="TextureButton" parent="."]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = 1030.0
-margin_top = 589.0
-margin_right = 1150.0
-margin_bottom = 709.0
-texture_normal = ExtResource( 2 )
+margin_left = 580.929
+margin_top = 718.185
+margin_right = 780.929
+margin_bottom = 918.185
+texture_normal = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton4" type="TextureButton" parent="."]
@@ -43,7 +43,7 @@ margin_bottom = 942.0
 texture_normal = ExtResource( 2 )
 expand = true
 
-[node name="SwipeHandler" parent="." instance=ExtResource( 4 )]
+[node name="SwipeHandler" parent="." instance=ExtResource( 5 )]
 
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
 position = Vector2( 684.955, 387 )
