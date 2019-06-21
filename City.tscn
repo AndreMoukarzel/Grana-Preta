@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://City.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://school/School.png" type="Texture" id=3]
 [ext_resource path="res://broker/Broker.png" type="Texture" id=4]
 [ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=5]
+[ext_resource path="res://CityTileset.tres" type="TileSet" id=6]
 
 [node name="City" type="Control"]
 margin_right = 40.0
@@ -12,34 +13,37 @@ margin_bottom = 40.0
 script = ExtResource( 1 )
 
 [node name="House" type="TextureButton" parent="."]
+visible = false
 modulate = Color( 0, 1, 0.484375, 1 )
-margin_right = 120.0
-margin_bottom = 120.0
+margin_left = 59.7915
+margin_top = 306.132
+margin_right = 179.792
+margin_bottom = 426.132
 texture_normal = ExtResource( 2 )
 expand = true
 
 [node name="School" type="TextureButton" parent="."]
-margin_left = 576.545
-margin_top = 376.101
-margin_right = 776.545
-margin_bottom = 576.101
+margin_left = 538.279
+margin_top = 285.218
+margin_right = 738.279
+margin_bottom = 485.218
 texture_normal = ExtResource( 3 )
 expand = true
 
 [node name="Broker" type="TextureButton" parent="."]
-margin_left = 580.929
-margin_top = 718.185
-margin_right = 780.929
-margin_bottom = 918.185
+margin_left = 542.663
+margin_top = 789.935
+margin_right = 742.663
+margin_bottom = 989.935
 texture_normal = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton4" type="TextureButton" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 1384.0
-margin_top = 822.0
-margin_right = 1504.0
-margin_bottom = 942.0
+margin_left = 1093.17
+margin_top = 835.632
+margin_right = 1213.17
+margin_bottom = 955.632
 texture_normal = ExtResource( 2 )
 expand = true
 
@@ -48,7 +52,14 @@ expand = true
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
 position = Vector2( 684.955, 387 )
 limit_right = 1500
-limit_bottom = 950
+limit_bottom = 1300
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = -1
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 256, 256 )
+format = 1
+tile_data = PoolIntArray( 0, 4, 0, 1, 0, 0, 2, 1, 0, 3, 2, 0, 4, 4, 0, 5, 6, 0, 6, 4, 0, 65536, 4, 0, 65537, 3, 0, 65538, 4, 0, 65539, 6, 0, 65540, 4, 0, 65541, 6, 0, 65542, 4, 0, 131072, 1, 0, 131073, 5, 0, 131074, 1, 0, 131075, 5, 0, 131076, 1, 0, 131077, 5, 0, 131078, 1, 0, 196608, 4, 0, 196609, 3, 0, 196610, 4, 0, 196611, 6, 0, 196612, 4, 0, 196613, 6, 0, 196614, 4, 0, 262144, 4, 0, 262145, 7, 0, 262146, 8, 0, 262147, 9, 0, 262148, 4, 0, 262149, 7, 0, 262150, 8, 0, 327680, 4, 0, 327681, 4, 0, 327682, 4, 0, 327683, 4, 0, 327684, 4, 0, 327685, 4, 0, 327686, 4, 0 )
 
 [connection signal="pressed" from="House" to="." method="_on_House_pressed"]
 [connection signal="pressed" from="School" to="." method="_on_School_pressed"]

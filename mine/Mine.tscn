@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://mine/Mine.gd" type="Script" id=1]
-[ext_resource path="res://mine/pickaxe.png" type="Texture" id=2]
+[ext_resource path="res://mine/MineBackground.png" type="Texture" id=2]
 [ext_resource path="res://mine/ore.png" type="Texture" id=3]
-[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mine/pickaxe.png" type="Texture" id=4]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -68,20 +69,26 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Pickaxe" type="Sprite" parent="."]
-position = Vector2( 51.8495, 624.04 )
-rotation = 0.523598
-scale = Vector2( 0.6, 0.6 )
+[node name="BackGround" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 texture = ExtResource( 2 )
-offset = Vector2( 256, -256 )
 
 [node name="Ore" type="Sprite" parent="."]
 position = Vector2( 294.531, 811.672 )
-z_index = -2
+z_index = 1
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Pickaxe" type="Sprite" parent="."]
+position = Vector2( 51.8495, 624.04 )
+rotation = 0.523598
+scale = Vector2( 0.6, 0.6 )
+z_index = 1
+texture = ExtResource( 4 )
+offset = Vector2( 256, -256 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 1 )
@@ -95,7 +102,7 @@ one_shot = true
 wait_time = 5.0
 autostart = true
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
+[node name="HUD" parent="." instance=ExtResource( 5 )]
 
 [connection signal="timeout" from="SaveTimer" to="." method="_on_SaveTimer_timeout"]
 [connection signal="on_Back_pressed" from="HUD" to="." method="_on_HUD_on_Back_pressed"]
