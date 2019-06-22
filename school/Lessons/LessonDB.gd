@@ -26,8 +26,8 @@ var lessons = [
 		TYPE : "question",
 		CONTENT : [
 				["Do you like cheese?"], [["Chesse is spoiled milk.", "And I hate it."], ["Yes"], ["No"]], 
-				["Is Jesus your lord and savior?"], [["I'm a JEW"], ["What?"], ["I'm alergic to mexicans"], ["Yea he actually is."]],
-				["Did this questionnaire work?"], [["FUCK YEA!"], ["acoes_codigos_001.png"]]
+#				["Is Jesus your lord and savior?"], [["I'm a JEW"], ["What?"], ["I'm alergic to mexicans"], ["Yea he actually is."]],
+#				["Did this questionnaire work?"], [["FUCK YEA!"], ["acoes_codigos_001.png"]]
 				],
 		LOCKTIME : [0, 0, 1]
 	}

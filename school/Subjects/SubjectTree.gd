@@ -46,9 +46,8 @@ func position_subjects(theme_name):
 
 func connect_signals():
 	for child in get_children():
-		var Subject = child.get_node("Subject")
-		
 		if child.get_name() != "CanvasLayer":
+			var Subject = child.get_node("Subject")
 			Subject.connect("opened", self, "subject_opened")
 			Subject.connect("closed", self, "subject_closed")
 

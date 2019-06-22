@@ -11,36 +11,36 @@ var themes = [
 	{
 		NAME : "A Escola",
 		ICON : "res://school/school_icon.png",
-		INFO : ["Test"],
+		INFO : ["Teste"],
 		DEPEN : [],
 		HEIGHT : 0
-	},
-	{
-		NAME : "A cidade",
-		ICON : null,
-		INFO : [],
-		DEPEN : [],
-		HEIGHT : 1
-	},
-	{
-		NAME : "Fixa 1",
-		ICON : null,
-		INFO : [],
-		DEPEN : [],
-		HEIGHT : 2
-	},
-	{
-		NAME : "Variável 1",
-		ICON : null,
-		INFO : [],
-		DEPEN : [],
-		HEIGHT : 2
 	}
+#	{
+#		NAME : "A cidade",
+#		ICON : null,
+#		INFO : [],
+#		DEPEN : [],
+#		HEIGHT : 1
+#	},
+#	{
+#		NAME : "Fixa 1",
+#		ICON : null,
+#		INFO : [],
+#		DEPEN : [],
+#		HEIGHT : 2
+#	},
+#	{
+#		NAME : "Variável 1",
+#		ICON : null,
+#		INFO : [],
+#		DEPEN : [],
+#		HEIGHT : 2
+#	}
 ]
 
 var subjects = [
 	{
-		NAME : "Test",
+		NAME : "Teste",
 		ICON : null,
 		INFO : ["Basic Stuff", "Advanced Stuff", "Important Questions"],
 	},
