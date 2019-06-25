@@ -41,19 +41,19 @@ func add_bond(parent):
 
 
 func close_all_bonds(exception = null):
-	for child in $Safe/Bonds.get_children():
+	for child in SafeBonds.get_children():
 		if exception and child == exception:
 			continue
 		if child.is_open:
 			child.close()
 			bond_closed(child)
-	for child in $Moderate/Bonds.get_children():
+	for child in ModerBonds.get_children():
 		if exception and child == exception:
 			continue
 		if child.is_open:
 			child.close()
 			bond_closed(child)
-	for child in $Chanceful/Bonds.get_children():
+	for child in ChanceBonds.get_children():
 		if exception and child == exception:
 			continue
 		if child.is_open:
@@ -62,11 +62,11 @@ func close_all_bonds(exception = null):
 
 
 func disable_all_bonds(disable = true):
-	for child in $Safe/Bonds.get_children():
+	for child in SafeBonds.get_children():
 		child.disabled = disable
-	for child in $Moderate/Bonds.get_children():
+	for child in ModerBonds.get_children():
 		child.disabled = disable
-	for child in $Chanceful/Bonds.get_children():
+	for child in ChanceBonds.get_children():
 		child.disabled = disable
 
 
