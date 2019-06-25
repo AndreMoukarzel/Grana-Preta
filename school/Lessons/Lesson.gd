@@ -77,6 +77,7 @@ func set_camera_limits(height):
 	var LocalCamera = $SwipeHandler/SwipingCamera
 	LocalCamera.limit_right = OS.get_window_size().x
 	LocalCamera.limit_bottom = height + 10
+	$SwipeHandler.update_cam_minmax()
 
 
 func set_height(height):
