@@ -1,15 +1,16 @@
 extends Control
 
-const SCREEN_SIZE = Vector2(576, 1024)
+const WINDOW_SIZE = Vector2(576, 1024)
 const OFFSET = Vector2(10, 5)
 const TEXT_OFFSET = 10
+
 
 var text_font
 
 func _ready():
-	rect_size = SCREEN_SIZE - OFFSET
+	rect_size = WINDOW_SIZE - OFFSET
 	rect_position = OFFSET/2
-	$Title.rect_size.x = SCREEN_SIZE.x - OFFSET.x
+	$Title.rect_size.x = WINDOW_SIZE.x - OFFSET.x
 	text_font = DynamicFont.new()
 	text_font.size = 20
 	text_font.font_data = load("res://school/Lessons/LessonFont.otf")
@@ -50,12 +51,12 @@ func add_image(texture_name, pos_y):
 	var tex_size = texture.get_size()
 	
 	tr.texture = texture
-	if tex_size.x > OS.get_window_size().x:
-		var scale = OS.get_window_size().x/tex_size.x
+	if tex_size.x > WINDOW_SIZE.x:
+		var scale = WINDOW_SIZE.x/tex_size.x
 		tex_size *= scale
 		tr.expand = true
 		tr.rect_size = tex_size
-	tr.rect_position = Vector2((OS.get_window_size().x - tex_size.x)/2, pos_y)
+	tr.rect_position = Vector2((WINDOW_SIZE.x - tex_size.x)/2, pos_y)
 	add_child(tr)
 	
 	return tex_size.y
@@ -75,11 +76,11 @@ func add_content(initial_height, content):
 
 func set_camera_limits(height):
 	var LocalCamera = $SwipeHandler/SwipingCamera
-	LocalCamera.limit_right = OS.get_window_size().x
+	LocalCamera.limit_right = WINDOW_SIZE.x
 	LocalCamera.limit_bottom = height + 10
 	$SwipeHandler.update_cam_minmax()
 
 
 func set_height(height):
-	var h = max(SCREEN_SIZE.y - OFFSET.y, height)
+	var h = max(WINDOW_SIZE.y - OFFSET.y, height)
 	rect_size.y = h

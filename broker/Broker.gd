@@ -2,7 +2,7 @@ extends Control
 
 const TWN_TIME = 1
 
-onready var SCREEN_SIZE = OS.get_window_size()
+onready var SCREEN_SIZE = Vector2(576, 1024) #OS.get_window_size()
 
 var on_main_menu = true
 

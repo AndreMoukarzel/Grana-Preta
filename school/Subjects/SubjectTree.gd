@@ -2,12 +2,13 @@ extends Control
 
 const SCHOOL_DB = preload("res://school/SchoolDB.gd")
 const HEIGHT_ADD = 100
+const WINDOW_SIZE = Vector2(576, 1024)
 
 
 func setup(theme_name):
 	var CP = $CanvasLayer/ConfirmationPanel
 	position_subjects(theme_name)
-	CP.rect_position.y = (1024 - CP.rect_size.y)/2
+	CP.rect_position.y = (WINDOW_SIZE.y - CP.rect_size.y)/2
 	connect_signals()
 
 
@@ -30,7 +31,7 @@ func get_all_subjects(theme_name):
 
 func position_subjects(theme_name):
 	var subjects = get_all_subjects(theme_name)
-	var size = OS.get_window_size().x/2
+	var size = WINDOW_SIZE.x/2
 	var height = 80
 	
 	for subject in subjects:

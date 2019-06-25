@@ -4,6 +4,7 @@ const OFFSET = Vector2(10, 5)
 const TEXT_OFFSET = 10
 const ALTERNATIVE_SCN = preload("res://school/Lessons/Alternative.tscn")
 const ALTER_HEIGHT = 50
+const WINDOW_SIZE = Vector2(576, 1024)
 
 var questions = []
 var answers = []
@@ -21,13 +22,13 @@ func _ready():
 	
 	BackButton.connect("pressed", self, "confirm_exit")
 	randomize()
-	rect_size = OS.get_window_size() - OFFSET
+	rect_size = WINDOW_SIZE - OFFSET
 	rect_position = OFFSET/2
-	$Title.rect_size.x = OS.get_window_size().x - OFFSET.x
+	$Title.rect_size.x = WINDOW_SIZE.x - OFFSET.x
 	text_font = DynamicFont.new()
 	text_font.font_data = load("res://school/Lessons/LessonFont.otf")
 	text_font.use_filter = true
-	Result.rect_position = Vector2(OS.get_window_size().x * 0.2, -OS.get_window_size().y)
+	Result.rect_position = Vector2(WINDOW_SIZE.x * 0.2, -WINDOW_SIZE.y)
 
 
 func _input(event):
@@ -95,7 +96,7 @@ func add_question(index, pos_y):
 	Cont.rect_position = Vector2(0, pos_y)
 	add_child(Cont)
 	text_font.size = 30
-	Cont.rect_size.x = OS.get_window_size().x - OFFSET.x
+	Cont.rect_size.x = WINDOW_SIZE.x - OFFSET.x
 	Cont.rect_size.y = parse_content(Cont, questions[index], true)
 	
 	return 20 + Cont.rect_size.y + Cont.rect_position.y
@@ -120,7 +121,7 @@ func add_answers(index, pos_y):
 		Alt.rect_position = Vector2(TEXT_OFFSET, answer_pos)
 		Alt.set_name(str("Alternative", i))
 		Cont.add_child(Alt)
-		Alt.rect_size.x = OS.get_window_size().x - 3 * TEXT_OFFSET
+		Alt.rect_size.x = WINDOW_SIZE.x - 3 * TEXT_OFFSET
 		Alt.rect_size.y = max(parse_content(Alt, current_answers[i]), 50)
 		Alt.get_node("Panel").rect_size = Alt.rect_size
 		Alt.connect("pressed", self, "Alternative_selected", [Alt])
@@ -142,9 +143,9 @@ func parse_content(parent, content, centralize=false):
 
 
 func position_back_next_count(pos_y):
-	$Back.rect_position = Vector2(OS.get_window_size().x/4 - $Back.rect_size.x/2, pos_y + 50)
-	$Next.rect_position = Vector2(3 * OS.get_window_size().x/4 - $Next.rect_size.x/2, pos_y + 50)
-	$PageCount.rect_position = Vector2(OS.get_window_size().x/2 - $PageCount.rect_size.x/2, pos_y + 70)
+	$Back.rect_position = Vector2(WINDOW_SIZE.x/4 - $Back.rect_size.x/2, pos_y + 50)
+	$Next.rect_position = Vector2(3 * WINDOW_SIZE.x/4 - $Next.rect_size.x/2, pos_y + 50)
+	$PageCount.rect_position = Vector2(WINDOW_SIZE.x/2 - $PageCount.rect_size.x/2, pos_y + 70)
 	
 	return $Next.rect_size.y + $Next.rect_position.y + 20
 
@@ -205,7 +206,7 @@ func disable_all():
 func tween_result():
 	var Twn = $CanvasLayer/ResultPanel/Tween
 	
-	Twn.interpolate_property($CanvasLayer/ResultPanel, "rect_position:y", null,  (OS.get_window_size().y - $CanvasLayer/ResultPanel.rect_size.y)/2, 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+	Twn.interpolate_property($CanvasLayer/ResultPanel, "rect_position:y", null,  (WINDOW_SIZE.y - $CanvasLayer/ResultPanel.rect_size.y)/2, 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
 	Twn.start()
 	yield(Twn, "tween_completed")
 	done = true
@@ -252,12 +253,12 @@ func get_all_questions_and_answers(content):
 
 func set_camera_limits(height):
 	var LocalCamera = $SwipeHandler/SwipingCamera
-	LocalCamera.limit_right = OS.get_window_size().x
+	LocalCamera.limit_right = WINDOW_SIZE.x
 	LocalCamera.limit_bottom = height + 10
 
 
 func set_height(height):
-	var h = max(OS.get_window_size().y, height)
+	var h = max(WINDOW_SIZE.y, height)
 	rect_size.y = h
 
 
