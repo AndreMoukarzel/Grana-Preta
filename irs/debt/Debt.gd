@@ -18,15 +18,26 @@ func setup(source_name : String, buy_date, sell_date, profit : int, taxes : Arra
 	self.taxes = taxes
 
 	$SourceName.text = source_name
-	# calculate value from profit * taxes
 	# calculate strikes ( difference between sell_date and current time)
-	$Value.text = str("G$", value)
-	#buydate
-	#selldate
+	self.value = calculate_value(profit, taxes)
+	$Value.text = str("G$", self.value)
+	self.buy_date = buy_date
+	$BuyDate.text = parse_datetime(buy_date)
+	self.sell_date = sell_date
+	$SellDate.text = parse_datetime(sell_date)
 	$InitialPrice.text = str("G$", initial_price)
 	$Profit.text = str("G$", profit)
 	#taxes
 
+func calculate_value(profit, taxes):
+	var total_taxes = 1.0 + (taxes[0] + taxes[1] + taxes[2])/100.0
+	
+	return profit * (total_taxes + (self.strikes * 0.1))
+
+
+func parse_datetime(datetime):
+	var year_last_two_digits = str(datetime.year).right(-2)
+	return str(datetime.day, "/", datetime.month, "/", year_last_two_digits)
 
 func _on_Pay_pressed():
 	var HUD = get_tree().get_root().get_node("HUD")
