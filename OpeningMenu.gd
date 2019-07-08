@@ -4,8 +4,10 @@ const LABEL_TWN_SPEED = 1.5
 const WINDOW_SIZE = Vector2(576, 1024)
 
 func _ready():
-	var label_size = $Label.rect_size
-	$Label.set_position(WINDOW_SIZE/2 - label_size/2)
+	$Label.set_position(WINDOW_SIZE/2 - $Label.rect_size/2)
+	var label_pos = $Label.rect_position 
+	$Label.set_position(Vector2(label_pos.x, label_pos.y - 200))
+	$Coin.set_position(WINDOW_SIZE/2)
 	play_start_animation()
 	Save.load_game()
 

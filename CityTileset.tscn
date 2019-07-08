@@ -4,62 +4,50 @@
 
 [node name="CityTileset" type="Node"]
 
-[node name="StreetTopLeft" type="Sprite" parent="."]
+[node name="StreetHor" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 256 )
 
-[node name="StreetTop" type="Sprite" parent="."]
-position = Vector2( 256, 0 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 256, 0, 256, 256 )
-
-[node name="StreetTopRight" type="Sprite" parent="."]
-position = Vector2( 512, 0 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 512, 0, 256, 256 )
-
-[node name="StreetLeft" type="Sprite" parent="."]
+[node name="StreetVertical" type="Sprite" parent="."]
 position = Vector2( 0, 256 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 256, 256, 256 )
 
-[node name="StreetCenterGrass" type="Sprite" parent="."]
-position = Vector2( 256, 256 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 256, 256, 256, 256 )
-
 [node name="StreetCenter" type="Sprite" parent="."]
-position = Vector2( 768, 0 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 768, 0, 256, 256 )
-
-[node name="StreetRight" type="Sprite" parent="."]
-position = Vector2( 512, 256 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 512, 256, 256, 256 )
-
-[node name="StreetBottomLeft" type="Sprite" parent="."]
 position = Vector2( 0, 512 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 512, 256, 256 )
 
-[node name="StreetBottom" type="Sprite" parent="."]
+[node name="StreetTTop" type="Sprite" parent="."]
+position = Vector2( 256, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 0, 256, 256 )
+
+[node name="StreetTLeft" type="Sprite" parent="."]
+position = Vector2( 512, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 512, 0, 256, 256 )
+
+[node name="StreetTRight" type="Sprite" parent="."]
+position = Vector2( 256, 256 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 256, 256, 256 )
+
+[node name="StreetTBottom" type="Sprite" parent="."]
 position = Vector2( 256, 512 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 256, 512, 256, 256 )
 
-[node name="StreetBottomRight" type="Sprite" parent="."]
-position = Vector2( 512, 512 )
+[node name="Grass" type="Sprite" parent="."]
+position = Vector2( 512, 256 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 512, 512, 256, 256 )
+region_rect = Rect2( 512, 256, 256, 256 )
 
