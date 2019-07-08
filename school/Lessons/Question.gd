@@ -229,7 +229,6 @@ func complete():
 	School.complete_lesson(id)
 	School.unlock_questionnaire(id)
 	School._on_HUD_on_Back_pressed()
-	School.get_node("HUD").add_money(50)
 
 
 func lock():

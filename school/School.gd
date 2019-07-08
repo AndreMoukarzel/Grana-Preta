@@ -76,6 +76,7 @@ func complete_lesson(id):
 			return
 	
 	complete_subject(subject_id)
+	get_node("HUD").add_money(100)
 
 
 func complete_subject(subject_id):
@@ -94,12 +95,14 @@ func complete_subject(subject_id):
 			return
 	
 	complete_theme(theme_id)
+	get_node("HUD").add_money(1000)
 
 
 func complete_theme(theme_id):
 	print("theme ", theme_id, " completed")
 	Save.completed_themes.append(theme_id)
 	Save.save_game()
+	get_node("HUD").add_money(10000)
 
 
 func lock_questionnaire(id):

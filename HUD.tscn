@@ -41,4 +41,10 @@ text = "100.1k"
 align = 1
 valign = 1
 
+[node name="Tween" type="Tween" parent="."]
+
+[node name="TweenTimer" type="Timer" parent="."]
+wait_time = 1.7
+one_shot = true
+
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
