@@ -21,11 +21,13 @@ func setup_owned(ammount, bought_time, last_updated_time, id):
 
 
 func resume_min_investment():
-	$MinInvestment.text = str(ammount)
+	if ammount:
+		$MinInvestment.text = str(floor(ammount))
 
 
 func expand_min_investment():
-	$MinInvestment.text = str("Valor:\nG$ ", ammount)
+	if ammount:
+		$MinInvestment.text = str("Valor:\nG$ ", floor(ammount))
 
 
 func iterate(times_iterated):
