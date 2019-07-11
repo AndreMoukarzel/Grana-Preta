@@ -7,6 +7,7 @@ const DIST_Y = 250
 const DIST_X = 200 # Must be Theme's rect_size
 const LINE_C = Color(0, 0, 0)
 const LINE_W = 2.5
+const WINDOW_SIZE = Vector2(576, 1024)
 
 var tree_height = [[]]
 
@@ -45,7 +46,7 @@ func add_themes():
 func position_themes():
 	for height in tree_height:
 		var size = DIST_X * height.size()
-		var init_pos = -size/2 + OS.get_window_size().x/2
+		var init_pos = -size/2 + WINDOW_SIZE.x/2
 		var i = 0
 		for theme in height:
 			get_node(theme).rect_position.x = init_pos + i * DIST_X
@@ -83,8 +84,8 @@ func set_camera_limits():
 			max_x = max(max_x, pos.x)
 			min_x = min(min_x, pos.x)
 	
-	max_x = max(max_x + DIST_X, OS.get_window_size().x)
-	max_y = max(max_y + DIST_Y, OS.get_window_size().y)
+	max_x = max(max_x + DIST_X, WINDOW_SIZE.x)
+	max_y = max(max_y + DIST_Y, WINDOW_SIZE.y)
 	Cam.limit_bottom = max_y
 	Cam.limit_right = max_x
 	Cam.limit_left = min_x

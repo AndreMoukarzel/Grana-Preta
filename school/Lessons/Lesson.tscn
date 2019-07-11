@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://school/Lessons/Lesson.gd" type="Script" id=1]
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=3]
-[ext_resource path="res://school/Lessons/TouchZoomCamera.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -27,6 +26,7 @@ font_data = ExtResource( 2 )
 [node name="Lesson" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 
@@ -40,9 +40,6 @@ text = "Title"
 align = 1
 
 [node name="SwipeHandler" parent="." instance=ExtResource( 3 )]
-
-[node name="SwipingCamera" parent="SwipeHandler" index="0"]
-script = ExtResource( 4 )
 
 
 [editable path="SwipeHandler"]

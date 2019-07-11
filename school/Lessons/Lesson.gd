@@ -36,6 +36,7 @@ func add_title(title):
 func add_text(content, pos_y):
 	var l = Label.new()
 	
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	l.add_color_override("font_color", Color(0, 0, 0))
 	l.rect_position = Vector2(TEXT_OFFSET, pos_y)
 	l.text = content
@@ -50,6 +51,7 @@ func add_image(texture_name, pos_y):
 	var tr = TextureRect.new()
 	var tex_size = texture.get_size()
 	
+	tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tr.texture = texture
 	if tex_size.x > WINDOW_SIZE.x:
 		var scale = WINDOW_SIZE.x/tex_size.x
