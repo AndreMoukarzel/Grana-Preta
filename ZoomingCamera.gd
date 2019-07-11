@@ -39,7 +39,6 @@ func _input(event):
 			
 			distance = new_distance
 
-
 func zoom_out():
 	if self.zoom.x >= minimum_zoomout.x:
 		return
@@ -51,9 +50,3 @@ func zoom_in():
 		return
 	
 	self.zoom = Vector2(zoom.x - 0.007, zoom.y - 0.007)
-
-
-#func _on_ZoomTimer_timeout():
-#	zooming = false
-#	if get_parent().get_parent().has_node("Title"):
-#				get_parent().get_parent().get_node("Title").text = "not zooming"
