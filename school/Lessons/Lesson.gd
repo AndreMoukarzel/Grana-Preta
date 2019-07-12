@@ -50,15 +50,16 @@ func add_image(texture_name, pos_y):
 	var texture = load(str("res://school/Lessons/", texture_name))
 	var tr = TextureRect.new()
 	var tex_size = texture.get_size()
+	var image_max_size = WINDOW_SIZE.x - 20
 	
 	tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tr.texture = texture
-	if tex_size.x > WINDOW_SIZE.x:
-		var scale = WINDOW_SIZE.x/tex_size.x
+	if tex_size.x > image_max_size:
+		var scale = image_max_size/tex_size.x
 		tex_size *= scale
 		tr.expand = true
 		tr.rect_size = tex_size
-	tr.rect_position = Vector2((WINDOW_SIZE.x - tex_size.x)/2, pos_y)
+	tr.rect_position = Vector2((image_max_size - tex_size.x)/2 + 5, pos_y)
 	add_child(tr)
 	
 	return tex_size.y
