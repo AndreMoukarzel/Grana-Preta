@@ -16,8 +16,3 @@ drag_margin_v_enabled = false
 smoothing_enabled = true
 script = ExtResource( 2 )
 
-[node name="ZoomTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
-[connection signal="timeout" from="ZoomTimer" to="SwipingCamera" method="_on_ZoomTimer_timeout"]

@@ -1,5 +1,6 @@
 extends Camera2D
 
+export(bool) var zoomable = false
 export(Vector2) var maximum_zoomin = Vector2(0.5,0.5)
 var minimum_zoomout = Vector2(1, 1)
 var finger_positions = [0, 0, 0, 0, 0]
@@ -9,15 +10,15 @@ var zooming = false
 
 
 func _ready():
-	set_process_input(true)
+	if zoomable:
+		set_process_input(true)
+	else:
+		set_process_input(false)
 
 func _input(event):
 	if event is InputEventScreenTouch:
 		if event.index > 0:
 			zooming = true
-#			get_parent().get_node("ZoomTimer").start()
-			if get_parent().get_parent().has_node("Title"):
-				get_parent().get_parent().get_node("Title").text = "zooming"
 		else:
 			finger_positions = [0, 0, 0, 0, 0]
 			finger_speeds = [0, 0, 0, 0, 0]

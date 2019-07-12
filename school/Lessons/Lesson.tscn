@@ -41,5 +41,8 @@ align = 1
 
 [node name="SwipeHandler" parent="." instance=ExtResource( 3 )]
 
+[node name="SwipingCamera" parent="SwipeHandler" index="0"]
+zoomable = true
+
 
 [editable path="SwipeHandler"]
