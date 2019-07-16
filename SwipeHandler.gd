@@ -16,11 +16,16 @@ func _ready():
 
 func activate():
 	set_process_input(true)
-	$SwipingCamera.current = true
+	LocalCamera.current = true
+	if LocalCamera.zoomable:
+		LocalCamera.set_process_input(true)
 
 func deactivate():
 	set_process_input(false)
 	LocalCamera.set_position(Vector2(0, 0))
+	LocalCamera.set_zoom(Vector2(1, 1))
+	if LocalCamera.zoomable:
+		LocalCamera.set_process_input(false)
 	LocalCamera.call_deferred("set_current", false)
 
 func update_cam_minmax():

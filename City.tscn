@@ -53,7 +53,9 @@ expand = true
 position = Vector2( 684.955, 387 )
 limit_right = 1500
 limit_bottom = 1300
+zoomable = true
 maximum_zoomin = Vector2( 1, 1 )
+minimum_zoomout = Vector2( 1.4, 1.4 )
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1

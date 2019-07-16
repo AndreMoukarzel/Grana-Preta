@@ -85,19 +85,16 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Sua Carteira"
 
 [node name="InvestmentMenu" type="Control" parent="."]
-editor/display_folded = true
 margin_left = 576.0
 margin_right = 976.0
 margin_bottom = 600.0
 size_flags_vertical = 7
 
 [node name="BondDisplay" parent="InvestmentMenu" instance=ExtResource( 4 )]
-editor/display_folded = true
 margin_top = 20.0
 margin_bottom = 20.0
 
 [node name="PortfolioMenu" type="Control" parent="."]
-editor/display_folded = true
 margin_left = -576.0
 margin_right = -176.0
 margin_bottom = 600.0
@@ -114,3 +111,7 @@ size_flags_vertical = 7
 [editable path="InvestmentMenu/BondDisplay"]
 
 [editable path="InvestmentMenu/BondDisplay/SwipeHandler"]
+
+[editable path="PortfolioMenu/Portfolio"]
+
+[editable path="PortfolioMenu/Portfolio/SwipeHandler"]

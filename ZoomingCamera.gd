@@ -2,7 +2,7 @@ extends Camera2D
 
 export(bool) var zoomable = false
 export(Vector2) var maximum_zoomin = Vector2(0.5,0.5)
-var minimum_zoomout = Vector2(1, 1)
+export(Vector2) var minimum_zoomout = Vector2(1, 1)
 var finger_positions = [0, 0, 0, 0, 0]
 var finger_speeds = [0, 0, 0, 0, 0]
 var distance = -1
@@ -10,7 +10,7 @@ var zooming = false
 
 
 func _ready():
-	if zoomable:
+	if zoomable and self.current:
 		set_process_input(true)
 	else:
 		set_process_input(false)

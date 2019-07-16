@@ -113,8 +113,11 @@ script = ExtResource( 3 )
 [node name="SwipeHandler" parent="." instance=ExtResource( 4 )]
 
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
+current = false
 limit_right = 576
 limit_bottom = 1324
+zoomable = true
+maximum_zoomin = Vector2( 0.65, 0.65 )
 
 
 [editable path="SwipeHandler"]

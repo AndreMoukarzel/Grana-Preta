@@ -13,6 +13,7 @@ func _ready():
 	$InvestmentMenu.rect_position.x = 1.5 * SCREEN_SIZE.x
 	$PortfolioMenu.rect_position.x = -1.5 * SCREEN_SIZE.x
 	$InvestmentMenu/BondDisplay/SwipeHandler.deactivate()
+	$PortfolioMenu/Portfolio/SwipeHandler.deactivate()
 
 
 func tween_menus(middle_position):
@@ -33,6 +34,7 @@ func _on_Portfolio_pressed():
 	on_main_menu = false
 	$HUD.set_arrow_texture()
 	$PortfolioMenu/Portfolio.update_bought_bonds()
+	$PortfolioMenu/Portfolio/SwipeHandler.activate()
 	tween_menus(1.5 * SCREEN_SIZE.x)
 
 
@@ -46,3 +48,4 @@ func _on_HUD_on_Back_pressed():
 		tween_menus(0)
 		on_main_menu = true
 		$InvestmentMenu/BondDisplay/SwipeHandler.deactivate()
+		$PortfolioMenu/Portfolio/SwipeHandler.deactivate()
