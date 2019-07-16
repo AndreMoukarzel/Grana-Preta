@@ -68,7 +68,8 @@ func complete_lesson(id):
 	
 	print("lesson ", id, " completed")
 	Save.completed_lessons.append(id)
-	Save.save_game()
+	get_node("HUD").add_money(100)
+	
 	for lesson in all_lessons:
 		var lesson_id = lesson_db.get_lesson_id(lesson)
 		
@@ -76,7 +77,6 @@ func complete_lesson(id):
 			return
 	
 	complete_subject(subject_id)
-	get_node("HUD").add_money(100)
 
 
 func complete_subject(subject_id):
@@ -87,7 +87,8 @@ func complete_subject(subject_id):
 	
 	print("subject ", subject_id, " completed")
 	Save.completed_subjects.append(subject_id)
-	Save.save_game()
+	get_node("HUD").add_money(1000)
+	
 	for subject in all_subjects:
 		var sub_id = school_db.get_subject_id(subject)
 		
@@ -95,13 +96,11 @@ func complete_subject(subject_id):
 			return
 	
 	complete_theme(theme_id)
-	get_node("HUD").add_money(1000)
 
 
 func complete_theme(theme_id):
 	print("theme ", theme_id, " completed")
 	Save.completed_themes.append(theme_id)
-	Save.save_game()
 	get_node("HUD").add_money(10000)
 
 
