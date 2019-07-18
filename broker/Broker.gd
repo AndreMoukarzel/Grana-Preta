@@ -20,6 +20,7 @@ func tween_menus(middle_position):
 	$Tween.interpolate_property($Menu, "rect_position:x", null, middle_position, TWN_TIME, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($InvestmentMenu, "rect_position:x", null, middle_position + 1.5 * SCREEN_SIZE.x, TWN_TIME, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($PortfolioMenu, "rect_position:x", null, middle_position - 1.5 * SCREEN_SIZE.x, TWN_TIME, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Background/TextureRect, "rect_position:x", null, middle_position/2 - 576, TWN_TIME, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	$Tween.start()
 
 

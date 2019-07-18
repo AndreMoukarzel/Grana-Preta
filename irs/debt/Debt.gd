@@ -29,17 +29,6 @@ func setup(source_name : String, buy_date, sell_date, ammount_sold : int, profit
 	$AmmountSold.text = str("G$", ammount_sold)
 	$Profit.text = str("G$", profit)
 	#taxes
-	print(rect_size)
-	print(rect_scale)
-	print(margin_bottom)
-
-func resume_info():
-	pass
-
-
-func expand_info():
-	pass
-
 
 func calculate_value(profit, taxes):
 	var total_taxes = (taxes[0] + taxes[1] + taxes[2])/100.0
@@ -49,6 +38,52 @@ func calculate_value(profit, taxes):
 func parse_datetime(datetime):
 	var year_last_two_digits = str(datetime.year).right(-2)
 	return str(datetime.day, "/", datetime.month, "/", year_last_two_digits)
+
+
+func resume_info():
+	pass
+
+
+func expand_info():
+	pass
+
+#func close():
+#	resume_info()
+#	$MinTime.hide()
+#	$Taxes.hide()
+#	$Tween.interpolate_property(self, "rect_size:y", null, 70, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Name, "rect_position:x", null, 10, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Rentability, "rect_position", null, Vector2(110, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	if time_left[0] > 0 and time_left[1] > 0:
+#		$Tween.interpolate_property($Expiration, "rect_position", null, Vector2(260, -45), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	else:
+#		$Tween.interpolate_property($Expiration, "rect_position", null, Vector2(260, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($MinInvestment, "rect_position", null, Vector2(320, -20), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Apply, "rect_position", null, Vector2(425, 5), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Apply, "rect_size", null, Vector2(147, 64), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.start()
+#
+#	is_open = false
+#	emit_signal("closed", self)
+#
+#
+#func open():
+#	expand_info()
+#	$MinTime.show()
+#	$Taxes.show()
+#	$Tween.interpolate_property(self, "rect_size:y", null, 360, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Name, "rect_position:x", null, (rect_size.x - $Name.rect_size.x)/2, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Rentability, "rect_position", null, Vector2(10, 50), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Expiration, "rect_position", null, Vector2(300, 50), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($MinInvestment, "rect_position", null, Vector2(10, 130), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Apply, "rect_position", null, Vector2((rect_size.x - 350)/2, 290), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Apply, "rect_size:x", null, 350, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($MinTime, "modulate", Color(1, 1, 1, 0), Color(1, 1, 1, 1), 2*TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($Taxes, "modulate", Color(1, 1, 1, 0), Color(1, 1, 1, 1), 2*TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+#	$Tween.start()
+#
+#	is_open = true
+#	emit_signal("opened", self)
 
 func _on_Pay_pressed():
 	var HUD = get_tree().get_root().get_node("IRS/HUD")

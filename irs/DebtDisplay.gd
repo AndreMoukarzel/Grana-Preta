@@ -5,13 +5,11 @@ const DEBT_SCN = preload("res://irs/debt/Debt.tscn")
 var total_height = 120
 
 func _ready():
-	print('start')
-	print(len(Save.debts))
 	for d in Save.debts:
 		var Debt = add_debt()
 		
 		Debt.setup(d.source_name, d.buy_date, d.sell_date, d.ammount_sold, d.profit, d.taxes)
-		total_height += 150
+		total_height += 135
 
 
 func add_debt():
