@@ -5,6 +5,7 @@
 
 [node name="SwipeHandler" type="Node"]
 script = ExtResource( 1 )
+speed_divisor = 100.0
 
 [node name="SwipingCamera" type="Camera2D" parent="."]
 current = true

@@ -2,6 +2,7 @@ extends Node
 
 onready var LocalCamera = $SwipingCamera
 
+export(float, 0.0, 100.0) var speed_divisor = 40.0
 var swiping = false
 var max_cam_pos = Vector2()
 var min_cam_pos = Vector2()
@@ -54,7 +55,7 @@ func _calculate_swipe(swipe_speed):
 func swipe(direction, speed):
 	if speed < 80:
 		return
-	var dist = direction * speed/40.0 * LocalCamera.zoom.x
+	var dist = direction * speed/speed_divisor * LocalCamera.zoom.x
 	move_camera(dist)
 
 

@@ -4,7 +4,7 @@ signal trade_confirmed(ammount)
 
 var ammount = 1
 var min_ammount = 1
-var max_ammount # if max_ammount is not null, we know the trade is a sell
+var max_ammount = null # if max_ammount is not null, we know the trade is a sell
 var multiplier = 1
 var showing_max = false
 var Swipe = null
@@ -15,7 +15,8 @@ func setup(Swipe, min_ammount, max_ammount = null):
 	if Swipe:
 		Swipe.deactivate()
 	self.min_ammount = min_ammount
-	self.max_ammount = max_ammount
+	if max_ammount:
+		self.max_ammount = floor(max_ammount)
 	ammount = min_ammount
 	update_ammount()
 

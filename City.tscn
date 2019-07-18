@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://City.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://mine/Mine.png" type="Texture" id=5]
 [ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=6]
 [ext_resource path="res://CityTileset.tres" type="TileSet" id=7]
+[ext_resource path="res://Coin.png" type="Texture" id=8]
 
 [node name="City" type="Control"]
 margin_right = 40.0
@@ -48,6 +49,7 @@ texture_normal = ExtResource( 5 )
 expand = true
 
 [node name="SwipeHandler" parent="." instance=ExtResource( 6 )]
+speed_divisor = 40.0
 
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
 position = Vector2( 684.955, 387 )
@@ -64,9 +66,17 @@ cell_size = Vector2( 255, 255 )
 format = 1
 tile_data = PoolIntArray( 0, 7, 0, 1, 4, 0, 2, 0, 0, 3, 3, 0, 4, 0, 0, 5, 2, 0, 6, 0, 0, 65536, 7, 0, 65537, 1, 0, 65538, 7, 0, 65539, 1, 0, 65540, 7, 0, 65541, 1, 0, 65542, 7, 0, 131072, 0, 0, 131073, 2, 0, 131074, 0, 0, 131075, 2, 0, 131076, 0, 0, 131077, 2, 0, 131078, 7, 0, 196608, 7, 0, 196609, 1, 0, 196610, 7, 0, 196611, 1, 0, 196612, 7, 0, 196613, 1, 0, 196614, 7, 0, 262144, 7, 0, 262145, 4, 0, 262146, 0, 0, 262147, 2, 0, 262148, 0, 0, 262149, 6, 0, 262150, 0, 0, 327680, 0, 0, 327681, 5, 0, 327682, 7, 0, 327683, 1, 0, 327684, 7, 0, 327685, 7, 0, 327686, 7, 0 )
 
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 1051.15
+margin_top = 789.314
+margin_right = 1251.15
+margin_bottom = 989.314
+texture_normal = ExtResource( 8 )
+
 [connection signal="pressed" from="House" to="." method="_on_House_pressed"]
 [connection signal="pressed" from="School" to="." method="_on_School_pressed"]
 [connection signal="pressed" from="Broker" to="." method="_on_Broker_pressed"]
 [connection signal="pressed" from="Mine" to="." method="_on_Mine_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
 
 [editable path="SwipeHandler"]

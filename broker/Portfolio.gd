@@ -31,7 +31,7 @@ func update_bought_bonds():
 		var Bond = add_bond($Sorter/Bonds, i)
 		
 		Bond.setup(b.name, b.display_rentability, b.rentability_type, b.expiration, b.min_investment, b.min_time, b.taxes, b.creation_time, b.index_value)
-		Bond.setup_owned(b.ammount, b.bought_time, b.last_updated_time, b.id)
+		Bond.setup_owned(b.ammount, b.bought_time, b.last_updated_time, b.profit, b.id)
 		if iteration_number > 0:
 			print("iterating, ", iteration_number, " times")
 			Bond.iterate(iteration_number)

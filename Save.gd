@@ -217,16 +217,19 @@ func save_available_bond(Bond):
 func save_bought_bond(Bond, ammount, first_buy = true):
 	var bt = OS.get_datetime()
 	var lut = OS.get_datetime()
+	var profit = 0
 	
 	if not first_buy: # The bond has been bought before and is being re-saved
 		bt = Bond.bought_time
 		lut = Bond.last_updated_time
+		profit = Bond.profit
 
 	var bond_json = {
 		"id" : bought_bonds_id,
 		"ammount" : ammount,
 		"bought_time" : bt,
 		"last_updated_time" : lut,
+		"profit" : profit,
 		"name" : Bond.bond_name,
 		"display_rentability" : Bond.display_rentability,
 		"rentability_type" : Bond.rentability_type,
@@ -252,11 +255,14 @@ func delete_bought_bond(id):
 	save_game()
 
 
-func save_debt(Bond, profit : int):
+func save_debt(Bond, ammount_sold : int, profit : int):
 	var debt_json = {
-		"source_name" : Bond.name,
+		"source_name" : Bond.bond_name,
 		"buy_date" : Bond.bought_time,
 		"sell_date" : OS.get_datetime(),
+		"ammount_sold" : ammount_sold,
 		"profit" : profit,
 		"taxes" : Bond.taxes
 	}
+	debts.append(debt_json)
+	save_game()

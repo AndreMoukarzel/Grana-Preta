@@ -111,6 +111,7 @@ margin_bottom = 150.0
 script = ExtResource( 3 )
 
 [node name="SwipeHandler" parent="." instance=ExtResource( 4 )]
+speed_divisor = 40.0
 
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
 current = false
