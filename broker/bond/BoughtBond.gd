@@ -4,14 +4,16 @@ var id
 var ammount
 var bought_time
 var last_updated_time # Used to define iteration number
-var profit # How much was profited so far
+var profit = 1.0 # Accumulated rented so far, in percentage
+var initial_ammount # Starting ammount of money
 
-func setup_owned(ammount, bought_time, last_updated_time, profit, id):
+func setup_owned(ammount, bought_time, last_updated_time, profit, initial_ammount, id):
 	self.id = id
 	self.ammount = ammount
 	self.bought_time = bought_time
 	self.last_updated_time = last_updated_time
 	self.profit = profit
+	self.initial_ammount = initial_ammount
 	$MinInvestment.text = str(int(ammount))
 	if min_time[0] > 0 or min_time[1] > 0:
 		$Apply.disabled = true
@@ -19,7 +21,7 @@ func setup_owned(ammount, bought_time, last_updated_time, profit, id):
 	#self.last_updated_time.hour += 4
 	#$Apply.disabled = false
 	#iterate(4)
-	print('rentability = ', rentability)
+	#print('rentability = ', rentability)
 	# TESTING #
 	var time_diff = Save.get_time_difference(creation_time, OS.get_datetime())
 	if time_diff[0] > 0 and bond_name != "LCI" and bond_name != "LCA": # Regressive taxes
@@ -38,21 +40,24 @@ func expand_min_investment():
 
 
 func iterate(times_iterated):
-	var init_value = ammount
 	for i in range(times_iterated): 
 		last_updated_time = OS.get_datetime()
 		if rentability_type == "Pre-fixada": # Prefixated interest rentability
-			ammount = (ammount * rentability)
+			ammount = ammount * rentability
+			profit *= rentability
 		elif rentability_type == "Pos-fixada": # Posfixated interest rentability
 			var name_split = bond_name.split("-")[0]
 		
 			if name_split == "S":
 				ammount = (ammount * rentability * Selic.value)
+				profit *= rentability * Selic.value
 			elif name_split == "I":
 				ammount = (ammount * rentability * Inflation.value)
+				profit *= rentability * Inflation.value
 		elif rentability_type == "Prov":
 			rentability += (randf() - randf()) * 20
 			ammount = ammount * rentability
+			profit *= rentability
 		
 		# Decrease time left to be able to sell
 		min_time[1] -= 4
@@ -63,8 +68,6 @@ func iterate(times_iterated):
 		$Apply.disabled = false
 		$MinTime.hide()
 	Save.delete_bought_bond(id)
-	var final_value = ammount
-	profit += final_value - init_value
 	Save.save_bought_bond(self, self.ammount)
 
 
@@ -76,11 +79,15 @@ func get_iterated_times():
 	return int(time_diff/4)
 
 
-func get_profit(ammount_sold):
-	var prft = min(self.profit, ammount_sold) # if ammount_sold is smaller than profit, that that is the current profit
-	self.profit -= prft # takes away acumulated profit from sold ammount
+func get_proportional_profit(ammount_sold):
+	var total_ammount = profit * initial_ammount
 	
-	return int(prft)
+	if int(total_ammount) <= initial_ammount:
+		return 0
+	
+	var proportion_sold = float(ammount_sold)/total_ammount
+	
+	return int((profit - 1.0) * proportion_sold * ammount_sold)
 
 
 func _on_Apply_pressed():
@@ -99,10 +106,9 @@ func _on_trade_confirmed(ammount):
 	
 	if ammount > 0:
 		HUD.add_money(int(ammount))
-		var profit = get_profit(ammount)
-		if profit > 0: # Only create debt in profit
-			print('create debt ', profit)
-			Save.save_debt(self, int(ammount), profit)
+		var pp = get_proportional_profit(ammount)
+		if pp > 0: # Only create debt in profit
+			Save.save_debt(self, int(ammount), pp)
 		self.ammount -= ammount
 		Save.delete_bought_bond(id)
 		if self.ammount > 0:

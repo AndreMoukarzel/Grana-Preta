@@ -9,7 +9,6 @@ var on_main_menu = true
 func _ready():
 	$Menu.rect_size = self.rect_size * 0.8
 	$Menu.rect_position.y = self.rect_size.y * 0.2
-	$Turtle.rect_position.x = self.rect_size.x * 0.8
 	$InvestmentMenu.rect_position.x = 1.5 * SCREEN_SIZE.x
 	$PortfolioMenu.rect_position.x = -1.5 * SCREEN_SIZE.x
 	$InvestmentMenu/BondDisplay/SwipeHandler.deactivate()

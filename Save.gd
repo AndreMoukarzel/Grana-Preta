@@ -217,12 +217,14 @@ func save_available_bond(Bond):
 func save_bought_bond(Bond, ammount, first_buy = true):
 	var bt = OS.get_datetime()
 	var lut = OS.get_datetime()
-	var profit = 0
+	var profit = 1.0
+	var ia = ammount
 	
 	if not first_buy: # The bond has been bought before and is being re-saved
 		bt = Bond.bought_time
 		lut = Bond.last_updated_time
 		profit = Bond.profit
+		ia = Bond.initial_ammount
 
 	var bond_json = {
 		"id" : bought_bonds_id,
@@ -230,6 +232,7 @@ func save_bought_bond(Bond, ammount, first_buy = true):
 		"bought_time" : bt,
 		"last_updated_time" : lut,
 		"profit" : profit,
+		"initial_ammount": ia,
 		"name" : Bond.bond_name,
 		"display_rentability" : Bond.display_rentability,
 		"rentability_type" : Bond.rentability_type,
