@@ -29,8 +29,8 @@ func _on_Mine_pressed():
 		print("Mine scene couldn't be loaded")
 
 
-func _on_TextureButton_pressed():
+func _on_IRS_pressed():
 	print("Enter IRS")
 	var e = get_tree().change_scene("res://irs/IRS.tscn")
 	if e != 0:
-		print("Mine scene couldn't be loaded")
+		print("IRS scene couldn't be loaded")
