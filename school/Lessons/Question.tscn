@@ -24,11 +24,16 @@ use_filter = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.937255, 0.905882, 0.866667, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+bg_color = Color( 0.862745, 0.862745, 0.862745, 0.392157 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.105882, 0.690196, 0, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="DynamicFont" id=4]
 size = 100
@@ -42,7 +47,7 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 3 )
 
-[node name="Question" instance=ExtResource( 1 )]
+[node name="Question" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="SwipeHandler" parent="." index="1"]
@@ -87,7 +92,6 @@ editor/display_folded = true
 margin_left = 100.0
 margin_top = -400.0
 margin_right = 410.0
-margin_bottom = -100.0
 custom_styles/panel = SubResource( 3 )
 
 [node name="Text" type="Label" parent="CanvasLayer/ResultPanel" index="0"]
@@ -117,6 +121,17 @@ valign = 1
 
 [node name="Tween" type="Tween" parent="CanvasLayer/ResultPanel" index="2"]
 
+[node name="Leave" type="Button" parent="CanvasLayer/ResultPanel" index="3"]
+margin_left = 87.0
+margin_top = 300.0
+margin_right = 227.0
+margin_bottom = 380.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "LEAVE"
+
 [node name="ConfirmationPanel" parent="CanvasLayer" index="1" instance=ExtResource( 4 )]
 visible = false
 margin_top = 312.0
@@ -124,5 +139,6 @@ margin_bottom = -312.0
 
 [connection signal="pressed" from="Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="CanvasLayer/ResultPanel/Leave" to="." method="_on_Leave_pressed"]
 
 [editable path="SwipeHandler"]

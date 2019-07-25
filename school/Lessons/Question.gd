@@ -173,6 +173,8 @@ func display_results():
 			wrong_answers += 1
 	
 	if wrong_answers == 0:
+		var panel = $CanvasLayer/ResultPanel.get("custom_styles/panel")
+		panel.border_color = Color(.1, .7, .0)
 		disable_all()
 		$CanvasLayer/ResultPanel.rect_size.y = 250
 		tween_result()
@@ -182,7 +184,9 @@ func display_results():
 	else:
 		disable_all()
 		$CanvasLayer/ResultPanel/Text.text = "FAILED"
-		$CanvasLayer/ResultPanel/Text.set("custom_colors/font_color",Color(.5, .08, .08))
+		$CanvasLayer/ResultPanel/Text.set("custom_colors/font_color", Color(.5, .08, .08))
+		var panel = $CanvasLayer/ResultPanel.get("custom_styles/panel")
+		panel.border_color = Color(.5, .08, .08)
 		$CanvasLayer/ResultPanel/Info.show()
 		if wrong_answers == 1:
 			$CanvasLayer/ResultPanel/Info.text = str(wrong_answers, " incorrect answer") # singular
@@ -301,3 +305,9 @@ func Alternative_selected(Alternative):
 		Alt.get_node("Panel").set_modulate(Color(1, 1, 1))
 	Alternative.get_node("Panel").set_modulate(Color(.95, .95, .6))
 	selected_answers[current_question] = alt_num
+
+
+func _on_Leave_pressed():
+	var School = get_tree().get_root().get_node("School")
+	
+	School.add_subject_tree(School.theme_entered)
