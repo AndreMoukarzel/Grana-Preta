@@ -176,7 +176,6 @@ func display_results():
 		var panel = $CanvasLayer/ResultPanel.get("custom_styles/panel")
 		panel.border_color = Color(.1, .7, .0)
 		disable_all()
-		$CanvasLayer/ResultPanel.rect_size.y = 250
 		tween_result()
 		
 		if not Save.completed_lessons.has(id): # if not completed, complete
