@@ -38,11 +38,15 @@ func setup(name, size):
 		if can_be_unlocked(locked_time, lock_duration):
 			unlock()
 		else:
-			var remaining_time = get_remaining_locktime(locked_time, lock_duration)
-			
 			$Lock.show()
 			self.disabled = true
-			self.text = str("Time remaning: ", remaining_time)
+			
+			var remaining_time = get_remaining_locktime(locked_time, lock_duration)
+			var remain_string = ""
+			for r in remaining_time:
+				remain_string += str(":", r)
+			remain_string.erase(0, 1) # removes first ":"
+			self.text = str("Time remaning: ", remain_string)
 			$Background.set_modulate(RED)
 			$Timer.start()
 
