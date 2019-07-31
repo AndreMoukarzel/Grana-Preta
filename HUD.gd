@@ -12,6 +12,19 @@ func set_arrow_texture():
 func set_city_texture():
 	$Back.texture_normal = load("res://city_icon.png")
 
+func display_money_changed(ammount, color = Color(.1, 1, .1)):
+	var Twn = $TweenMoneyChanged
+	var transparent = color
+	transparent.a = 0
+	
+	$Money/Change.text = str(ammount)
+	$Money/Change.rect_position.y = 50
+	$Money/Change.modulate = color
+	Twn.stop_all()
+	Twn.interpolate_property($Money/Change, 'rect_position:y', 50, 0, .5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 1.0)
+	Twn.interpolate_property($Money/Change, 'modulate', color, transparent, .5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 1.0)
+	Twn.start()
+
 func add_money(value : int, pos = Vector2(256, 512)):
 	Save.money += value
 	Save.save_game()
@@ -33,6 +46,7 @@ func add_money(value : int, pos = Vector2(256, 512)):
 	add_child(timer)
 	timer.start()
 	yield(timer, "timeout")
+	display_money_changed(value)
 	for coin in coins:
 		coin.queue_free()
 	timer.queue_free()
@@ -41,6 +55,7 @@ func add_money(value : int, pos = Vector2(256, 512)):
 
 func subtract_money(value : int):
 	Save.money -= value
+	display_money_changed(value, Color(1, .1, .1))
 	Save.save_game()
 	update_money_display()
 

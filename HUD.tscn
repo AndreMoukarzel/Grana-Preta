@@ -41,7 +41,19 @@ text = "100.1k"
 align = 1
 valign = 1
 
+[node name="Change" type="Label" parent="Money"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 50.0
+margin_right = 128.0
+margin_bottom = 150.0
+custom_fonts/font = SubResource( 1 )
+text = "100.1k"
+align = 1
+valign = 1
+
 [node name="Tween" type="Tween" parent="."]
+
+[node name="TweenMoneyChanged" type="Tween" parent="."]
 
 [node name="TweenTimer" type="Timer" parent="."]
 wait_time = 1.7
