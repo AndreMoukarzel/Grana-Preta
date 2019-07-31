@@ -58,7 +58,7 @@ func resume_info():
 	if rentability_type == "Pre-fixada":
 		$Rentability.text = str("PRE", stepify(display_rentability, 0.1))
 	elif rentability_type == "Pos-fixada":
-		$Rentability.text = str("POS", stepify(display_rentability, 0.1))
+		$Rentability.text = str("POS", stepify(display_rentability, 0.01))
 		$Name.text = bond_name
 	elif rentability_type == "Prov":
 		$Rentability.text = str("PR", stepify(display_rentability, 0.1))
