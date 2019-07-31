@@ -1,18 +1,25 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://City.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://school/School.png" type="Texture" id=3]
-[ext_resource path="res://broker/Broker.png" type="Texture" id=4]
-[ext_resource path="res://mine/Mine.png" type="Texture" id=5]
-[ext_resource path="res://irs/IRS.png" type="Texture" id=6]
-[ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=7]
-[ext_resource path="res://CityTileset.tres" type="TileSet" id=8]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://school/School.png" type="Texture" id=4]
+[ext_resource path="res://broker/Broker.png" type="Texture" id=5]
+[ext_resource path="res://mine/Mine.png" type="Texture" id=6]
+[ext_resource path="res://irs/IRS.png" type="Texture" id=7]
+[ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=8]
+[ext_resource path="res://CityTileset.tres" type="TileSet" id=9]
 
 [node name="City" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 1 )
+
+[node name="HUD" parent="." instance=ExtResource( 2 )]
+editor/display_folded = true
+
+[node name="Back" parent="HUD" index="0"]
+visible = false
 
 [node name="House" type="TextureButton" parent="."]
 visible = false
@@ -21,7 +28,7 @@ margin_left = 59.7915
 margin_top = 306.132
 margin_right = 179.792
 margin_bottom = 426.132
-texture_normal = ExtResource( 2 )
+texture_normal = ExtResource( 3 )
 expand = true
 
 [node name="School" type="TextureButton" parent="."]
@@ -29,7 +36,7 @@ margin_left = 538.279
 margin_top = 285.218
 margin_right = 738.279
 margin_bottom = 485.218
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 4 )
 expand = true
 
 [node name="Broker" type="TextureButton" parent="."]
@@ -37,7 +44,7 @@ margin_left = 542.663
 margin_top = 789.935
 margin_right = 742.663
 margin_bottom = 989.935
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 expand = true
 
 [node name="Mine" type="TextureButton" parent="."]
@@ -45,7 +52,7 @@ margin_left = 1053.88
 margin_top = 283.262
 margin_right = 1253.88
 margin_bottom = 483.262
-texture_normal = ExtResource( 5 )
+texture_normal = ExtResource( 6 )
 expand = true
 
 [node name="IRS" type="TextureButton" parent="."]
@@ -53,9 +60,9 @@ margin_left = 1051.15
 margin_top = 789.314
 margin_right = 1251.15
 margin_bottom = 989.314
-texture_normal = ExtResource( 6 )
+texture_normal = ExtResource( 7 )
 
-[node name="SwipeHandler" parent="." instance=ExtResource( 7 )]
+[node name="SwipeHandler" parent="." instance=ExtResource( 8 )]
 speed_divisor = 40.0
 
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
@@ -68,7 +75,7 @@ minimum_zoomout = Vector2( 1.4, 1.4 )
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
-tile_set = ExtResource( 8 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 255, 255 )
 format = 1
 tile_data = PoolIntArray( 0, 7, 0, 1, 4, 0, 2, 0, 0, 3, 3, 0, 4, 0, 0, 5, 2, 0, 6, 0, 0, 65536, 7, 0, 65537, 1, 0, 65538, 7, 0, 65539, 1, 0, 65540, 7, 0, 65541, 1, 0, 65542, 7, 0, 131072, 0, 0, 131073, 2, 0, 131074, 0, 0, 131075, 2, 0, 131076, 0, 0, 131077, 2, 0, 131078, 7, 0, 196608, 7, 0, 196609, 1, 0, 196610, 7, 0, 196611, 1, 0, 196612, 7, 0, 196613, 1, 0, 196614, 7, 0, 262144, 7, 0, 262145, 4, 0, 262146, 0, 0, 262147, 2, 0, 262148, 0, 0, 262149, 6, 0, 262150, 0, 0, 327680, 0, 0, 327681, 5, 0, 327682, 7, 0, 327683, 1, 0, 327684, 7, 0, 327685, 7, 0, 327686, 7, 0 )
@@ -78,5 +85,7 @@ tile_data = PoolIntArray( 0, 7, 0, 1, 4, 0, 2, 0, 0, 3, 3, 0, 4, 0, 0, 5, 2, 0, 
 [connection signal="pressed" from="Broker" to="." method="_on_Broker_pressed"]
 [connection signal="pressed" from="Mine" to="." method="_on_Mine_pressed"]
 [connection signal="pressed" from="IRS" to="." method="_on_IRS_pressed"]
+
+[editable path="HUD"]
 
 [editable path="SwipeHandler"]
