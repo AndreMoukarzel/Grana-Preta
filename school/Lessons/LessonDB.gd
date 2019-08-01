@@ -14,7 +14,7 @@ var lessons = [
 		CONTENT : ["\nParabéns, você acabou de completar sua primeira lição!\n\nIsso mesmo, ler uma lição é o suficiente para completá-la.",
 					"\nPor concluir uma Lição (ou Questionário) pela primeira vez você\nrecebeu um prêmio de G$ 100!",
 					"\nLições e Questionários são parte de Assuntos, sobre os quais vamos\nfalar mais na próxima lição.\n",
-					"Lições e Questionários/1.png",
+					"Licoes e Questionarios/1.png",
 					"\nA imagem acima deve ser parecida com o Assunto que você acabou\nde entrar.\n\nLições VERDES foram concluídas.\nLições CINZAS ainda não foram concluídas.\nLições AZUIS são, na verdade, Questionários.",
 					"\nQuestionários são mais complicados de completar que Lições\ncomuns. Ao entrar em um Questionário, SAIR ANTES DE CONCLUI-LO\nRESULTARÁ EM REPROVAÇÃO.",
 					"\nVocê pode ser reprovado em um Questionário por desistência ou\npor errar as respostas, mas ambos farão com que ele fique\n travado por algum tempo, então se esforce para acertar tudo de\n primeira!"
