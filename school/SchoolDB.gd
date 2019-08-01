@@ -11,7 +11,7 @@ var themes = [
 	{
 		NAME : "A Escola",
 		ICON : "res://school/school_icon.png",
-		INFO : ["Teste"],
+		INFO : ["Onde estou?"],
 		DEPEN : [],
 		HEIGHT : 0
 	}
@@ -40,9 +40,9 @@ var themes = [
 
 var subjects = [
 	{
-		NAME : "Teste",
-		ICON : null,
-		INFO : ["Basic Stuff", "Advanced Stuff", "Important Questions"],
+		NAME : "Onde estou?",
+		ICON : 'res://school/Subjects/pencil.png',
+		INFO : ["Lições e Questionários", "Assuntos e Temas", "O Primeiro Teste"],
 	},
 ]
 
