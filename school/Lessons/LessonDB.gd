@@ -16,8 +16,8 @@ var lessons = [
 					"\nLições e Questionários são parte de Assuntos, sobre os quais vamos\nfalar mais na próxima lição.\n",
 					"Licoes e Questionarios/1.png",
 					"\nA imagem acima deve ser parecida com o Assunto que você acabou\nde entrar.\n\nLições VERDES foram concluídas.\nLições CINZAS ainda não foram concluídas.\nLições AZUIS são, na verdade, Questionários.",
-					"\nQuestionários são mais complicados de completar que Lições\ncomuns. Ao entrar em um Questionário, SAIR ANTES DE CONCLUI-LO\nRESULTARÁ EM REPROVAÇÃO.",
-					"\nVocê pode ser reprovado em um Questionário por desistência ou\npor errar as respostas, mas ambos farão com que ele fique\n travado por algum tempo, então se esforce para acertar tudo de\n primeira!"
+					"\nQuestionários são mais complicados de completar que Lições\ncomuns. Ao entrar em um Questionário, responder as questões\ncorretamente para ser aprovado. Errar perguntas ou sair antes de\nterminar fará com que o Questionário fique bloqueado por um\ntempo.",
+					"\nEntão se esforce para acertar tudo de primeira!"
 				  ]
 	},
 	{
