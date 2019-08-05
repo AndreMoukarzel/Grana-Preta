@@ -12,9 +12,9 @@ var lessons = [
 		NAME : "Lições e Questionários",
 		TYPE : "info",
 		CONTENT : ["\nParabéns, você acabou de completar sua primeira lição!\n\nIsso mesmo, ler uma lição é o suficiente para completá-la.",
-					"\nPor concluir uma Lição (ou Questionário) pela primeira vez você\nrecebeu um prêmio de G$ 100!",
+					"\nAo concluir uma Lição (ou Questionário) pela primeira vez você\nreceberá um prêmio de G$ 100!",
 					"\nLições e Questionários são parte de Assuntos, sobre os quais vamos\nfalar mais na próxima lição.\n",
-					"Licoes e Questionarios/1.png",
+					"Images/1.png",
 					"\nA imagem acima deve ser parecida com o Assunto que você acabou\nde entrar.\n\nLições VERDES foram concluídas.\nLições CINZAS ainda não foram concluídas.\nLições AZUIS são, na verdade, Questionários.",
 					"\nQuestionários são mais complicados de completar que Lições\ncomuns. Ao entrar em um Questionário, responder as questões\ncorretamente para ser aprovado. Errar perguntas ou sair antes de\nterminar fará com que o Questionário fique bloqueado por um\ntempo.",
 					"\nEntão se esforce para acertar tudo de primeira!"
@@ -23,15 +23,21 @@ var lessons = [
 	{
 		NAME : "Assuntos e Temas",
 		TYPE : "info",
-		CONTENT : ["Hihi"]
+		CONTENT : ["\n\nAo completar todas as Lições de um Assunto, você terá concluído\no Assunto e receberá um prêmio de G$ 1000.",
+					"\nAo completar todos os Assuntos de um Tema, você terá concluído\num Tema e receberá um prêmio de G$ 10000.\n",
+					"Images/2.png",
+					"\nCompletar um Assunto ou Tema envolve mais trabalho do que\ncompletar uma Lição, e por isso seus prêmios são maiores.",
+					"\nAo completar o Questionário a seguir, você terá concluído o Assunto\n'Onde Estou?', e sendo este o único assunto do Tema 'A Escola',\nvocê completará o Tema também!",
+					"\nBoa sorte!"]
 	},
 	{
 		NAME : "O Primeiro Teste",
 		TYPE : "question",
 		CONTENT : [
-				["Do you like cheese?"], [["Chesse is spoiled milk.", "And I hate it."], ["Yes"], ["No"]], 
-#				["Is Jesus your lord and savior?"], [["I'm a JEW"], ["What?"], ["I'm alergic to mexicans"], ["Yea he actually is."]],
-#				["Did this questionnaire work?"], [["FUCK YEA!"], ["acoes_codigos_001.png"]]
+				["Qual o prêmio por concluir um Assunto?"], [["G$ 1000"], ["G$ 100"], ["G$ 10000"]],
+				["Qual o prêmio por concluir um Tema?"], [["G$ 10000"], ["G$ 100"], ["G$ 1000"]], 
+				["A seguinte imagem a seguir representa:", "/../school_icon.png"], [["Tema"], ["Assunto"], ["Lição"], ["Questionário"]],
+				["Como se conclui um Assunto?"], [["Completar todas as Lições do Assunto"], ["Completar o Questionário do Assunto"], ["Fazer uma dancinha"]]
 				],
 		LOCKTIME : [0, 0, 1]
 	}

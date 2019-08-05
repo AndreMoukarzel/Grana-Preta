@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1.png-4b31d4c7f580a3da002a028da2a301fb.stex"
+path="res://.import/2.png-22d49005ff5059909065507c6f3de51e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://school/Lessons/Licoes e Questionarios/1.png"
-dest_files=[ "res://.import/1.png-4b31d4c7f580a3da002a028da2a301fb.stex" ]
+source_file="res://school/Lessons/Images/2.png"
+dest_files=[ "res://.import/2.png-22d49005ff5059909065507c6f3de51e.stex" ]
 
 [params]
 
