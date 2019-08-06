@@ -103,11 +103,10 @@ text = "11/11"
 align = 2
 
 [node name="Strikes" type="Control" parent="."]
-visible = false
-margin_left = 270.0
-margin_top = 5.0
-margin_right = 310.0
-margin_bottom = 45.0
+margin_left = 5.0
+margin_top = 60.0
+margin_right = 45.0
+margin_bottom = 100.0
 
 [node name="AmmountSold" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )

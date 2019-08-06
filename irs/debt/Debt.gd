@@ -22,7 +22,8 @@ func setup(source_name : String, buy_date, sell_date, ammount_sold : int, profit
 	self.taxes = taxes
 
 	$SourceName.text = source_name
-	# calculate strikes ( difference between sell_date and current time)
+	self.strikes = Save.get_time_difference(sell_date, OS.get_date())[0]
+	# Strike display
 	self.value = calculate_value(profit, taxes)
 	$Value.text = str("G$", self.value)
 	self.buy_date = buy_date
