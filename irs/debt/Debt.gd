@@ -103,6 +103,7 @@ func _on_Pay_pressed():
 	
 	if Save.money >= value:
 		HUD.subtract_money(value)
+		Save.delete_debt(self)
 		queue_free()
 
 

@@ -15,5 +15,7 @@ speed_divisor = 40.0
 limit_right = 576
 limit_bottom = 1400
 
+[node name="Tween" type="Tween" parent="."]
+
 
 [editable path="SwipeHandler"]

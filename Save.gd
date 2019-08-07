@@ -51,6 +51,7 @@ func load_game():
 		Selic.create(10.0, 3.0, 6.0, 15.0)
 		Inflation.create(3.0, 1.0, -0.5, 10.0)
 		
+#warning-ignore:unused_variable
 		for i in range(100):
 			Selic.iterate()
 			Inflation.iterate()
@@ -96,6 +97,7 @@ func load_game():
 	
 	var days = get_days_to_today(last_index_iteration_date)
 	if days > 0:
+#warning-ignore:unused_variable
 		for i in range(days):
 			Selic.iterate()
 			Inflation.iterate()
@@ -121,6 +123,7 @@ func get_days_to_today(past_date):
 		months += 12 * (today.year - past_date.year)
 	if today.month + months > past_date.month:
 		var m = int(past_date.month)
+#warning-ignore:unused_variable
 		for i in range((today.month + months) - past_date.month):
 			if m % 2 == 0:
 				if m == 2: # February
@@ -254,8 +257,9 @@ func delete_bought_bond(id):
 		if bond.id == id:
 			break
 		i += 1
-	bought_bonds.remove(i)
-	save_game()
+	if i < bought_bonds.size():
+		bought_bonds.remove(i)
+		save_game()
 
 
 func save_debt(Bond, ammount_sold : int, profit : int):
@@ -269,3 +273,14 @@ func save_debt(Bond, ammount_sold : int, profit : int):
 	}
 	debts.append(debt_json)
 	save_game()
+
+func delete_debt(Debt):
+	var i = 0
+	for d in debts:
+		if d.source_name == Debt.source_name and d.buy_date == Debt.buy_date and d.sell_date == Debt.sell_date and \
+		   d.ammount_sold == Debt.ammount_sold and d.profit == Debt.profit and d.taxes == Debt.taxes:
+			break
+		i += 1
+	if i < debts.size():
+		debts.remove(i)
+		save_game()
