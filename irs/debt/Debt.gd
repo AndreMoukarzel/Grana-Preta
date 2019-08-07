@@ -5,8 +5,8 @@ const TWN_TIME = .2
 var source_name : String
 var strikes : int = 0 # with 3 strikes the debt is automatically charged
 var value : int # ammount to be paid (profit * taxes)
-var buy_date
-var sell_date # date the debt was generated
+var buy_date = OS.get_datetime()
+var sell_date = OS.get_datetime() # date the debt was generated
 var ammount_sold : int # total ammount sold that produced current debt
 var profit : int
 var taxes : Array # Array of tuples ["Tax Name", ammount_taxed]
@@ -42,7 +42,7 @@ func calculate_value(profit, taxes):
 
 
 func parse_datetime(datetime):
-	var year_last_two_digits = str(datetime.year).right(-2)
+	var year_last_two_digits = str(datetime.year).right(2)
 	return str(datetime.day, "/", datetime.month, "/", year_last_two_digits)
 
 
@@ -59,6 +59,8 @@ func parse_taxes(taxes):
 func close():
 	$Tween.interpolate_property(self, 'rect_size', null, Vector2(566, 120), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Value, 'rect_position', null, Vector2(5, 55), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($BuyDate, 'rect_position', null, Vector2(50, 5), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($SellDate, 'rect_position', null, Vector2(50, 55), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($AmmountSold, 'modulate', null, Color(1, 1, 1, 0), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Profit, 'modulate', null, Color(1, 1, 1, 0), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Taxes, 'modulate', null, Color(1, 1, 1, 0), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
@@ -66,15 +68,19 @@ func close():
 	
 	$Tween.start()
 	
-	$Value.text = str("G$", self.value)
+	$Value.text = str('G$', self.value)
+	$BuyDate.text = parse_datetime(self.buy_date)
+	$SellDate.text = parse_datetime(self.sell_date)
 	
 	is_open = false
 	emit_signal("closed", self)
 
 
 func open():
-	$Tween.interpolate_property(self, 'rect_size', null, Vector2(566, 560), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($Value, 'rect_position', null, Vector2(5, 490), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, 'rect_size', null, Vector2(566, 610), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Value, 'rect_position', null, Vector2(5, 540), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($BuyDate, 'rect_position', null, Vector2(-30, 55), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($SellDate, 'rect_position', null, Vector2(-30, 105), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($AmmountSold, 'modulate', null, Color(1, 1, 1, 1), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Profit, 'modulate', null, Color(1, 1, 1, 1), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Taxes, 'modulate', null, Color(1, 1, 1, 1), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
@@ -83,6 +89,8 @@ func open():
 	$Tween.start()
 	
 	$Value.text = str("Total: G$", self.value)
+	$BuyDate.text = str('Compra: ', parse_datetime(self.buy_date))
+	$SellDate.text = str('Venda: ', parse_datetime(self.sell_date))
 	
 	is_open = true
 	emit_signal("opened", self)

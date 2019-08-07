@@ -83,23 +83,23 @@ custom_fonts/font = SubResource( 4 )
 text = "PAGAR"
 
 [node name="BuyDate" type="Label" parent="."]
-margin_left = 350.0
+margin_left = 50.0
 margin_top = 5.0
-margin_right = 406.0
+margin_right = 400.0
 margin_bottom = 59.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "11/11"
+text = "11/11/11"
 align = 2
 
 [node name="SellDate" type="Label" parent="."]
-margin_left = 350.0
+margin_left = 50.0
 margin_top = 55.0
-margin_right = 406.0
+margin_right = 400.0
 margin_bottom = 109.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "11/11"
+text = "11/11/11"
 align = 2
 
 [node name="Strikes" type="Control" parent="."]
@@ -108,12 +108,16 @@ margin_top = 60.0
 margin_right = 45.0
 margin_bottom = 100.0
 
+[node name="Strike" type="TextureRect" parent="Strikes"]
+margin_right = 40.0
+margin_bottom = 40.0
+
 [node name="AmmountSold" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 5.0
-margin_top = 150.0
-margin_right = 160.0
-margin_bottom = 204.0
+margin_top = 200.0
+margin_right = 349.0
+margin_bottom = 254.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Vendido: G$12345"
@@ -121,9 +125,9 @@ text = "Vendido: G$12345"
 [node name="Profit" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 5.0
-margin_top = 200.0
-margin_right = 160.0
-margin_bottom = 254.0
+margin_top = 250.0
+margin_right = 343.0
+margin_bottom = 304.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.117647, 0.584314, 0, 1 )
 text = "Lucro:     G$12345"
@@ -131,9 +135,9 @@ text = "Lucro:     G$12345"
 [node name="Taxes" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 5.0
-margin_top = 250.0
+margin_top = 300.0
 margin_right = 522.0
-margin_bottom = 475.0
+margin_bottom = 525.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.784314, 0, 0, 1 )
 text = "Impostos:
@@ -144,9 +148,9 @@ text = "Impostos:
 [node name="TaxesLine" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 100.0
-margin_top = 435.0
-margin_right = 500.0
-margin_bottom = 489.0
+margin_top = 485.0
+margin_right = 540.0
+margin_bottom = 539.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.784314, 0, 0, 1 )
 text = "______________________"
