@@ -218,7 +218,6 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.784314, 0, 0, 1 )
 text = "______________________"
 
-[node name="RotTween" type="Tween" parent="."]
-
+[node name="Tween" type="Tween" parent="."]
 [connection signal="pressed" from="." to="." method="_on_Debt_pressed"]
 [connection signal="pressed" from="Pay" to="." method="_on_Pay_pressed"]

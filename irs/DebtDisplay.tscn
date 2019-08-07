@@ -17,5 +17,6 @@ limit_bottom = 1400
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="RotTween" type="Tween" parent="."]
 
 [editable path="SwipeHandler"]
