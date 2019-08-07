@@ -23,8 +23,8 @@ func setup(source_name : String, buy_date, sell_date, ammount_sold : int, profit
 
 	$SourceName.text = source_name
 	self.strikes = max(0, Save.get_time_difference(sell_date, OS.get_date())[0])
-	$Strikes/Sprite.frame = min(strikes, 0) 
-	self.value = calculate_value(profit, taxes)
+	$Strikes/Sprite.frame = min(strikes, 3) 
+	self.value = calculate_value(profit, ammount_sold, taxes)
 	$Value.text = str("G$", self.value)
 	self.buy_date = buy_date
 	$BuyDate.text = parse_datetime(buy_date)
@@ -35,10 +35,13 @@ func setup(source_name : String, buy_date, sell_date, ammount_sold : int, profit
 	$Taxes.text = parse_taxes(taxes)
 
 
-func calculate_value(profit, taxes):
-	var total_taxes = (taxes[0] + taxes[1] + taxes[2])/100.0
+# Returns the value to be paid in taxes based in the taxed
+# percentage, the adquired profit and the ammount sold.
+func calculate_value(profit, ammount_sold, taxes):
+	var taxes_ir_perf = profit * (taxes[0] + taxes[2])/100.0
+	var taxes_adm = ammount_sold * taxes[1]/100.0
 	
-	return int(profit * (total_taxes + (self.strikes * 0.1)))
+	return (taxes_ir_perf + taxes_adm) * (self.strikes + 1)
 
 
 func parse_datetime(datetime):
@@ -49,9 +52,9 @@ func parse_datetime(datetime):
 func parse_taxes(taxes):
 	var tax_text = 'Impostos:\n'
 	
-	tax_text += str('       G$', int(taxes[0] * profit), ' (IR ', taxes[0], '%')
-	tax_text += str('      +G$', int(taxes[1] * profit), ' (Adm ', taxes[1], '%')
-	tax_text += str('      +G$', int(taxes[2] * profit), ' (Perf ', taxes[2], '%')
+	tax_text += str('       G$', int(taxes[0] * self.profit), ' (IR ', taxes[0], '%)')
+	tax_text += str('      +G$', int(taxes[1] * self.ammount_sold), ' (Adm ', taxes[1], '%)')
+	tax_text += str('      +G$', int(taxes[2] * self.profit), ' (Perf ', taxes[2], '%)')
 	
 	return tax_text
 
