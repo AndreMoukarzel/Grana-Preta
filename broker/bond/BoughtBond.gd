@@ -1,11 +1,11 @@
 extends "res://broker/bond/Bond.gd"
 
 var id
-var ammount
-var bought_time
+var ammount = 1
+var bought_time # Moment this Bond was bought
 var last_updated_time # Used to define iteration number
 var profit = 1.0 # Accumulated rented so far, in percentage
-var initial_ammount # Starting ammount of money
+var initial_ammount = 0 # Starting ammount of money
 
 func setup_owned(ammount, bought_time, last_updated_time, profit, initial_ammount, id):
 	self.id = id
@@ -17,12 +17,6 @@ func setup_owned(ammount, bought_time, last_updated_time, profit, initial_ammoun
 	$MinInvestment.text = str(int(ammount))
 	if min_time[0] > 0 or min_time[1] > 0:
 		$Apply.disabled = true
-	# TESTING #
-	#self.last_updated_time.hour += 4
-	#$Apply.disabled = false
-	#iterate(4)
-	#print('rentability = ', rentability)
-	# TESTING #
 	var time_diff = Save.get_time_difference(creation_time, OS.get_datetime())
 	if time_diff[0] > 0 and bond_name != "LCI" and bond_name != "LCA": # Regressive taxes
 		taxes[0] = taxes[0] - (min(3, time_diff[0]) * 2.5)
