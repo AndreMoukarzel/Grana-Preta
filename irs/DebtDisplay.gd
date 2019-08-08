@@ -3,6 +3,8 @@ extends Control
 const DEBT_SCN = preload("res://irs/debt/Debt.tscn")
 const ROT_TIME = 1.0
 const TWN_TIME = .2
+const DEBT_OFFSET = 25
+const TOP_OFFSET = 120
 
 var total_height = 120
 
@@ -67,7 +69,7 @@ func debt_opened(Debt):
 	close_all_debts(Debt)
 	for child in Debt.get_parent().get_children():
 		if child.rect_global_position.y > pos_y:
-			var pos = int(child.get_name()) * (Debt.CLOSED_SIZE + 25) + 120
+			var pos = int(child.get_name()) * (Debt.CLOSED_SIZE + DEBT_OFFSET) + TOP_OFFSET
 			
 			will_tween = true
 			$Tween.interpolate_property(child, "rect_position:y", null, pos + (Debt.OPENED_SIZE - Debt.CLOSED_SIZE), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
@@ -86,7 +88,7 @@ func debt_closed(Debt):
 	disable_all_debts()
 	for child in Debt.get_parent().get_children():
 		if child.rect_global_position.y > pos_y:
-			var pos = int(child.get_name()) * (Debt.CLOSED_SIZE + 25) + 120
+			var pos = int(child.get_name()) * (Debt.CLOSED_SIZE + DEBT_OFFSET) + TOP_OFFSET
 			
 			will_tween = true
 			$Tween.interpolate_property(child, "rect_position:y", null, pos, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
