@@ -1,6 +1,11 @@
 extends Button
 
+signal opened(parent)
+signal closed(parent)
+
 const TWN_TIME = .2
+const OPENED_SIZE = 610
+const CLOSED_SIZE = 120
 
 var source_name : String
 var strikes : int = 0 # with 3 strikes the debt is automatically charged
@@ -60,7 +65,7 @@ func parse_taxes(taxes):
 
 
 func close():
-	$Tween.interpolate_property(self, 'rect_size', null, Vector2(566, 120), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, 'rect_size', null, Vector2(566, CLOSED_SIZE), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Value, 'rect_position', null, Vector2(5, 55), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($BuyDate, 'rect_position', null, Vector2(50, 5), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($SellDate, 'rect_position', null, Vector2(50, 55), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
@@ -81,7 +86,7 @@ func close():
 
 
 func open():
-	$Tween.interpolate_property(self, 'rect_size', null, Vector2(566, 610), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, 'rect_size', null, Vector2(566, OPENED_SIZE), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Value, 'rect_position', null, Vector2(5, 540), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($BuyDate, 'rect_position', null, Vector2(-30, 55), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($SellDate, 'rect_position', null, Vector2(-30, 105), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)

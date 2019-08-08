@@ -2,23 +2,27 @@ extends Control
 
 const DEBT_SCN = preload("res://irs/debt/Debt.tscn")
 const ROT_TIME = 1.0
+const TWN_TIME = .2
 
 var total_height = 120
 
 func _ready():
 	for d in Save.debts:
-		var Debt = add_debt()
+		var Debt = add_debt($Debts)
 		
 		Debt.setup(d.source_name, d.buy_date, d.sell_date, d.ammount_sold, d.profit, d.taxes)
-		total_height += 135
 
 
-func add_debt():
+func add_debt(parent):
 	var Debt = DEBT_SCN.instance()
 	
 	Debt.rect_position.y = total_height
-	add_child(Debt)
+	Debt.set_name(str(parent.get_child_count()))
+	Debt.connect("opened", self, "debt_opened")
+	Debt.connect("closed", self, "debt_closed")
+	parent.add_child(Debt)
 	
+	total_height += 135
 	$SwipeHandler/SwipingCamera.limit_bottom = max(1024, total_height)
 	$SwipeHandler.update_cam_minmax()
 	
@@ -38,3 +42,56 @@ func rot_debt(Debt):
 	yield($RotTween, 'tween_completed')
 	Debt.queue_free()
 	# update_display_positions()
+
+
+func close_all_debts(exception = null):
+	for child in $Debts.get_children():
+		if exception and child == exception:
+			continue
+		if child.is_open:
+			child.close()
+			debt_closed(child)
+
+
+func disable_all_debts(disable = true):
+	for child in $Debts.get_children():
+		child.disabled = disable
+
+
+func debt_opened(Debt):
+	var pos_y = Debt.rect_global_position.y
+	var group = Debt.get_parent().get_parent().get_name()
+	var will_tween = false
+	
+	disable_all_debts()
+	close_all_debts(Debt)
+	for child in Debt.get_parent().get_children():
+		if child.rect_global_position.y > pos_y:
+			var pos = int(child.get_name()) * (Debt.CLOSED_SIZE + 25) + 120
+			
+			will_tween = true
+			$Tween.interpolate_property(child, "rect_position:y", null, pos + (Debt.OPENED_SIZE - Debt.CLOSED_SIZE), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	
+	if will_tween:
+		$Tween.start()
+		yield($Tween, "tween_completed")
+	disable_all_debts(false)
+
+
+func debt_closed(Debt):
+	var pos_y = Debt.rect_global_position.y
+	var group = Debt.get_parent().get_parent().get_name()
+	var will_tween = false
+	
+	disable_all_debts()
+	for child in Debt.get_parent().get_children():
+		if child.rect_global_position.y > pos_y:
+			var pos = int(child.get_name()) * (Debt.CLOSED_SIZE + 25) + 120
+			
+			will_tween = true
+			$Tween.interpolate_property(child, "rect_position:y", null, pos, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	
+	if will_tween:
+		$Tween.start()
+		yield($Tween, "tween_completed")
+	disable_all_debts(false)

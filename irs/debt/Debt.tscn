@@ -62,6 +62,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 1 )
+custom_styles/disabled = SubResource( 1 )
 custom_styles/normal = SubResource( 1 )
 shortcut_in_tooltip = false
 script = ExtResource( 1 )
@@ -219,5 +220,6 @@ custom_colors/font_color = Color( 0.784314, 0, 0, 1 )
 text = "______________________"
 
 [node name="Tween" type="Tween" parent="."]
+
 [connection signal="pressed" from="." to="." method="_on_Debt_pressed"]
 [connection signal="pressed" from="Pay" to="." method="_on_Pay_pressed"]
