@@ -10,16 +10,16 @@ const TRADE_CONFIRM_SCN = preload("res://broker/TradeConfirmation.tscn")
 
 var is_open = false
 var bond_name : String
-var display_rentability : float # Expected rentability of bond in 5 days
-var rentability : float # How much the bond returns each 4 hours ( or each day, in case of provisioned bonds )
-var rentability_type : String # Pre, Pos index or Pos provisioned 
-var expiration
-var min_investment : int
-var min_time
-var taxes
-var creation_time
-var time_left
-var index_value
+var display_rentability : float = 0.0# Expected rentability of bond in 5 days
+var rentability : float = .0 # How much the bond returns each 4 hours ( or each day, in case of provisioned bonds )
+var rentability_type : String = 'Pre-fixada' # ('Pre-fixada', 'Pos-fixada' or 'Prov') Prefixated, Posfixated index or Posfixated indexed on expected profit 
+var expiration # [days, hours]
+var min_investment : int # Minimum ammount of G$ you can buy of this Bond at one trade
+var min_time # [days, hours] Time the bond will be unsellable for after buying it
+var taxes = [0.0, 0.0, 0.0] # [IR, Administration, Performance] Taxation on this bond
+var creation_time = OS.get_datetime() # Time the bond was created
+var time_left = [1, 1] # [days, hours] Time left until expiration
+var index_value = 0    # Value of index used in chanceful bonds
 
 
 func setup(bond_name : String, five_day_rentability : float, rentability_type : String, expiration, min_investment : int, min_time : Array, taxes : Array, creation_time, index_value = null):
@@ -64,7 +64,6 @@ func resume_info():
 		$Rentability.text = str("PR", stepify(display_rentability, 0.1))
 		$Name.text = bond_name
 		
-	
 	
 	$Expiration.rect_scale = Vector2(1, 1)
 	if time_left[0] > 0: # days left
