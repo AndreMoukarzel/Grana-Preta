@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://school/Subjects/SubjectLesson.gd" type="Script" id=2]
 [ext_resource path="res://school/lock.png" type="Texture" id=3]
+[ext_resource path="res://school/check-mark.png" type="Texture" id=4]
+[ext_resource path="res://school/bookmarklet.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.203922, 0.203922, 0.203922, 1 )
@@ -51,10 +53,29 @@ custom_styles/panel = SubResource( 1 )
 
 [node name="Lock" type="TextureRect" parent="."]
 visible = false
-margin_left = 136.023
-margin_right = 176.023
-margin_bottom = 40.0
+margin_left = 140.0
+margin_top = 3.0
+margin_right = 175.0
+margin_bottom = 38.0
 texture = ExtResource( 3 )
+expand = true
+
+[node name="Check" type="TextureRect" parent="."]
+visible = false
+margin_left = 140.0
+margin_top = 3.0
+margin_right = 175.0
+margin_bottom = 38.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Book" type="TextureRect" parent="."]
+visible = false
+margin_left = 140.0
+margin_top = 3.0
+margin_right = 175.0
+margin_bottom = 38.0
+texture = ExtResource( 5 )
 expand = true
 
 [node name="Timer" type="Timer" parent="."]

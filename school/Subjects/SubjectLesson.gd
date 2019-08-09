@@ -23,6 +23,10 @@ func setup(name, size):
 	$Background.rect_size = size
 	$Lock.rect_size = Vector2(size.y - 10, size.y - 10)
 	$Lock.rect_position = Vector2(size.x - $Lock.rect_size.x - 5, 5)
+	$Check.rect_size = Vector2(size.y - 10, size.y - 10)
+	$Check.rect_position = Vector2(size.x - $Lock.rect_size.x - 5, 5)
+	$Book.rect_size = Vector2(size.y - 10, size.y - 10)
+	$Book.rect_position = Vector2(size.x - $Lock.rect_size.x - 5, 5)
 	
 	type = db.get_lesson_type(self.id)
 	if type == "question":
@@ -84,6 +88,10 @@ func unlock():
 
 func set_completed():
 	$Background.set_modulate(GREEN)
+	if type == 'question':
+		$Book.show()
+	else:
+		$Check.show()
 	completed = true
 
 
