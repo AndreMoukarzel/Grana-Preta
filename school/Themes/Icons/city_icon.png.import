@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/school_icon.png-1565a9ba722ec8942729ccaf2fd9ef18.stex"
+path="res://.import/city_icon.png-3660a76c812262662a406fef540e63cd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://school/school_icon.png"
-dest_files=[ "res://.import/school_icon.png-1565a9ba722ec8942729ccaf2fd9ef18.stex" ]
+source_file="res://school/Themes/Icons/city_icon.png"
+dest_files=[ "res://.import/city_icon.png-3660a76c812262662a406fef540e63cd.stex" ]
 
 [params]
 

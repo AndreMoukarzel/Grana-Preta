@@ -10,18 +10,18 @@ const HEIGHT = 4 # height of theme on tree
 var themes = [
 	{
 		NAME : "A Escola",
-		ICON : "res://school/school_icon.png",
+		ICON : "res://school/Themes/Icons/school_icon.png",
 		INFO : ["Onde estou?"],
 		DEPEN : [],
 		HEIGHT : 0
-	}
-#	{
-#		NAME : "A cidade",
-#		ICON : null,
-#		INFO : [],
-#		DEPEN : [],
-#		HEIGHT : 1
-#	},
+	},
+	{
+		NAME : "A Cidade",
+		ICON : "res://school/Themes/Icons/city_icon.png",
+		INFO : ["A Mina"],
+		DEPEN : [],
+		HEIGHT : 1
+	},
 #	{
 #		NAME : "Fixa 1",
 #		ICON : null,
@@ -43,6 +43,11 @@ var subjects = [
 		NAME : "Onde estou?",
 		ICON : 'res://school/Subjects/pencil.png',
 		INFO : ["Lições e Questionários", "Assuntos e Temas", "O Primeiro Teste"],
+	},
+	{
+		NAME : "A Mina",
+		ICON : 'res://mine/Mine.png',
+		INFO : ["O Emprego", "Por que minerar?", "Leite de Pedra"],
 	},
 ]
 

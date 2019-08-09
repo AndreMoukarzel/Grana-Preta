@@ -36,11 +36,43 @@ var lessons = [
 		CONTENT : [
 				["Qual o prêmio por concluir um Assunto?"], [["G$ 1000"], ["G$ 100"], ["G$ 10000"]],
 				["Qual o prêmio por concluir um Tema?"], [["G$ 10000"], ["G$ 100"], ["G$ 1000"]], 
-				["A seguinte imagem a seguir representa:", "/../school_icon.png"], [["Tema"], ["Assunto"], ["Lição"], ["Questionário"]],
+				["A imagem a seguir representa:", "/../school_icon.png"], [["Tema"], ["Assunto"], ["Lição"], ["Questionário"]],
 				["Como se conclui um Assunto?"], [["Completar todas as Lições do Assunto"], ["Completar o Questionário do Assunto"], ["Fazer uma dancinha"]]
 				],
 		LOCKTIME : [0, 0, 1]
-	}
+	},
+	{
+		NAME : "O Emprego",
+		TYPE : "info",
+		CONTENT : ["\nVocê conseguiu arrumar um emprego estável nas minas!",
+					"\nPode não ser a coisa mais glamurosa ou com maior expectativa de\nvida do mundo, mas você tem a minha garantia de que não será\ndemitido daqui!",
+					"\nA mina é o local mais simples da cidade. Tudo que você pode\nfazer aqui é tocar na tela para trabalhar, ganhando G$10 por toque.",
+					"\nMas não adianta tocar na tela na velocidade da luz! Querendo\nou não, há um limite de quão rápido você pode trabalhar...",
+					"As minas são uma analogia para empregos da vida real. Empregos\nsão relativamente seguros, mas você não deve ser dependente deles!",
+					"\nEnfim, chega de papo, de volta ao trabalho!",
+					"/../../mine/Mine.png"
+				  ]
+	},
+	{
+		NAME : "Por que minerar?",
+		TYPE : "info",
+		CONTENT : ["\nSe você já trabalhou na minha, deve ter percebido que não é um\ntrabalho extremamente lucrativo...",
+					"Isso é porque seu objetivo aqui não é se matar de trabalhar até\nficar rico, e sim aprender a viver de sua renda passiva!",
+					"\nEntão quando devo minerar? Bom, você sempre pode minerar se\nachar divertido, mas na prática só vale a pena passar um tempo",
+					"nas minas quando você precisar de uma graninha extra, seja para\nter dinheiro o suficiente para comprar um ativo legal, ou para\najudar a pagar suas dívidas mais rápido!",
+					"\nSe você está perdido com essa conversa de ativos e dívidas, não\nse preocupe! Em Lições futuras, tudo isso será explicado."
+				  ]
+	},
+	{
+		NAME : "Leite de Pedra",
+		TYPE : "question",
+		CONTENT : [
+				["Quanto você recebe por toque da tela nas\nminas?"], [["G$ 10"], ["G$ 100"], ["G$ 50"]],
+				["Em qual situação faz mais sentido trabalhar\nna mina?"], [["Conseguir o dinheiro restante para pagar\nminhas dívidas"], ["Nunca"], ["Sempre que tiver tempo, para ficar rico\nmais rápido"]], 
+				["As minas são uma analogia para qual aspecto\nda vida real?"], [["Empregos"], ["Ações"], ["Poupança"], ["Higiene Bucal"]],
+				],
+		LOCKTIME : [0, 0, 5]
+	},
 ]
 
 
