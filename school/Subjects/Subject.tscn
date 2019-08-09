@@ -47,10 +47,10 @@ valign = 1
 clip_text = true
 
 [node name="Icon" type="TextureRect" parent="."]
-margin_left = 138.7
-margin_top = 8.55001
-margin_right = 178.7
-margin_bottom = 48.55
+margin_left = 140.0
+margin_top = 10.0
+margin_right = 180.0
+margin_bottom = 50.0
 expand = true
 
 [node name="Lessons" type="VBoxContainer" parent="."]

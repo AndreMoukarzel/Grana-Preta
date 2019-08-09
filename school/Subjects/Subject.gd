@@ -24,7 +24,6 @@ func setup(width : int, name, icon, lessons):
 	$Background.rect_size = Vector2(width, BASE_HEIGHT)
 	$Title.rect_size = Vector2(0.66 * width, BASE_HEIGHT)
 	$Title.text = title
-	$Icon.rect_position = Vector2(rect_size.x - BASE_HEIGHT, 5)
 	$Icon.rect_size = Vector2(0.34 * width, BASE_HEIGHT - 10)
 	
 	clip_title()
@@ -53,13 +52,14 @@ func add_icon(icon_location):
 		texture = load(icon_location)
 	
 	tex_size = texture.get_size()
+	print($Icon.rect_position)
 	if $Icon.rect_size.x < tex_size.x:
 		scale = $Icon.rect_size.x / tex_size.x
 	elif $Icon.rect_size.y < tex_size.y:
 		scale = $Icon.rect_size.y / tex_size.y
 	$Icon.texture = texture
 	$Icon.rect_size = tex_size * scale
-	$Icon.rect_position.y = (rect_size.y - $Icon.rect_size.y)/2
+	$Icon.rect_position = Vector2(rect_size.x - $Icon.rect_size.x - 5, (rect_size.y - $Icon.rect_size.y)/2)
 
 
 func add_lessons(lessons):
