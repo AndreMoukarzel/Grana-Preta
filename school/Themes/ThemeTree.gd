@@ -3,7 +3,7 @@ extends Control
 const SCHOOL_DB = preload("res://school/SchoolDB.gd")
 const THEME_SCN = preload("res://school/Themes/Theme.tscn")
 const INITIAL_Y = 90
-const DIST_Y = 250
+const DIST_Y = 300
 const DIST_X = 200 # Must be Theme's rect_size
 const LINE_C = Color(0, 0, 0)
 const LINE_W = 2.5

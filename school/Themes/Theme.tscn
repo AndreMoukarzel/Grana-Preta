@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://school/Themes/Icons/school_icon.png" type="Texture" id=1]
 [ext_resource path="res://school/Themes/Theme.gd" type="Script" id=2]
 [ext_resource path="res://school/lock.png" type="Texture" id=3]
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=4]
@@ -12,7 +12,7 @@ font_data = ExtResource( 4 )
 
 [node name="Theme" type="TextureButton"]
 margin_right = 200.0
-margin_bottom = 64.0
+margin_bottom = 200.0
 texture_normal = ExtResource( 1 )
 expand = true
 stretch_mode = 3
@@ -27,9 +27,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_top = 64.0
-margin_right = 68.0
-margin_bottom = 107.0
+margin_top = 200.0
+margin_right = 200.0
+margin_bottom = 243.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Title"
