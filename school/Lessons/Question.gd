@@ -28,7 +28,7 @@ func _ready():
 	text_font = DynamicFont.new()
 	text_font.font_data = load("res://school/Lessons/LessonFont.otf")
 	text_font.use_filter = true
-	Result.rect_position = Vector2(WINDOW_SIZE.x * 0.2, -WINDOW_SIZE.y)
+	Result.rect_position = Vector2((WINDOW_SIZE.x - Result.rect_size.x)/2, -WINDOW_SIZE.y)
 
 
 func _input(event):
@@ -167,8 +167,6 @@ func display_results():
 	var wrong_answers = 0
 	
 	for i in range(selected_answers.size()):
-		if selected_answers[i] == -1:
-			pass # didn't answer all questions!
 		if selected_answers[i] != correct_answers[i]:
 			wrong_answers += 1
 	
@@ -182,15 +180,15 @@ func display_results():
 			complete()
 	else:
 		disable_all()
-		$CanvasLayer/ResultPanel/Text.text = "FAILED"
+		$CanvasLayer/ResultPanel/Text.text = "FALHOU"
 		$CanvasLayer/ResultPanel/Text.set("custom_colors/font_color", Color(.5, .08, .08))
 		var panel = $CanvasLayer/ResultPanel.get("custom_styles/panel")
 		panel.border_color = Color(.5, .08, .08)
 		$CanvasLayer/ResultPanel/Info.show()
 		if wrong_answers == 1:
-			$CanvasLayer/ResultPanel/Info.text = str(wrong_answers, " incorrect answer") # singular
+			$CanvasLayer/ResultPanel/Info.text = str(wrong_answers, " resposta incorreta") # singular
 		else:
-			$CanvasLayer/ResultPanel/Info.text = str(wrong_answers, " incorrect answers") # plural
+			$CanvasLayer/ResultPanel/Info.text = str(wrong_answers, " respostas incorretas") # plural
 		tween_result()
 		
 		if not Save.completed_lessons.has(id): # if not completed, lock
@@ -248,8 +246,8 @@ func get_all_questions_and_answers(content):
 			answers.append(c)
 		else:
 			questions.append(c)
-		selected_answers.append(-1)
-		correct_answers.append(-1)
+			selected_answers.append(-1)
+			correct_answers.append(-1)
 		odd = not odd
 
 
@@ -281,12 +279,16 @@ func _on_Next_pressed():
 		set_questionnaire_size(answers_height)
 		
 		if current_question == questions.size() - 1:
-			$Next.text = "Finish"
+			$Next.text = "ACABAR"
 			$Next.set_modulate(Color(.3, 1, .3))
+			for answer in selected_answers:
+				if answer == -1: # Questions were still not answered
+					$Next.disabled = true
 
 
 func _on_Back_pressed():
-	$Next.text = "NEXT"
+	$Next.text = "PRÓXIMO"
+	$Next.disabled = false
 	$Next.set_modulate(Color(1, 1, 1))
 	current_question = max(current_question - 1, 0)
 	var answers_height = show_question_and_answer(current_question)
