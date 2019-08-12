@@ -56,7 +56,7 @@ var lessons = [
 	{
 		NAME : "Por que minerar?",
 		TYPE : "info",
-		CONTENT : ["\nSe você já trabalhou na minha, deve ter percebido que não é um\ntrabalho extremamente lucrativo...",
+		CONTENT : ["\nSe você já trabalhou na mina, deve ter percebido que não é um\ntrabalho extremamente lucrativo...",
 					"Isso é porque seu objetivo aqui não é se matar de trabalhar até\nficar rico, e sim aprender a viver de sua renda passiva!",
 					"\nEntão quando devo minerar? Bom, você sempre pode minerar se\nachar divertido, mas na prática só vale a pena passar um tempo",
 					"nas minas quando você precisar de uma graninha extra, seja para\nter dinheiro o suficiente para comprar um ativo legal, ou para\najudar a pagar suas dívidas mais rápido!",
@@ -72,6 +72,35 @@ var lessons = [
 				["As minas são uma analogia para qual aspecto\nda vida real?"], [["Empregos"], ["Ações"], ["Poupança"], ["Higiene Bucal"]],
 				],
 		LOCKTIME : [0, 0, 5]
+	},
+	{
+		NAME : "Comprando Ativos",
+		TYPE : "info",
+		CONTENT : [ "\nNa corretora você pode comprar e vender ativos de renda fixa.\nPara isso, basta tocar no botão 'APLICAR' em um ativo a venda.",
+					"\nApertando o botão, você deverá selecionar quantos G$ do ativo\nvocê vai comprar. Você pode adicionar(+) e remover(-) o número\nindicado no MULTIPLICADOR à direita.",
+					"Você também pode tocar diretamente no MULTIPLICADOR para\nalterar o seu valor.\n",
+					"Images/Multiplicador.png",
+					"\nTambém tem mais um detalhe... Para todo ativo, há um valor\nmínimo de compra. Este valor é chamado REQUISITO.\n",
+					"Images/Requisito.png",
+					"\nO REQUISITO é um elemento de ativos da vida real também, então\nvocê pode dar uma olhada na sua corretora ou banco preferido e\nverificar o valor mínimo de compra dos ativos lá!",
+					"Alguns títulos de renda fixa da via real têm requisitos baixos, algo\nem torno de R$ 30, enquanto outros podem ter requisitos de\nmais de R$ 50000."
+				  ]
+	},
+	{
+		NAME : "Qual comprar?",
+		TYPE : "info",
+		CONTENT : [ "\nCom tantas opções, como decidir qual título comprar?",
+					"\nBom, vamos por partes:\n",
+					"\nPrimeiro, devemos escolher qual tipo de ativo vamos comprar.\nNa corretora, separamos os ativos em SEGUROS, MODERADOS e\nARROJADOS.",
+					"Dentro de cada uma dessas categorias temos, respectivamente,\ntítulos Pré-fixados, Pós-fixados e Pós-fixados indexados no\nhistórico de um fundo privado. Se você não sabe o que são cada\numa dessas coisas, é comece com os títulos seguros.",
+					"Vamos explicar cada uma dessas classificações em Lições futuras.",
+					"\nEm seguida, vamos dar uma olhada na rentabilidade dos ativos.\nA rentabilidade já é um bom indicativo de quão lucrativo\num título será!",
+					"Images/Rentabilidade.png",
+					"\nNa rentabilidade temos as informações do tipo de título:\n* PRE = Pré-fixado\n* POS = Pós-fixado\n* PROV = Pós-fixado indexado em fundo privado\n",
+					"\nMas além da rentabilidade, também é importante manter em mente\nos impostos que serão cobrados!\n",
+					"Images/Impostos.png",
+					"\nIsso deve ser o suficiente para fazer uma boa escolha. Caso tenha\ndúvidas sobre os detalhes de rentabilidade e impostos,\nhá uma explicação aprofundada sobre eles no tema de Renda Fixa"
+				  ]
 	},
 ]
 

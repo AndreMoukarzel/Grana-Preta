@@ -18,7 +18,7 @@ var themes = [
 	{
 		NAME : "A Cidade",
 		ICON : "res://school/Themes/Icons/city_icon.png",
-		INFO : ["A Mina"],
+		INFO : ["A Mina", "A Corretora"],
 		DEPEN : [],
 		HEIGHT : 1
 	},
@@ -49,6 +49,11 @@ var subjects = [
 		ICON : 'res://mine/Mine.png',
 		INFO : ["O Emprego", "Por que minerar?", "Leite de Pedra"],
 	},
+	{
+		NAME : 'A Corretora',
+		ICON : 'res://broker/Broker.png',
+		INFO : ['Comprando Ativos', "Qual comprar?", "Meu ativo sumiu?!?", "Vendendo Ativos"]
+	}
 ]
 
 
