@@ -75,6 +75,7 @@ func add_text(parent, content, pos_y, centralize=false):
 func add_image(parent, pos_y, texture_name):
 	var texture = load(str("res://school/Lessons/", texture_name))
 	var tr = TextureRect.new()
+	print(texture_name)
 	var tex_size = texture.get_size()
 	
 	tr.texture = texture
@@ -306,6 +307,13 @@ func Alternative_selected(Alternative):
 		Alt.get_node("Panel").set_modulate(Color(1, 1, 1))
 	Alternative.get_node("Panel").set_modulate(Color(.95, .95, .6))
 	selected_answers[current_question] = alt_num
+	
+	var done = true # Unlocks 'Next' button if all answers were selected
+	for answer in selected_answers:
+		if answer == -1:
+			done = false
+	if done:
+		$Next.disabled = false
 
 
 func _on_Leave_pressed():

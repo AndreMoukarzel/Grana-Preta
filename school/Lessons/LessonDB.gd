@@ -36,7 +36,7 @@ var lessons = [
 		CONTENT : [
 				["Qual o prêmio por concluir um Assunto?"], [["G$ 1000"], ["G$ 100"], ["G$ 10000"]],
 				["Qual o prêmio por concluir um Tema?"], [["G$ 10000"], ["G$ 100"], ["G$ 1000"]], 
-				["A imagem a seguir representa:", "/../school_icon.png"], [["Tema"], ["Assunto"], ["Lição"], ["Questionário"]],
+				["A imagem a seguir representa:", "/../Themes/Icons/school_icon.png"], [["Tema"], ["Assunto"], ["Lição"], ["Questionário"]],
 				["Como se conclui um Assunto?"], [["Completar todas as Lições do Assunto"], ["Completar o Questionário do Assunto"], ["Fazer uma dancinha"]]
 				],
 		LOCKTIME : [0, 0, 1]
