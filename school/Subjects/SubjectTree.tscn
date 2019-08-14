@@ -13,3 +13,5 @@ script = ExtResource( 1 )
 [node name="ConfirmationPanel" parent="CanvasLayer" instance=ExtResource( 2 )]
 visible = false
 
+[node name="Tween" type="Tween" parent="."]
+
