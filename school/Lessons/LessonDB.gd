@@ -96,7 +96,8 @@ var lessons = [
 					"Vamos explicar cada uma dessas classificações em Lições futuras.",
 					"\nEm seguida, vamos dar uma olhada na rentabilidade dos ativos.\nA rentabilidade já é um bom indicativo de quão lucrativo\num título será!",
 					"Images/Rentabilidade.png",
-					"\nNa rentabilidade temos as informações do tipo de título:\n* PRE = Pré-fixado\n* POS = Pós-fixado\n* PROV = Pós-fixado indexado em fundo privado\n",
+					"\nNa rentabilidade temos as informações do tipo de título:\n* PRE = Pré-fixado\n* POS = Pós-fixado\n* PROV = Pós-fixado indexado em fundo privado (provisionado)",
+					"\nAssim como títulos reais costumam apresentar uma previsão da\nrentabilidade anual, o valor numérico da rentabilidade aqui\nrepresenta a valorização prevista do ativo em 5 DIAS.\n",
 					"\nMas além da rentabilidade, também é importante manter em mente\nos impostos que serão cobrados!\n",
 					"Images/Impostos.png",
 					"\nIsso deve ser o suficiente para fazer uma boa escolha. Caso tenha\ndúvidas sobre os detalhes de rentabilidade e impostos,\nhá uma explicação aprofundada sobre eles no tema de Renda Fixa"
