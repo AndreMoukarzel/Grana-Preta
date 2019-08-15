@@ -42,7 +42,7 @@ class LineGraph:
 		                         -self.total_height/(self.values.max() - self.values.min())) # point_dist.y is negative because positive values go down visually
 		var first_diff = self.values[0] - self.central_val
 		print(first_diff)
-		var current_point = Vector2(self.pos.x, self.pos.y + (point_dist.y * first_diff) +self.total_height/2)
+		var current_point = Vector2(self.pos.x, self.pos.y + (point_dist.y * first_diff) + self.total_height/2)
 		var points = []
 		points.append(current_point)
 		for i in range(1, self.values.size()):
@@ -52,10 +52,30 @@ class LineGraph:
 		return points
 	
 	func get_midpoint():
-		return Vector2(0, self.pos.y + self.total_height/2)
+		return Vector2(self.pos.x, self.pos.y + self.total_height/2)
 	
 	func get_central_line_points():
 		return [self.get_midpoint(), self.get_midpoint() + Vector2(self.total_width, 0)]
+	
+	func get_top_line_points():
+		return [self.pos, self.pos + Vector2(self.total_width, 0)]
+	
+	func get_bottom_line_points():
+		return [self.pos + Vector2(0, self.total_height), self.pos + Vector2(self.total_width, self.total_height)]
+		
+	func get_max_line_points():
+		var point_dist = Vector2(self.total_width/self.values.size(),\
+		                        -self.total_height/(self.values.max() - self.values.min())) # point_dist.y is negative because positive values go down visually
+		var max_val = self.values.max()
+		var diff = Vector2(0, (max_val - self.central_val) * point_dist.y)
+		return[self.get_midpoint() + diff, self.get_midpoint() + diff + Vector2(self.total_width, 0)]
+	
+	func get_min_line_points():
+		var point_dist = Vector2(self.total_width/self.values.size(),\
+		                        -self.total_height/(self.values.max() - self.values.min())) # point_dist.y is negative because positive values go down visually
+		var min_val = self.values.min()
+		var diff = Vector2(0, (min_val - self.central_val) * point_dist.y)
+		return[self.get_midpoint() + diff, self.get_midpoint() + diff + Vector2(self.total_width, 0)]
 
 func _ready():
 	set_process(false)
@@ -66,7 +86,12 @@ func _process(delta):
 func _draw():
 	var LG = LineGraph.new(values, Vector2(5, 300), 3.0)
 	var points = LG.graph_points()
+	var top = LG.get_max_line_points()
 	var central = LG.get_central_line_points()
-	draw_line(central[0], central[1], Color(0, 1, 0, .6))
+	var bot = LG.get_min_line_points()
+	
+	draw_line(top[0], top[1], Color(0, 1, 0, .6))
+	draw_line(central[0], central[1], Color(0, 0, 1, .6))
+	draw_line(bot[0], bot[1], Color(1, 0, 0, .6))
 	for i in range(1, points.size()):
 		draw_line(points[i-1], points[i], Color(1, 1, 1), 2.0, true)
