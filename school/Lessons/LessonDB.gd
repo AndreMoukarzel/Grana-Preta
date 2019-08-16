@@ -76,7 +76,7 @@ var lessons = [
 	{
 		NAME : "Comprando Ativos",
 		TYPE : "info",
-		CONTENT : [ "\nNa corretora você pode comprar e vender ativos de renda fixa.\nPara isso, basta tocar no botão 'APLICAR' em um ativo a venda.",
+		CONTENT : [ "\nNa corretora você pode comprar e vender ativos de RENDA FIXA.\nPara isso, basta tocar no botão 'APLICAR' em um ativo a venda.",
 					"\nApertando o botão, você deverá selecionar quantos G$ do ativo\nvocê vai comprar. Você pode adicionar(+) e remover(-) o número\nindicado no MULTIPLICADOR à direita.",
 					"Você também pode tocar diretamente no MULTIPLICADOR para\nalterar o seu valor.\n",
 					"Images/Multiplicador.png",
@@ -98,10 +98,35 @@ var lessons = [
 					"Images/Rentabilidade.png",
 					"\nNa rentabilidade temos as informações do tipo de título:\n* PRE = Pré-fixado\n* POS = Pós-fixado\n* PROV = Pós-fixado indexado em fundo privado (provisionado)",
 					"\nAssim como títulos reais costumam apresentar uma previsão da\nrentabilidade anual, o valor numérico da rentabilidade aqui\nrepresenta a valorização prevista do ativo em 5 DIAS.\n",
+					"Para acelerar as coisas, enquanto um título real rende diariamente,\n os seus títulos aqui vão render a cada 4 HORAS!.",
 					"\nMas além da rentabilidade, também é importante manter em mente\nos impostos que serão cobrados!\n",
 					"Images/Impostos.png",
 					"\nIsso deve ser o suficiente para fazer uma boa escolha. Caso tenha\ndúvidas sobre os detalhes de rentabilidade e impostos,\nhá uma explicação aprofundada sobre eles no tema de Renda Fixa"
 				  ]
+	},
+	{
+		NAME : "Vendendo Ativos",
+		TYPE : "info",
+		CONTENT : [ "\nCaso você já tenha sido dono de um título de renda fixa por algum\ntempo, pode ter acontecido dele ter desaparecido!",
+					"\nNão se preocupe, isso não é um bug do sistema! O que acontece\né que títulos de renda fixa aqui, assim como na vida real, têm\nVALIDADE!\n",
+					"Images/Vencimento.png",
+					"\nFora isso, você também deve ter notado que é impossível vender um\ntítulo recém comprado. Isso é porque títulos de renda fixa têm\noutra característica importante. A CARÊNCIA!\n",
+					"Images/Carencia.png",
+					"\nA CARÊNCIA também é frequentemente chamada de CUSTÓDIA.\nNote que até se passar o período de tempo destacado neste\ncampo, não será possível vender este título!",
+					"\nBom, agora você já sabe de tudo isso e está pronto para vender\num título. E agora? Bom, basta tocar em VENDER e escolher a\nquantidade, assim como você fez na hora da compra.",
+					"\nMas fique alerta! Ao vender um título com lucro, você deve pagar\nseus IMPOSTOS! Não se preocupe, vamos falar melhor disso no\npróximo assunto.\nBons negócios!"
+				  ]
+	},
+	{
+		NAME : "Agora é pra Render!",
+		TYPE : "question",
+		CONTENT : [
+				["Comprei um ativo faz alguns dias, e quando\nfui vendê-lo ele tinha sumido!\nO que aconteceu?"], [["O título passou do período de vencimento"], ["Você só se confundiu! Não tinha ativo\nnenhum ali!"], ["Ocorreu um erro de sistema"]],
+				["Depois de quanto tempo posso vender\num ativo?"], [["Depois do período de custódia"], ["Assim que tiver comprado um ativo"], ["Após 4 horas"], ["Após 1 dia"]], 
+				["O que define se um título será mais lucrativo\nque outro no mesmo período de tempo?"], [["Rentabilidade e Impostos"], ["Requisito e Carência"], ["Apenas o tipo do título"], ["As cores dos botões"]],
+				["Como é a forma correta de ordenar os tipos\nde título de renda fixa,\ndo menos arriscado ao mais arriscado?"], [["1)Pré-Fixada\n2)Pós-fixada\n3)Pós-fixada em índice privado"], ["1)Pós-fixada\n2)Pré-Fixada\n3)Pós-fixada em índice privado"], ["1)Pós-fixada em índice privado\n2)Pós-fixada\n3)Pré-Fixada"]],
+				],
+		LOCKTIME : [0, 0, 1]
 	},
 ]
 

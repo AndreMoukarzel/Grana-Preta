@@ -52,7 +52,7 @@ var subjects = [
 	{
 		NAME : 'A Corretora',
 		ICON : 'res://broker/Broker.png',
-		INFO : ['Comprando Ativos', "Qual comprar?", "Meu ativo sumiu?!?", "Vendendo Ativos"]
+		INFO : ['Comprando Ativos', "Qual comprar?", "Vendendo Ativos", "Agora é pra Render!"]
 	}
 ]
 
