@@ -1,8 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://IndexDisplay.gd" type="Script" id=1]
+[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.901961, 0.901961, 0.901961, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.235294, 0.235294, 0.235294, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=2]
+size = 25
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
 
 [node name="IndexDisplay" type="Control"]
 anchor_right = 1.0
@@ -14,4 +32,12 @@ show_behind_parent = true
 margin_right = 40.0
 margin_bottom = 40.0
 custom_styles/panel = SubResource( 1 )
+
+[node name="Central" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "100.1"
+align = 2
 
