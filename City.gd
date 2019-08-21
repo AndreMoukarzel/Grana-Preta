@@ -34,3 +34,10 @@ func _on_IRS_pressed():
 	var e = get_tree().change_scene("res://irs/IRS.tscn")
 	if e != 0:
 		print("IRS scene couldn't be loaded")
+
+
+func _on_Home_pressed():
+	print("Enter Home")
+	var e = get_tree().change_scene("res://home/Home.tscn")
+	if e != 0:
+		print("Home scene couldn't be loaded")
