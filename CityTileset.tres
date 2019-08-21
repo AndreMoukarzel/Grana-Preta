@@ -77,7 +77,7 @@
 7/texture = ExtResource( 1 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 512, 256, 256, 256 )
+7/region = Rect2( 513, 257, 256, 256 )
 7/tile_mode = 0
 7/occluder_offset = Vector2( 128, 128 )
 7/navigation_offset = Vector2( 128, 128 )

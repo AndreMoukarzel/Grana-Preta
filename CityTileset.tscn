@@ -49,5 +49,5 @@ region_rect = Rect2( 256, 512, 256, 256 )
 position = Vector2( 512, 256 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 512, 256, 256, 256 )
+region_rect = Rect2( 513, 257, 256, 256 )
 
