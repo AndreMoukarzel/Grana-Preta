@@ -1,6 +1,7 @@
 extends Control
 
 var current_graph = null
+var lines = []
 
 class LineGraph:
 	var values = [0.0] # Values to be plotted in the graph
@@ -14,7 +15,7 @@ class LineGraph:
 	var value_offset = 0 # distance the points will be moved to fit centrally in the graph
 	
 	func _init(values, pos, central_val = null, val_range = null, size = Vector2(500, 500), \
-	           color = Color(0, 0, 1), line_width = 1.0):
+	           color = Color(0, 0, 1, .8), line_width = 1.0):
 		self.values = values
 		self.pos    = pos
 		
@@ -91,7 +92,7 @@ class LineGraph:
 
 func _ready():
 	set_process(false)
-	set_current_graph("LineGraph", [0, -1, 2, 3, 11,-5, 6, -7, 8, -9, 10],\
+	lines = set_current_graph("LineGraph", [0.0, -1.0, 2.0, 3.0, 11.0, -5.0, 6.0, -7.0, 8.0, -9.0, 10.0],\
 	                  [Vector2(0, 300), 3.0])
 
 func _process(delta):
@@ -100,19 +101,62 @@ func _process(delta):
 func _draw():
 	if current_graph:
 		var points  = current_graph.graph_points()
-		var top     = current_graph.get_top_line_points()
+		#var top     = current_graph.get_top_line_points()
 		var maximum = current_graph.get_max_line_points()
 		var central = current_graph.get_central_line_points()
 		var minimum = current_graph.get_min_line_points()
-		var bot     = current_graph.get_bottom_line_points()
+		#var bot     = current_graph.get_bottom_line_points()
 		
-		draw_line(top[0], top[1], Color(0, 0, 0))
+		#draw_line(top[0], top[1], Color(0, 0, 0))
 		draw_line(maximum[0], maximum[1], Color(0, 1, 0, .6))
 		draw_line(central[0], central[1], Color(0, 0, 1, .6))
 		draw_line(minimum[0], minimum[1], Color(1, 0, 0, .6))
-		draw_line(bot[0], bot[1], Color(0, 0, 0))
+		#draw_line(bot[0], bot[1], Color(0, 0, 0))
+		
+		for line in lines:
+			draw_line(line[0], line[1], Color(0, 0, 0, 0.3))
+		
 		for i in range(1, points.size()):
 			draw_line(points[i-1], points[i], current_graph.color, 2.0, true)
+
+
+func set_value_labels():
+	var point_diff = current_graph.size.y/(current_graph.values.max() - current_graph.values.min() + 1)
+	var val_diff   = stepify((current_graph.values.max() - current_graph.values.min() + 1)/20.0, 0.01)
+	var value_lines_points = []
+	
+	for i in range(9):
+		var Lab = get_node("Values/" + str(i))
+		var pos = current_graph.get_central_line_points()[0] + Vector2(-30, (i + 1) * -point_diff)
+		var line_points = current_graph.get_central_line_points()
+		line_points[0] += Vector2(-5, (i + 1) * -point_diff)
+		line_points[1] += Vector2(0, (i + 1) * -point_diff)
+		
+		value_lines_points.append(line_points)
+		#draw_line(line_points[0], line_points[1], Color(0, 0, 0, .6))
+		Lab.rect_position = pos - Lab.rect_size/2
+		Lab.text = str(current_graph.central_val + (i + 1) * val_diff)
+	for i in range(9, 18):
+		var Lab = get_node("Values/" + str(i))
+		var pos = current_graph.get_central_line_points()[0] + Vector2(-30, (i - 9 + 1) * point_diff)
+		var line_points = current_graph.get_central_line_points()
+		line_points[0] += Vector2(-5, (i - 9 + 1) * point_diff)
+		line_points[1] += Vector2(0, (i - 9 + 1) * point_diff)
+		
+		value_lines_points.append(line_points)
+		#draw_line(line_points[0], line_points[1], Color(0, 0, 0, .6))
+		Lab.rect_position = pos - Lab.rect_size/2
+		Lab.text = str(current_graph.central_val - (i - 9 + 1) * val_diff)
+	
+	$Max.rect_position = current_graph.get_max_line_points()[0] - $Max.rect_size/2 - Vector2(30, 0)
+	$Max.text = str(current_graph.values.max())
+	$Central.rect_position = current_graph.get_central_line_points()[0] - $Central.rect_size/2 - Vector2(30, 0)
+	$Central.text = str(current_graph.central_val)
+	$Min.rect_position = current_graph.get_min_line_points()[0] - $Min.rect_size/2 - Vector2(30, 0)
+	$Min.text = str(current_graph.values.min())
+	
+	return value_lines_points
+
 
 func set_current_graph(graph_type, values, args):
 	var vals = values
@@ -124,5 +168,7 @@ func set_current_graph(graph_type, values, args):
 	
 	$Background.rect_position = pos
 	$Background.rect_size = Vector2(current_graph.size.x + 140, current_graph.size.y + 30)
-	$Central.rect_position = current_graph.get_central_line_points()[0] - $Central.rect_size/2 - Vector2(30, 0)
-	$Central.text = str(current_graph.central_val)
+	$InternalBackground.rect_position = Vector2(pos.x + 69, pos.y + 14)
+	$InternalBackground.rect_size = current_graph.size + Vector2(1, 1)
+	
+	return set_value_labels()
