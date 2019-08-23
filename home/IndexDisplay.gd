@@ -50,7 +50,6 @@ class LineGraph:
 		for i in range(self.values.size()):
 			self.values[i] -= self.value_offset
 	
-	
 	func graph_points():
 		var first_diff = self.values[0] - self.central_val
 		var current_point = self.get_midpoint() + Vector2(0, self.point_dist.y * first_diff)
@@ -85,22 +84,20 @@ class LineGraph:
 	
 	# Returns the line vertically positioned at the maximum value in the graph
 	func get_max_line_points():
-		var max_val = self.values.max()
-		var diff = Vector2(0, (max_val - self.central_val) * self.point_dist.y)
-		return[self.get_midpoint() + diff, self.get_midpoint() + diff + Vector2(self.size.x, 0)]
+		return get_val_line_points(self.values.max())
 	
 	# Returns the line vertically positioned at the minimum value in the graph
 	func get_min_line_points():
-		var min_val = self.values.min()
-		var diff = Vector2(0, (min_val - self.central_val) * self.point_dist.y)
-		return[self.get_midpoint() + diff, self.get_midpoint() + diff + Vector2(self.size.x, 0)]
+		return get_val_line_points(self.values.min())
 
 
 func _ready():
 	set_process(false)
 
+
 func _process(delta):
 	update()
+
 
 func _draw():
 	if current_graph:
@@ -109,9 +106,9 @@ func _draw():
 		var central = current_graph.get_central_line_points()
 		var minimum = current_graph.get_min_line_points()
 
-		draw_line(maximum[0], maximum[1], Color(0, 1, 0, .6))
-		draw_line(central[0], central[1], Color(0, 0, 1, .6))
-		draw_line(minimum[0], minimum[1], Color(1, 0, 0, .6))
+		draw_line(maximum[0], maximum[1], Color(0, 0, 0, .6), 2.0)
+		draw_line(central[0], central[1], Color(0, 0, 0, .6), 2.0)
+		draw_line(minimum[0], minimum[1], Color(0, 0, 0, .6), 2.0)
 		
 		for line in lines:
 			draw_line(line[0], line[1], Color(0, 0, 0, 0.3))
@@ -148,12 +145,12 @@ func set_value_labels():
 		elif abs(line_points[0].y - min_pos.y) < 20:
 			label.hide()
 	
-	$Max.rect_position = current_graph.get_max_line_points()[0] - $Max.rect_size/2 - Vector2(30, 0)
-	$Max.text = str(stepify(current_graph.values.max(), 0.01))
-	$Central.rect_position = current_graph.get_central_line_points()[0] - $Central.rect_size/2 - Vector2(30, 0)
-	$Central.text = str(stepify(current_graph.central_val, 0.01))
-	$Min.rect_position = current_graph.get_min_line_points()[0] - $Min.rect_size/2 - Vector2(30, 0)
-	$Min.text = str(stepify(current_graph.values.min(), 0.01))
+	$Max.rect_position     = max_pos - $Max.rect_size/2 - Vector2(30, 0)
+	$Max.text              = str(stepify(current_graph.values.max(), 0.01))
+	$Central.rect_position = central_pos - $Central.rect_size/2 - Vector2(30, 0)
+	$Central.text          = str(stepify(current_graph.central_val, 0.01))
+	$Min.rect_position     = min_pos - $Min.rect_size/2 - Vector2(30, 0)
+	$Min.text              = str(stepify(current_graph.values.min(), 0.01))
 	
 	return value_lines_points
 
