@@ -112,7 +112,7 @@ var lessons = [
 					"Images/Vencimento.png",
 					"\nFora isso, você também deve ter notado que é impossível vender um\ntítulo recém comprado. Isso é porque títulos de renda fixa têm\noutra característica importante. A CARÊNCIA!\n",
 					"Images/Carencia.png",
-					"\nA CARÊNCIA também é frequentemente chamada de CUSTÓDIA.\nNote que até se passar o período de tempo destacado neste\ncampo, não será possível vender este título!",
+					"Note que até se passar o período de CARÊNCIA, não será possível\nvender este título!",
 					"\nBom, agora você já sabe de tudo isso e está pronto para vender\num título. E agora? Bom, basta tocar em VENDER e escolher a\nquantidade, assim como você fez na hora da compra.",
 					"\nMas fique alerta! Ao vender um título com lucro, você deve pagar\nseus IMPOSTOS! Não se preocupe, vamos falar melhor disso no\npróximo assunto.\nBons negócios!"
 				  ]
