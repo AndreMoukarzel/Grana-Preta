@@ -124,7 +124,10 @@ func _on_SubjectLesson_pressed():
 			complete()
 	elif type == "question":
 		var SubjTree = get_parent().get_parent().get_parent().get_parent()
-		SubjTree.get_node("CanvasLayer/ConfirmationPanel").add_questionnaire_info(title, id, db.get_lesson_content(id))
+		if completed:
+			School.add_question(title, db.get_lesson_content(id), id)
+		else:
+			SubjTree.get_node("CanvasLayer/ConfirmationPanel").add_questionnaire_info(title, id, db.get_lesson_content(id))
 
 
 func _on_Timer_timeout():

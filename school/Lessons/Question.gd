@@ -75,7 +75,6 @@ func add_text(parent, content, pos_y, centralize=false):
 func add_image(parent, pos_y, texture_name):
 	var texture = load(str("res://school/Lessons/", texture_name))
 	var tr = TextureRect.new()
-	print(texture_name)
 	var tex_size = texture.get_size()
 	
 	tr.texture = texture
@@ -215,6 +214,9 @@ func tween_result():
 
 
 func confirm_exit():
+	if Save.completed_lessons.has(id):
+		var School = get_tree().get_root().get_node("School")
+		School.add_subject_tree(School.theme_entered)
 	if not done:
 		$CanvasLayer/ConfirmationPanel.id = id
 		$CanvasLayer/ConfirmationPanel.show()

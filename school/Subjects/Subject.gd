@@ -52,7 +52,6 @@ func add_icon(icon_location):
 		texture = load(icon_location)
 	
 	tex_size = texture.get_size()
-	print($Icon.rect_position)
 	if $Icon.rect_size.x < tex_size.x:
 		scale = $Icon.rect_size.x / tex_size.x
 	elif $Icon.rect_size.y < tex_size.y:
