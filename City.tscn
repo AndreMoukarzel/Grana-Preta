@@ -75,6 +75,7 @@ texture_normal = ExtResource( 7 )
 
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
 position = Vector2( 1194.97, 1033.11 )
+zoom = Vector2( 1.6, 1.6 )
 limit_left = 300
 limit_right = 2060
 limit_bottom = 1920
