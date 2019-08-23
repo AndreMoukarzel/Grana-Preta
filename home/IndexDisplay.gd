@@ -95,6 +95,7 @@ func _ready():
 	set_process(false)
 
 
+#warning-ignore:unused_argument
 func _process(delta):
 	update()
 
@@ -121,7 +122,6 @@ func set_value_labels():
 	var max_pos = current_graph.get_max_line_points()[0]
 	var central_pos = current_graph.get_central_line_points()[0]
 	var min_pos = current_graph.get_min_line_points()[0]
-	var point_diff = current_graph.size.y/(current_graph.values.max() - current_graph.values.min() + 1)
 	var val_diff   = stepify((current_graph.values.max() - current_graph.values.min() + 1)/20.0, 0.01)
 	var current_value = stepify(current_graph.values.min(), 0.01)
 	var value_lines_points = []
@@ -133,17 +133,22 @@ func set_value_labels():
 		var line_points = current_graph.get_val_line_points(current_value)
 		
 		line_points[0] += Vector2(-5, 0)
-		value_lines_points.append(line_points)
 		label.rect_position = line_points[0] - Vector2(label.rect_size.x, label.rect_size.y/2)
 		label.text = str(current_value)
 		
 		# Hides labels too close to max, min or central labels
-		if abs(line_points[0].y - max_pos.y) < 20:
+		if abs(line_points[0].y - max_pos.y) < 15:
 			label.hide()
-		elif abs(line_points[0].y - central_pos.y) < 20:
+		elif abs(line_points[0].y - central_pos.y) < 15:
 			label.hide()
-		elif abs(line_points[0].y - min_pos.y) < 20:
+		elif abs(line_points[0].y - min_pos.y) < 15:
 			label.hide()
+		elif line_points[0].y < current_graph.get_top_line_points()[0].y: # label will be out of graphs' bounds
+			label.hide()
+		elif line_points[0].y > current_graph.get_bottom_line_points()[0].y: # label will be out of graphs' bounds
+			label.hide()
+		else:
+			value_lines_points.append(line_points)
 	
 	$Max.rect_position     = max_pos - $Max.rect_size/2 - Vector2(30, 0)
 	$Max.text              = str(stepify(current_graph.values.max(), 0.01))
@@ -155,19 +160,19 @@ func set_value_labels():
 	return value_lines_points
 
 
-func set_current_graph(graph_type, values, position, args = {}):
-	var vals = values
-	var pos = position
+func set_current_graph(graph_type, values, pos, args = {}):
 	var central_val = (null if not args.has('central_val') else args['central_val'])
-	var val_range = (null if not args.has('val_range') else args['val_range'])
-	var size = (Vector2(500, 500) if not args.has('size') else args['size'])
-	var color = (Color(0, 0, 1, .8) if not args.has('color') else args['color'])
+	var val_range   = (null if not args.has('val_range') else args['val_range'])
+	var size        = (Vector2(500, 500) if not args.has('size') else args['size'])
+	var color       = (Color(0, 0, 1, .8) if not args.has('color') else args['color'])
+	var line_width  = (1.0 if not args.has('line_width') else args['line_width'])
+	var graph_size = Vector2(size.x - 80, size.y - 30)
 	
 	if graph_type == "LineGraph":
-		current_graph = LineGraph.new(values, Vector2(pos.x + 70, pos.y + 15), central_val, val_range, size, color)
+		current_graph = LineGraph.new(values, Vector2(pos.x + 70, pos.y + 15), central_val, val_range, graph_size, color, line_width)
 	
 	$Background.rect_position = pos
-	$Background.rect_size = Vector2(current_graph.size.x + 140, current_graph.size.y + 30)
+	$Background.rect_size = size
 	$InternalBackground.rect_position = Vector2(pos.x + 69, pos.y + 14)
 	$InternalBackground.rect_size = current_graph.size + Vector2(1, 1)
 	
