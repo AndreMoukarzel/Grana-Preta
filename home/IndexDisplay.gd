@@ -78,6 +78,11 @@ class LineGraph:
 	func get_bottom_line_points():
 		return [self.pos + Vector2(0, self.size.y), self.pos + Vector2(self.size.x, self.size.y)]
 	
+	# Returns the line vertically positioned at the specified value in the graph
+	func get_val_line_points(value):
+		var diff = Vector2(0, (value - self.central_val) * self.point_dist.y)
+		return[self.get_midpoint() + diff, self.get_midpoint() + diff + Vector2(self.size.x, 0)]
+	
 	# Returns the line vertically positioned at the maximum value in the graph
 	func get_max_line_points():
 		var max_val = self.values.max()
@@ -89,6 +94,7 @@ class LineGraph:
 		var min_val = self.values.min()
 		var diff = Vector2(0, (min_val - self.central_val) * self.point_dist.y)
 		return[self.get_midpoint() + diff, self.get_midpoint() + diff + Vector2(self.size.x, 0)]
+
 
 func _ready():
 	set_process(false)
@@ -115,37 +121,39 @@ func _draw():
 
 
 func set_value_labels():
+	var max_pos = current_graph.get_max_line_points()[0]
+	var central_pos = current_graph.get_central_line_points()[0]
+	var min_pos = current_graph.get_min_line_points()[0]
 	var point_diff = current_graph.size.y/(current_graph.values.max() - current_graph.values.min() + 1)
 	var val_diff   = stepify((current_graph.values.max() - current_graph.values.min() + 1)/20.0, 0.01)
+	var current_value = stepify(current_graph.values.min(), 0.01)
 	var value_lines_points = []
 	
-	for i in range(9):
-		var Lab = get_node("Values/" + str(i))
-		var pos = current_graph.get_central_line_points()[0] + Vector2(-30, (i + 1) * -point_diff)
-		var line_points = current_graph.get_central_line_points()
-		line_points[0] += Vector2(-5, (i + 1) * -point_diff)
-		line_points[1] += Vector2(0, (i + 1) * -point_diff)
+	for i in range(18):
+		current_value += val_diff
 		
-		value_lines_points.append(line_points)
-		Lab.rect_position = pos - Lab.rect_size/2
-		Lab.text = str(current_graph.central_val + (i + 1) * val_diff)
-	for i in range(9, 18):
-		var Lab = get_node("Values/" + str(i))
-		var pos = current_graph.get_central_line_points()[0] + Vector2(-30, (i - 9 + 1) * point_diff)
-		var line_points = current_graph.get_central_line_points()
-		line_points[0] += Vector2(-5, (i - 9 + 1) * point_diff)
-		line_points[1] += Vector2(0, (i - 9 + 1) * point_diff)
+		var label = get_node("Values/" + str(i))
+		var line_points = current_graph.get_val_line_points(current_value)
 		
+		line_points[0] += Vector2(-5, 0)
 		value_lines_points.append(line_points)
-		Lab.rect_position = pos - Lab.rect_size/2
-		Lab.text = str(current_graph.central_val - (i - 9 + 1) * val_diff)
+		label.rect_position = line_points[0] - Vector2(label.rect_size.x, label.rect_size.y/2)
+		label.text = str(current_value)
+		
+		# Hides labels too close to max, min or central labels
+		if abs(line_points[0].y - max_pos.y) < 20:
+			label.hide()
+		elif abs(line_points[0].y - central_pos.y) < 20:
+			label.hide()
+		elif abs(line_points[0].y - min_pos.y) < 20:
+			label.hide()
 	
 	$Max.rect_position = current_graph.get_max_line_points()[0] - $Max.rect_size/2 - Vector2(30, 0)
-	$Max.text = str(current_graph.values.max())
+	$Max.text = str(stepify(current_graph.values.max(), 0.01))
 	$Central.rect_position = current_graph.get_central_line_points()[0] - $Central.rect_size/2 - Vector2(30, 0)
-	$Central.text = str(current_graph.central_val)
+	$Central.text = str(stepify(current_graph.central_val, 0.01))
 	$Min.rect_position = current_graph.get_min_line_points()[0] - $Min.rect_size/2 - Vector2(30, 0)
-	$Min.text = str(current_graph.values.min())
+	$Min.text = str(stepify(current_graph.values.min(), 0.01))
 	
 	return value_lines_points
 
