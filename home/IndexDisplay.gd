@@ -160,13 +160,29 @@ func set_value_labels():
 	return value_lines_points
 
 
+func set_day_labels():
+	var first_pos = current_graph.get_bottom_line_points()[0]
+	var last_pos  = current_graph.get_bottom_line_points()[1]
+	var pos_diff  = (last_pos.x - first_pos.x)/100
+	var lines = []
+	
+	$BotLeft.rect_position = first_pos - Vector2($BotRight.rect_size.x/2, 3)
+	$BotRight.rect_position= last_pos - Vector2($BotRight.rect_size.x, 3)
+	
+	for i in range(100):
+		var h_pos = first_pos.x + i * pos_diff
+		lines.append([Vector2(h_pos, first_pos.y - 5), Vector2(h_pos, first_pos.y + 3)])
+	
+	return lines
+
+
 func set_current_graph(graph_type, values, pos, args = {}):
 	var central_val = (null if not args.has('central_val') else args['central_val'])
 	var val_range   = (null if not args.has('val_range') else args['val_range'])
 	var size        = (Vector2(500, 500) if not args.has('size') else args['size'])
 	var color       = (Color(0, 0, 1, .8) if not args.has('color') else args['color'])
 	var line_width  = (1.0 if not args.has('line_width') else args['line_width'])
-	var graph_size = Vector2(size.x - 80, size.y - 30)
+	var graph_size = Vector2(size.x - 80, size.y - 40)
 	
 	if graph_type == "LineGraph":
 		current_graph = LineGraph.new(values, Vector2(pos.x + 70, pos.y + 15), central_val, val_range, graph_size, color, line_width)
@@ -176,4 +192,5 @@ func set_current_graph(graph_type, values, pos, args = {}):
 	$InternalBackground.rect_position = Vector2(pos.x + 69, pos.y + 14)
 	$InternalBackground.rect_size = current_graph.size + Vector2(1, 1)
 	
-	lines = set_value_labels()
+	lines  = set_value_labels()
+	lines += set_day_labels()
