@@ -60,7 +60,7 @@ func iterate(times_iterated):
 			min_time[0] -= 1
 	if min_time[0] <= 0 and min_time[1] <= 0:
 		$Apply.disabled = false
-		$MinTime.hide()
+		$MinTime.text = "Carência:\nCONCLUÍDA"
 	Save.delete_bought_bond(id)
 	Save.save_bought_bond(self, self.ammount)
 

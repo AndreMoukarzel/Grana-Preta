@@ -41,7 +41,7 @@ func setup(bond_name : String, five_day_rentability : float, rentability_type : 
 	elif rentability_type == "Prov":
 		self.rentability = index_value
 	$Name.text = bond_name
-	$MinTime.text = "Carencia: "
+	$MinTime.text = "Carência: "
 	if min_time[0] > 0:
 		$MinTime.text += str(min_time[0], " dias")
 		if min_time[1] > 0:
