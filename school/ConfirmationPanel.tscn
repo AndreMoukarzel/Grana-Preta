@@ -55,7 +55,7 @@ margin_right = 450.0
 margin_bottom = 140.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Sair do teste antes de o completar
+text = "Sair do teste antes de completa-lo
  resultará em uma reprovação. 
 Quer continuar assim mesmo?"
 align = 1

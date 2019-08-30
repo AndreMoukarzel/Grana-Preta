@@ -90,6 +90,7 @@ func _on_Apply_pressed():
 	var Swipe = get_parent().get_parent().get_parent().get_node("SwipeHandler")
 	
 	TradeConfirm.setup(Swipe, 0, ammount) 
+	TradeConfirm.get_node("Label").text = "Defina o valor de títulos\na serem vendidos"
 	Canvas.add_child(TradeConfirm)
 	TradeConfirm.connect("trade_confirmed", self, "_on_trade_confirmed")
 

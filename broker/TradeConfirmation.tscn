@@ -96,7 +96,7 @@ margin_right = 450.0
 margin_bottom = 90.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Defina o número de títulos
+text = "Defina o valor de títulos
 a serem comprados"
 align = 1
 valign = 1
