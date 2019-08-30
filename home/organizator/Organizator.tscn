@@ -33,6 +33,7 @@ text = "ADICIONAR"
 valign = 1
 
 [node name="Total" type="Label" parent="."]
+editor/display_folded = true
 margin_left = 10.0
 margin_top = 80.0
 margin_right = 576.0
