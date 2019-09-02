@@ -44,12 +44,28 @@ func update_total():
 		$Total/Value.modulate = Color(1, 0, 0)
 
 
+func delete_element(DeletedElement):
+	var deleted_index = int(DeletedElement.name)
+	
+	DeletedElement.name = "old"
+	DeletedElement.value = "0"
+	for i in range(deleted_index + 1, $Elements.get_child_count()):
+		var child = $Elements.get_node(str(i))
+		child.name = str(i - 1)
+		child.rect_position.y = (i - 1) * 80
+	$Elements.rect_size.y = ($Elements.get_child_count() - 1) * 80
+	$AddElement.rect_position.y = $Elements.rect_size.y
+	$Total.rect_position.y = $Elements.rect_size.y + 80
+	update_total()
+
+
 func add_element(value : String, date = null):
 	var Element = ELEMENT_SCN.instance()
 	var element_count = $Elements.get_child_count()
 	
 	Element.name = str(element_count)
 	Element.rect_position.y = element_count * 80
+	Element.connect("deleted", self, "delete_element")
 	$Elements.rect_size.y = (element_count + 1) * 80
 	$Elements.add_child(Element)
 	Element.setup(add_values(value, "0.00"), date)

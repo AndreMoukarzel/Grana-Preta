@@ -1,5 +1,7 @@
 extends Control
 
+signal deleted(Self)
+
 var value : String
 var date
 
@@ -21,4 +23,5 @@ func setup(value : String, date = null):
 
 
 func _on_Delete_pressed():
+	emit_signal("deleted", self)
 	queue_free()
