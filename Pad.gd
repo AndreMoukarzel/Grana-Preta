@@ -10,6 +10,8 @@ func number_pressed(digit : int):
 	if not has_dot:
 		if number.length() == 1 and number[0] == "0":
 			number = str(digit)
+		elif number.length() == 2 and number == "-0":
+			number = "-" + str(digit)
 		else:
 			number += str(digit)
 	else:
@@ -19,9 +21,7 @@ func number_pressed(digit : int):
 			number[-1] = str(digit)
 		else:
 			number += str(digit)
-	print(number)
-	print(has_dot)
-	emit_signal("value_changed", float(number))
+	emit_signal("value_changed", number)
 
 
 func _on_1_pressed():
@@ -60,13 +60,13 @@ func _on_Minus_pressed():
 		number.erase(0, 1)
 	else:
 		number = "-" + number
-	emit_signal("value_changed", float(number))
+	emit_signal("value_changed", number)
 
 func _on_Dot_pressed():
 	if not has_dot:
 		has_dot = true
 		number += "."
-		emit_signal("value_changed", float(number))
+		emit_signal("value_changed", number)
 
 func _on_Del_pressed():
 	if number[-1] == ".":
@@ -74,9 +74,9 @@ func _on_Del_pressed():
 	number = number.left(number.length() - 1)
 	if number.empty():
 		number = "0"
-	emit_signal("value_changed", float(number))
+	emit_signal("value_changed", number)
 
 func _on_Clear_pressed():
 	has_dot = false
 	number = "0"
-	emit_signal("value_changed", float(number))
+	emit_signal("value_changed", number)

@@ -1,17 +1,17 @@
 extends Control
 
-var value
+var value : String
 var date
 
-func setup(value : float, date = null):
+func setup(value : String, date = null):
 	self.value = value
 	self.date = date
 	
-	if value > 0.00:
-		$Value.text = "+" + str(stepify(value, 0.01))
+	if float(value) > 0.00:
+		$Value.text = "+" + value
 		$Value.modulate = Color(0.2, 1.0, 0.0)
 	else:
-		$Value.text = str(stepify(value, 0.01))
+		$Value.text = value
 		$Value.modulate = Color(1, 0, 0)
 	
 	if not date:
