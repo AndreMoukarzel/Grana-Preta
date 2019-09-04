@@ -2,6 +2,7 @@ extends Control
 
 const ELEMENT_SCN = preload("res://home/organizator/Element.tscn")
 const ADDER_SCN = preload("res://home/organizator/ElementAdder.tscn")
+const MIN_HEIGHT = 140
 
 var total_value : String = "0"
 
@@ -54,8 +55,8 @@ func delete_element(DeletedElement):
 		child.name = str(i - 1)
 		child.rect_position.y = (i - 1) * 80
 	$Elements.rect_size.y = ($Elements.get_child_count() - 1) * 80
-	$AddElement.rect_position.y = $Elements.rect_size.y
-	$Total.rect_position.y = $Elements.rect_size.y + 80
+	$AddElement.rect_position.y = $Elements.rect_size.y + MIN_HEIGHT
+	$Total.rect_position.y = $Elements.rect_size.y + 80 + MIN_HEIGHT
 	update_total()
 
 
@@ -70,8 +71,8 @@ func add_element(value : String, date = null):
 	$Elements.add_child(Element)
 	Element.setup(add_values(value, "0.00"), date)
 	
-	$AddElement.rect_position.y = $Elements.rect_size.y
-	$Total.rect_position.y = $Elements.rect_size.y + 80
+	$AddElement.rect_position.y = $Elements.rect_size.y + MIN_HEIGHT
+	$Total.rect_position.y = $Elements.rect_size.y + 80 + MIN_HEIGHT
 	update_total()
 
 
@@ -79,6 +80,5 @@ func _on_AddElement_pressed():
 	var Adder = ADDER_SCN.instance()
 	
 	Adder.connect("add_element", self, "add_element")
-	#Adder.connect("canceled", self, ...?)
 	
 	add_child(Adder)

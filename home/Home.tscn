@@ -1,11 +1,30 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://home/Home.gd" type="Script" id=1]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://home/house_treated.png" type="Texture" id=3]
-[ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=4]
+[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://home/Computer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://home/organizator/Organizator.tscn" type="PackedScene" id=6]
 
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.827451, 0.827451, 0.827451, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.541176, 0.541176, 0.541176, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
 
 [node name="Home" type="Control"]
 anchor_right = 1.0
@@ -18,20 +37,60 @@ script = ExtResource( 1 )
 editor/display_folded = true
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
-margin_right = 1512.0
+margin_left = -300.0
+margin_right = 1212.0
 margin_bottom = 1024.0
 texture = ExtResource( 3 )
 expand = true
 
-[node name="SwipeHandler" parent="." instance=ExtResource( 4 )]
+[node name="Buttons" type="VBoxContainer" parent="."]
 editor/display_folded = true
+margin_top = -1.0
+margin_right = 576.0
+margin_bottom = 1023.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
 
-[node name="SwipingCamera" parent="SwipeHandler" index="0"]
-limit_right = 576
-limit_bottom = 1200
+[node name="Computer" type="Button" parent="Buttons"]
+margin_left = 138.0
+margin_top = 215.0
+margin_right = 438.0
+margin_bottom = 295.0
+rect_min_size = Vector2( 300, 80 )
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Computador"
+
+[node name="Tracker" type="Button" parent="Buttons"]
+margin_left = 138.0
+margin_top = 729.0
+margin_right = 438.0
+margin_bottom = 809.0
+rect_min_size = Vector2( 300, 80 )
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Organizador"
 
 [node name="Computer" parent="." instance=ExtResource( 5 )]
+margin_left = -576.0
+margin_right = -576.0
+
+[node name="Organizator" parent="." instance=ExtResource( 6 )]
+margin_left = 576.0
+margin_right = 576.0
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="on_Back_pressed" from="HUD" to="." method="_on_HUD_on_Back_pressed"]
-
-[editable path="SwipeHandler"]
+[connection signal="pressed" from="Buttons/Computer" to="." method="_on_Computer_pressed"]
+[connection signal="pressed" from="Buttons/Tracker" to="." method="_on_Tracker_pressed"]
