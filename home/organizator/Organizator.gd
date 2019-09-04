@@ -5,6 +5,7 @@ const ADDER_SCN = preload("res://home/organizator/ElementAdder.tscn")
 const MIN_HEIGHT = 140
 
 var total_value : String = "0"
+var total_height = 0
 
 
 func _ready():
@@ -33,6 +34,7 @@ func add_values(v1 : String, v2 : String):
 	
 	return str(sum_int) + "." + str(sum_float)
 
+
 func update_total():
 	total_value = "0"
 	for child in $Elements.get_children():
@@ -57,6 +59,8 @@ func delete_element(DeletedElement):
 	$Elements.rect_size.y = ($Elements.get_child_count() - 1) * 80
 	$AddElement.rect_position.y = $Elements.rect_size.y + MIN_HEIGHT
 	$Total.rect_position.y = $Elements.rect_size.y + 80 + MIN_HEIGHT
+	$SwipeHandler/SwipingCamera.limit_bottom = max(1024, $Elements.rect_size.y + 80 + MIN_HEIGHT + 160)
+	$SwipeHandler.update_cam_minmax()
 	update_total()
 
 
@@ -73,6 +77,8 @@ func add_element(value : String, date = null):
 	
 	$AddElement.rect_position.y = $Elements.rect_size.y + MIN_HEIGHT
 	$Total.rect_position.y = $Elements.rect_size.y + 80 + MIN_HEIGHT
+	$SwipeHandler/SwipingCamera.limit_bottom = max(1024, $Elements.rect_size.y + 80 + MIN_HEIGHT + 160)
+	$SwipeHandler.update_cam_minmax()
 	update_total()
 
 

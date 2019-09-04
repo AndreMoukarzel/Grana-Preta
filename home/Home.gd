@@ -6,6 +6,7 @@ var current_screen = "main"
 
 func _ready():
 	$Computer/SwipeHandler.deactivate()
+	$Organizator/SwipeHandler.deactivate()
 
 func _on_HUD_on_Back_pressed():
 	if current_screen == "main":
@@ -21,6 +22,7 @@ func _on_HUD_on_Back_pressed():
 		$HUD.set_city_texture()
 		current_screen = "main"
 		$Computer/SwipeHandler.deactivate()
+		$Organizator/SwipeHandler.deactivate()
 
 
 func _on_Computer_pressed():
@@ -40,3 +42,4 @@ func _on_Tracker_pressed():
 	$Tween.start()
 	$HUD.set_arrow_texture()
 	current_screen = "organizator"
+	$Organizator/SwipeHandler.activate()
