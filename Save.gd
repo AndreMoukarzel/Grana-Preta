@@ -1,19 +1,24 @@
 extends Node
 
+var money = 0
+var selic_last100 = []
+var inflation_last100 = []
+var last_index_iteration_date
+########### School ###########
 var completed_lessons = []
 var completed_subjects = []
 var completed_themes = []
 var failed_questions = []
 var failed_questions_time = []
-var money = 0
-var selic_last100 = []
-var inflation_last100 = []
-var last_index_iteration_date
+########### Broker ###########
 var available_bonds = []
 var available_bonds_id = 0
 var bought_bonds = []
 var bought_bonds_id = 0
+############ IRS #############
 var debts = []
+############ Home ############
+var elements = []
 
 
 func save():
@@ -31,7 +36,8 @@ func save():
 		available_bonds_id = available_bonds_id,
 		bought_bonds = bought_bonds,
 		bought_bonds_id = bought_bonds_id,
-		debts = debts
+		debts = debts,
+		elements = elements
 	}
 	return savedict
 
@@ -90,6 +96,8 @@ func load_game():
 	bought_bonds_id = int(savedata.bought_bonds_id)
 	for element in savedata.debts:
 		debts.append(element)
+	for element in savedata.elements:
+		elements.append(element)
 	
 	Selic.create(selic_last100[99], 3.0, 6.0, 15.0)
 	Inflation.create(inflation_last100[99], 1.0, -0.5, 10.0)
@@ -274,6 +282,7 @@ func save_debt(Bond, ammount_sold : int, profit : int):
 	debts.append(debt_json)
 	save_game()
 
+
 func delete_debt(Debt):
 	var i = 0
 	for d in debts:
@@ -283,4 +292,26 @@ func delete_debt(Debt):
 		i += 1
 	if i < debts.size():
 		debts.remove(i)
+		save_game()
+
+
+func save_element(Element):
+	var elem_json = {
+		"value" : Element.value,
+		"date" : Element.date,
+		"creation_date" : Element.creation_date
+	}
+	elements.append(elem_json)
+	save_game()
+
+
+func delete_element(Element):
+	var i = 0
+	for e in elements:
+		if e.value == Element.value and e.date == Element.date and e.creation_date == Element.creation_date:
+			break
+		i += 1
+
+	if i < elements.size():
+		elements.remove(i)
 		save_game()

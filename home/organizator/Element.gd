@@ -2,10 +2,11 @@ extends Control
 
 signal deleted(Self)
 
+onready var creation_date = OS.get_datetime()
 var value : String
 var date
 
-func setup(value : String, date = null):
+func setup(value : String, date = null, creation_date = null):
 	self.value = value
 	self.date = date
 	
@@ -20,8 +21,14 @@ func setup(value : String, date = null):
 		$Date.hide()
 	else:
 		$Date.text = date
+	
+	if not creation_date:
+		Save.save_element(self)
+	else:
+		self.creation_date = creation_date
 
 
 func _on_Delete_pressed():
-	emit_signal("deleted", self)
+	Save.delete_element(self)
+	emit_signal("deleted", self) # Here value is set to 0, so must be deleted before
 	queue_free()

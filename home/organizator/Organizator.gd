@@ -9,6 +9,8 @@ var total_height = 0
 
 
 func _ready():
+	for e in Save.elements:
+		add_element(e.value, e.date, e.creation_date)
 	update_total()
 
 
@@ -64,7 +66,7 @@ func delete_element(DeletedElement):
 	update_total()
 
 
-func add_element(value : String, date = null):
+func add_element(value : String, date = null, creation_date = null):
 	var Element = ELEMENT_SCN.instance()
 	var element_count = $Elements.get_child_count()
 	
@@ -73,7 +75,7 @@ func add_element(value : String, date = null):
 	Element.connect("deleted", self, "delete_element")
 	$Elements.rect_size.y = (element_count + 1) * 80
 	$Elements.add_child(Element)
-	Element.setup(add_values(value, "0.00"), date)
+	Element.setup(add_values(value, "0.00"), date, creation_date)
 	
 	$AddElement.rect_position.y = $Elements.rect_size.y + MIN_HEIGHT
 	$Total.rect_position.y = $Elements.rect_size.y + 80 + MIN_HEIGHT
