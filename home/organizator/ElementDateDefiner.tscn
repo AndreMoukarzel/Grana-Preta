@@ -79,6 +79,7 @@ align = 1
 valign = 1
 
 [node name="Ammount" type="Control" parent="."]
+editor/display_folded = true
 margin_left = 25.0
 margin_top = 90.0
 margin_right = 65.0

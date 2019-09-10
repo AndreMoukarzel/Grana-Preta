@@ -20,7 +20,7 @@ func setup(value : String, date = null, creation_date = null):
 	if not date:
 		$Date.hide()
 	else:
-		$Date.text = date
+		$Date.text = "no dia " + date
 	
 	if not creation_date:
 		Save.save_element(self)

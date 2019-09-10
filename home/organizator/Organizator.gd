@@ -2,10 +2,11 @@ extends Control
 
 const ELEMENT_SCN = preload("res://home/organizator/Element.tscn")
 const ADDER_SCN = preload("res://home/organizator/ElementAdder.tscn")
+const DATE_DEFINER_SCN = preload("res://home/organizator/ElementDateDefiner.tscn")
 const MIN_HEIGHT = 140
 
 var total_value : String = "0"
-var total_height = 0
+var to_be_added_value : String = ""
 
 
 func _ready():
@@ -84,9 +85,32 @@ func add_element(value : String, date = null, creation_date = null):
 	update_total()
 
 
+func add_element_with_date(date):
+	add_element(to_be_added_value, date)
+
+
+func add_element_without_date():
+	add_element(to_be_added_value)
+
+
+func add_element_date_definer(value):
+	var DateDefiner = DATE_DEFINER_SCN.instance()
+	
+	to_be_added_value = value
+	DateDefiner.connect("add_element_date", self, "add_element_with_date")
+	DateDefiner.connect("no_date", self, "add_element_without_date")
+	
+	add_child(DateDefiner)
+
+
+func cancel_add_element():
+	to_be_added_value = ""
+
+
 func _on_AddElement_pressed():
 	var Adder = ADDER_SCN.instance()
 	
-	Adder.connect("add_element", self, "add_element")
+	Adder.connect("add_element", self, "add_element_date_definer")
+	Adder.connect("canceled", self, "cancel_add_element")
 	
 	add_child(Adder)

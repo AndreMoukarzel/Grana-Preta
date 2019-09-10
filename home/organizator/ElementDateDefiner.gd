@@ -1,5 +1,8 @@
 extends Panel
 
+signal add_element_date(ammount)
+signal no_date()
+
 var ammount : String = "1"
 
 func _ready():
@@ -17,9 +20,9 @@ func _on_Pad_value_changed(value):
 	$Ammount/AmmountLabel.text = ammount
 
 func _on_Cancel_pressed():
-	emit_signal("canceled")
+	emit_signal("no_date")
 	queue_free()
 
 func _on_Confirm_pressed():
-	emit_signal("add_element", ammount)
+	emit_signal("add_element_date", ammount)
 	queue_free()
