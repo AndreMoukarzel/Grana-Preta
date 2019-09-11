@@ -19,6 +19,7 @@ var bought_bonds_id = 0
 var debts = []
 ############ Home ############
 var elements = []
+var accumulated_patrimony = "0.00"
 
 
 func save():
@@ -37,7 +38,8 @@ func save():
 		bought_bonds = bought_bonds,
 		bought_bonds_id = bought_bonds_id,
 		debts = debts,
-		elements = elements
+		elements = elements,
+		accumulated_patrimony = accumulated_patrimony
 	}
 	return savedict
 
@@ -98,6 +100,7 @@ func load_game():
 		debts.append(element)
 	for element in savedata.elements:
 		elements.append(element)
+	accumulated_patrimony = savedata.accumulated_patrimony
 	
 	Selic.create(selic_last100[99], 3.0, 6.0, 15.0)
 	Inflation.create(inflation_last100[99], 1.0, -0.5, 10.0)
@@ -114,11 +117,51 @@ func load_game():
 			selic_last100.append(Selic.value)
 			inflation_last100.append(Inflation.value)
 		last_index_iteration_date = OS.get_date()
+	
+	var elements_to_remove = []
+	for el in elements:
+		var days_since_creation = get_days_to_today(el.creation_date)
+		if days_since_creation > 0:
+			if el.date == null:
+				elements_to_remove.append(el)
+				accumulated_patrimony = add_values(accumulated_patrimony, el.value)
+			elif get_days_to_today(el.update_date) >= el.update_date.month \
+			     and int(OS.get_datetime().day) >= int(el.date): # Has not been collected this month yet and can be collected
+				el.update_date = OS.get_datetime()
+				accumulated_patrimony = add_values(accumulated_patrimony, el.value)
+	
+	for el in elements_to_remove:
+		var index = elements.find(el)
+		elements.remove(index)
+	elements_to_remove.clear()
 
 
 func clear_save():
 	var dir = Directory.new()
 	dir.remove("user://savegame.save")
+
+
+func add_values(v1 : String, v2 : String):
+	var v1_int = int(v1.split(".")[0])
+	var v2_int = int(v2.split(".")[0])
+	var v1_float = 0
+	var v2_float = 0
+	
+	if len(v1.split(".")) > 1:
+		v1_float = int(v1.split(".")[1])
+	if len(v2.split(".")) > 1:
+		v2_float = int(v2.split(".")[1])
+	
+	var sum_int = v1_int + v2_int
+	var sum_float = v1_float + v2_float
+	
+	if sum_float >= 100:
+		sum_float -= 100
+		sum_int += 1
+	if sum_float < 10:
+		sum_float = "0" + str(sum_float)
+	
+	return str(sum_int) + "." + str(sum_float)
 
 
 # Returns the numbers of days from past_date to today
@@ -299,7 +342,8 @@ func save_element(Element):
 	var elem_json = {
 		"value" : Element.value,
 		"date" : Element.date,
-		"creation_date" : Element.creation_date
+		"creation_date" : Element.creation_date,
+		"update_date" : OS.get_datetime() # Used on monthly elements
 	}
 	elements.append(elem_json)
 	save_game()

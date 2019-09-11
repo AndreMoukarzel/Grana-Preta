@@ -4,7 +4,7 @@ signal deleted(Self)
 
 onready var creation_date = OS.get_datetime()
 var value : String
-var date
+var date = null
 
 func setup(value : String, date = null, creation_date = null):
 	self.value = value

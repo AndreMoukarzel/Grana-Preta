@@ -55,11 +55,14 @@ text = "9093128301.13"
 valign = 1
 
 [node name="SwipeHandler" parent="." instance=ExtResource( 3 )]
+editor/display_folded = true
 
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
 limit_right = 576
 limit_bottom = 1024
 maximum_zoomin = Vector2( 1, 1 )
+
+[node name="Prediction" type="CanvasLayer" parent="."]
 
 [connection signal="pressed" from="AddElement" to="." method="_on_AddElement_pressed"]
 
