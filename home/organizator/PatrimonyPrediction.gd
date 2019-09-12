@@ -3,19 +3,17 @@ extends Control
 const ID_SCN = preload("res://home/IndexDisplay.tscn")
 
 func _ready():
-	var SelicGraph     = ID_SCN.instance()
-	var InflationGraph = ID_SCN.instance()
+	var PatrimonyGraph = ID_SCN.instance()
+	var prediction = calculate_prediction()
 	
-	add_child(SelicGraph)
-	SelicGraph.set_current_graph("LineGraph", Save.selic_last100, Vector2(10, 70),
-	                             {"size" : Vector2(556, 500)})
-	add_title_to_graph("Selic", SelicGraph)
-	
-	add_child(InflationGraph)
-	InflationGraph.set_current_graph("LineGraph", Save.inflation_last100, Vector2(10, 640), 
-	                                 {"size" : Vector2(556, 500), "color" : Color(1, .1, .1, .8)})
-	add_title_to_graph("Inflação", InflationGraph)
+	add_child(PatrimonyGraph)
+	PatrimonyGraph.set_current_graph("LineGraph", prediction, Vector2(10, 200),
+	                             {"size" : Vector2(400, 500)})
+	add_title_to_graph("Patrimônio previsto", PatrimonyGraph)
 
+
+func calculate_prediction():
+	return [0, 1, 2]
 
 func add_title_to_graph(title : String, Graph):
 	var Bg = Graph.get_node("Background")
@@ -32,6 +30,6 @@ func add_title_to_graph(title : String, Graph):
 	l.add_color_override("font_color", Color(0, 0, 0))
 	l.align = Label.ALIGN_CENTER
 	l.text = title
-	l.rect_size = Vector2(556, 1)
+	l.rect_size = Vector2(400, 1)
 	l.rect_position = Vector2(10, Graph.current_graph.pos.y - 45)
 	Graph.add_child(l)

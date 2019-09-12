@@ -126,7 +126,7 @@ func set_value_labels():
 	var current_value = stepify(current_graph.values.min(), 0.01)
 	var value_lines_points = []
 	
-	for i in range(18):
+	for i in range(18): # Gets horizontal lines
 		current_value += val_diff
 		
 		var label = get_node("Values/" + str(i))
@@ -163,13 +163,13 @@ func set_value_labels():
 func set_day_labels():
 	var first_pos = current_graph.get_bottom_line_points()[0]
 	var last_pos  = current_graph.get_bottom_line_points()[1]
-	var pos_diff  = (last_pos.x - first_pos.x)/100
+	var pos_diff  = (last_pos.x - first_pos.x)/current_graph.values.size()
 	var lines = []
 	
 	$BotLeft.rect_position = first_pos - Vector2($BotRight.rect_size.x/2, 3)
 	$BotRight.rect_position= last_pos - Vector2($BotRight.rect_size.x, 3)
 	
-	for i in range(100):
+	for i in range(current_graph.values.size() + 1):
 		var h_pos = first_pos.x + i * pos_diff
 		lines.append([Vector2(h_pos, first_pos.y - 5), Vector2(h_pos, first_pos.y + 3)])
 	
