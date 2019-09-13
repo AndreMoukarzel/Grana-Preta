@@ -55,7 +55,6 @@ func save_game():
 func load_game():
 	var savegame = File.new()
 	if !savegame.file_exists("user://savegame.save"):
-		money = 10000
 		Selic.create(10.0, 3.0, 6.0, 15.0)
 		Inflation.create(3.0, 1.0, -0.5, 10.0)
 		

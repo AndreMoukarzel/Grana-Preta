@@ -4,9 +4,11 @@ const ELEMENT_SCN = preload("res://home/organizator/Element.tscn")
 const ADDER_SCN = preload("res://home/organizator/ElementAdder.tscn")
 const DATE_DEFINER_SCN = preload("res://home/organizator/ElementDateDefiner.tscn")
 const MIN_HEIGHT = 140
+const TWN_TIME = .6
 
 var total_value : String = "0"
 var to_be_added_value : String = ""
+var prediction_displayed = false
 
 
 func _ready():
@@ -48,6 +50,7 @@ func update_total():
 		$Total/Value.modulate = Color(.2, 1, 0)
 	else:
 		$Total/Value.modulate = Color(1, 0, 0)
+	$Prediction/PatrimonyPrediction.update_patrimony_graph()
 
 
 func delete_element(DeletedElement):
@@ -107,6 +110,21 @@ func cancel_add_element():
 	to_be_added_value = ""
 
 
+func hide_prediction():
+	var Twn = $Prediction/Tween
+	
+	Twn.interpolate_property($Prediction/PatrimonyPrediction, "rect_position:y", null, 1200, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	Twn.start()
+	prediction_displayed = false
+
+
+func show_prediction():
+	var Twn = $Prediction/Tween
+	
+	Twn.interpolate_property($Prediction/PatrimonyPrediction, "rect_position:y", null, 930, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	Twn.start()
+
+
 func _on_AddElement_pressed():
 	var Adder = ADDER_SCN.instance()
 	
@@ -114,3 +132,15 @@ func _on_AddElement_pressed():
 	Adder.connect("canceled", self, "cancel_add_element")
 	
 	add_child(Adder)
+
+
+func _on_PatrimonyPrediction_pressed():
+	var Twn = $Prediction/Tween
+	if prediction_displayed:
+		Twn.interpolate_property($Prediction/PatrimonyPrediction, "rect_position:y", null, 930, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		Twn.start()
+		prediction_displayed = false
+	else:
+		Twn.interpolate_property($Prediction/PatrimonyPrediction, "rect_position:y", null, 430, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		Twn.start()
+		prediction_displayed = true

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://home/organizator/Organizator.gd" type="Script" id=1]
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=3]
+[ext_resource path="res://home/organizator/PatrimonyPrediction.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -63,7 +64,15 @@ limit_bottom = 1024
 maximum_zoomin = Vector2( 1, 1 )
 
 [node name="Prediction" type="CanvasLayer" parent="."]
+editor/display_folded = true
+
+[node name="PatrimonyPrediction" parent="Prediction" instance=ExtResource( 4 )]
+margin_top = 1200.0
+margin_bottom = 776.0
+
+[node name="Tween" type="Tween" parent="Prediction"]
 
 [connection signal="pressed" from="AddElement" to="." method="_on_AddElement_pressed"]
+[connection signal="pressed" from="Prediction/PatrimonyPrediction" to="." method="_on_PatrimonyPrediction_pressed"]
 
 [editable path="SwipeHandler"]

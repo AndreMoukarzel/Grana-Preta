@@ -7,6 +7,7 @@ var current_screen = "main"
 func _ready():
 	$Computer/SwipeHandler.deactivate()
 	$Organizator/SwipeHandler.deactivate()
+	$Organizator.hide_prediction()
 
 func _on_HUD_on_Back_pressed():
 	if current_screen == "main":
@@ -23,6 +24,7 @@ func _on_HUD_on_Back_pressed():
 		current_screen = "main"
 		$Computer/SwipeHandler.deactivate()
 		$Organizator/SwipeHandler.deactivate()
+		$Organizator.hide_prediction()
 
 
 func _on_Computer_pressed():
@@ -43,3 +45,4 @@ func _on_Tracker_pressed():
 	$HUD.set_arrow_texture()
 	current_screen = "organizator"
 	$Organizator/SwipeHandler.activate()
+	$Organizator.show_prediction()
