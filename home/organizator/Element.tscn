@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://home/organizator/Element.gd" type="Script" id=1]
 [ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://home/organizator/cancel.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -41,9 +42,18 @@ __meta__ = {
 }
 
 [node name="Delete" type="TextureButton" parent="."]
+modulate = Color( 0.741176, 0.741176, 0.741176, 1 )
 margin_left = 490.0
-margin_right = 570.0
-margin_bottom = 80.0
+margin_top = 10.0
+margin_right = 618.0
+margin_bottom = 138.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 3 )
+texture_focused = ExtResource( 3 )
+stretch_mode = 2
 __meta__ = {
 "_edit_lock_": true
 }

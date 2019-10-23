@@ -3,7 +3,7 @@ extends Control
 const ELEMENT_SCN = preload("res://home/organizator/Element.tscn")
 const ADDER_SCN = preload("res://home/organizator/ElementAdder.tscn")
 const DATE_DEFINER_SCN = preload("res://home/organizator/ElementDateDefiner.tscn")
-const MIN_HEIGHT = 140
+const MIN_HEIGHT = 150
 const TWN_TIME = .6
 
 var total_value : String = "0"
@@ -141,6 +141,6 @@ func _on_PatrimonyPrediction_pressed():
 		Twn.start()
 		prediction_displayed = false
 	else:
-		Twn.interpolate_property($Prediction/PatrimonyPrediction, "rect_position:y", null, 430, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		Twn.interpolate_property($Prediction/PatrimonyPrediction, "rect_position:y", null, 390, TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 		Twn.start()
 		prediction_displayed = true

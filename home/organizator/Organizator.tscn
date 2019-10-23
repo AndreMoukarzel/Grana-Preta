@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://home/organizator/Organizator.gd" type="Script" id=1]
-[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=2]
-[ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=3]
-[ext_resource path="res://home/organizator/PatrimonyPrediction.tscn" type="PackedScene" id=4]
+[ext_resource path="res://home/organizator/plus.png" type="Texture" id=2]
+[ext_resource path="res://school/Lessons/LessonFont.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://SwipeHandler.tscn" type="PackedScene" id=4]
+[ext_resource path="res://home/organizator/PatrimonyPrediction.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -11,7 +12,7 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [node name="Organizator" type="Control"]
 anchor_right = 1.0
@@ -25,14 +26,22 @@ margin_bottom = 140.0
 
 [node name="AddElement" type="TextureButton" parent="."]
 editor/display_folded = true
-margin_top = 140.0
-margin_right = 300.0
-margin_bottom = 220.0
+margin_left = 10.0
+margin_top = 150.0
+margin_right = 70.0
+margin_bottom = 210.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 2 )
+texture_disabled = ExtResource( 2 )
+texture_focused = ExtResource( 2 )
+expand = true
 
 [node name="Label" type="Label" parent="AddElement"]
 margin_left = 85.0
-margin_right = 236.0
-margin_bottom = 80.0
+margin_top = -10.0
+margin_right = 262.0
+margin_bottom = 70.0
 custom_fonts/font = SubResource( 1 )
 text = "ADICIONAR"
 valign = 1
@@ -55,7 +64,7 @@ custom_fonts/font = SubResource( 1 )
 text = "9093128301.13"
 valign = 1
 
-[node name="SwipeHandler" parent="." instance=ExtResource( 3 )]
+[node name="SwipeHandler" parent="." instance=ExtResource( 4 )]
 editor/display_folded = true
 
 [node name="SwipingCamera" parent="SwipeHandler" index="0"]
@@ -64,9 +73,8 @@ limit_bottom = 1024
 maximum_zoomin = Vector2( 1, 1 )
 
 [node name="Prediction" type="CanvasLayer" parent="."]
-editor/display_folded = true
 
-[node name="PatrimonyPrediction" parent="Prediction" instance=ExtResource( 4 )]
+[node name="PatrimonyPrediction" parent="Prediction" instance=ExtResource( 5 )]
 margin_top = 1200.0
 margin_bottom = 776.0
 

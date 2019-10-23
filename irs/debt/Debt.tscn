@@ -83,7 +83,7 @@ margin_right = 292.0
 margin_bottom = 109.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.784314, 0, 0, 1 )
-text = "G$12345"
+text = "G$45474"
 
 [node name="Pay" type="Button" parent="."]
 margin_left = 415.0
@@ -205,9 +205,9 @@ margin_bottom = 525.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.784314, 0, 0, 1 )
 text = "Impostos:
-          G$12345 (IR 22.5%)
-		         +G$12345 (Adm 0.3%)
-				         +G$12345 (Perf 10.2%)"
+          G$33051 (IR 22.5%)
+		         +G$ 440  (Adm 0.3%)
+				         +G$11983 (Perf 10.2%)"
 
 [node name="TaxesLine" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )

@@ -88,8 +88,8 @@ func close():
 func open():
 	$Tween.interpolate_property(self, 'rect_size', null, Vector2(566, OPENED_SIZE), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Value, 'rect_position', null, Vector2(5, 540), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($BuyDate, 'rect_position', null, Vector2(-30, 55), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($SellDate, 'rect_position', null, Vector2(-30, 105), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($BuyDate, 'rect_position', null, Vector2(-15, 55), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($SellDate, 'rect_position', null, Vector2(-15, 105), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Strikes, 'modulate', null, Color(1, 1, 1, 1), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($AmmountSold, 'modulate', null, Color(1, 1, 1, 1), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($Profit, 'modulate', null, Color(1, 1, 1, 1), TWN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
